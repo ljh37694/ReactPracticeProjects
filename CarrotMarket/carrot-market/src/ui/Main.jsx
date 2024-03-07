@@ -6,10 +6,10 @@ function Main(props) {
         background-color: #1b1b1b;
         border: none;
         border-radius: 20px;
-        padding: 10px;
+        padding: 40px;
         margin-top: 50px;
         width: 50%;
-        height: 600px;
+        height: 800px;
         margin: auto;
         margin-top: 50px;
         min-width: 350px;
