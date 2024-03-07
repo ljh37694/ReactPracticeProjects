@@ -3,12 +3,11 @@ import styled from "styled-components";
 
 function HomePage(props) {
     const MainContainer = styled.div`
-        min-width: 500px;
-        width: 50%;
-        height: 800px;
+        width: 100%;
         margin: auto;
-        position: relative;
-        padding: 1px;
+        border-radius: 20px;
+        background-color: #1b1b1b;
+        border: none;
     `;
 
     return (
