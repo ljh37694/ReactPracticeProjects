@@ -5,10 +5,10 @@ import { Row, Col } from "react-bootstrap";
 
 function MainNav(props) {
     const Nav = styled.nav`
-        position: fixed;
+        position: absolute;
         border: 1px solid #eee;
         height: 50px;
-        width: 50%;
+        width: 100%;
         min-width: 350px;
         color: #fff;
         font-family: "Nanum Gothic";
@@ -17,20 +17,18 @@ function MainNav(props) {
         text-align: center;
         padding: 10px;
         border: none;
-        border-radius: 10px 10px 0px 0px;
         margin: auto;
     `;
 
     return (
         <Nav>
             <Row>
-                <Col xs={3}>마포구</Col>
-                <Col xs={6}></Col>
-                <Col xs={3}>
-                    <FontAwesomeIcon
-                        icon={faMagnifyingGlass}
-                        className="me-3"
-                    />
+                <Col xs={2}>마포구</Col>
+                <Col xs={8}></Col>
+                <Col xs={1}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </Col>
+                <Col xs={1}>
                     <FontAwesomeIcon icon={faBell} />
                 </Col>
             </Row>
