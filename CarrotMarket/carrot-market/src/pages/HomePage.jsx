@@ -1,6 +1,7 @@
 import MainNav from "../ui/MainNav";
 import styled from "styled-components";
 import PostList from "../ui/PostList";
+import WriteQuickBtn from "../ui/WirteQuickBtn";
 
 function HomePage(props) {
     const MainContainer = styled.div`
@@ -11,12 +12,14 @@ function HomePage(props) {
         background-color: #1b1b1b;
         border: none;
         position: relative;
+        overflow: hidden;
     `;
 
     return (
         <MainContainer>
             <MainNav />
             <PostList />
+            <WriteQuickBtn />
         </MainContainer>
     );
 }
