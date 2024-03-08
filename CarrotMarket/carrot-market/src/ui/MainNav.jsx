@@ -7,9 +7,8 @@ function MainNav(props) {
     const Nav = styled.nav`
         position: absolute;
         border: 1px solid #eee;
-        height: 50px;
+        height: 20%;
         width: 100%;
-        min-width: 350px;
         color: #fff;
         font-family: "Nanum Gothic";
         font-size: 20px;
@@ -23,12 +22,12 @@ function MainNav(props) {
     return (
         <Nav>
             <Row>
-                <Col xs={2}>마포구</Col>
-                <Col xs={8}></Col>
-                <Col xs={1}>
+                <Col xs={4} md={4} className="text-start">마포구</Col>
+                <Col xs={4} md={6}></Col>
+                <Col xs={2} md={1}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </Col>
-                <Col xs={1}>
+                <Col xs={2} md={1}>
                     <FontAwesomeIcon icon={faBell} />
                 </Col>
             </Row>

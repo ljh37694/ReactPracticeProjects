@@ -8,10 +8,10 @@ function Main(props) {
         border-radius: 20px;
         padding: 40px;
         margin-top: 50px;
-        width: 50%;
-        height: 800px;
+        width: 50vw;
+        height: 80vh;
         margin: auto;
-        margin-top: 50px;
+        margin-top: 10vh;
         min-width: 350px;
     `;
 
