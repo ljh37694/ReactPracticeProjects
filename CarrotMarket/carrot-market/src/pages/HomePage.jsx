@@ -2,6 +2,7 @@ import MainNav from "../ui/MainNav";
 import styled from "styled-components";
 import PostList from "../ui/PostList";
 import WriteQuickBtn from "../ui/WirteQuickBtn";
+import Footer from "../ui/Footer";
 
 function HomePage(props) {
     const MainContainer = styled.div`
@@ -20,6 +21,7 @@ function HomePage(props) {
             <MainNav />
             <PostList />
             <WriteQuickBtn />
+            <Footer></Footer>
         </MainContainer>
     );
 }
