@@ -6,12 +6,12 @@ function Main(props) {
         background-color: #1b1b1b;
         border: none;
         border-radius: 20px;
-        padding: 40px;
+        padding: 30px;
         margin-top: 50px;
         width: 50vw;
-        height: 80vh;
+        height: 90vh;
         margin: auto;
-        margin-top: 10vh;
+        margin-top: 5vh;
         min-width: 350px;
     `;
 
