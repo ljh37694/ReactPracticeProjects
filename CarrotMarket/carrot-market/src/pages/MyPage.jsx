@@ -18,7 +18,6 @@ function MyPage(props) {
         <MainContainer>
             <MainNav />
             <div>내 당근</div>
-            <Footer />
         </MainContainer>
     );
 }

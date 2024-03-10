@@ -18,7 +18,6 @@ function ChattingListPage(props) {
         <MainContainer>
             <MainNav />
             <div>채팅</div>
-            <Footer />
         </MainContainer>
     );
 }

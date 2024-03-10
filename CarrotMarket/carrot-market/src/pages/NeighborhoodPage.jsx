@@ -18,7 +18,6 @@ function NeighborhoodPage(props) {
         <MainContainer>
             <MainNav />
             <div style={{ float : "left"} }>동네생활</div>
-            <Footer />
         </MainContainer>
     );
 }

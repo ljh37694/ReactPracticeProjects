@@ -21,7 +21,6 @@ function HomePage(props) {
             <MainNav />
             <PostList />
             <WriteQuickBtn />
-            <Footer></Footer>
         </MainContainer>
     );
 }

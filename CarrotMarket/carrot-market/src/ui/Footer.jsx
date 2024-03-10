@@ -17,7 +17,8 @@ function Footer(props) {
     const FooterContainer = styled.footer`
         color: #fff;
         position: absolute;
-        bottom: -20px;
+        bottom: 10px;
+        left: 0px;
         width: 100%;
         text-align: center;
 
@@ -63,11 +64,10 @@ function Footer(props) {
                 {footerMenuData.map((data, idx) => {
                     return (
                         <Col>
-                            <Link to={data.link} style={{ textDecorationLine : "none" }}>
+                            <Link to={data.link} onClick={() => setSelectMenu(idx)} style={{ textDecorationLine : "none" }}>
                                 <Menu
                                     className="menu-btn"
                                     data-id={idx}
-                                    onClick={() => setSelectMenu(idx)}
                                 >
                                     <FontAwesomeIcon icon={data.icon} />
                                     <MenuTitle>{data.title}</MenuTitle>

@@ -18,7 +18,6 @@ function MyLocationPage(props) {
         <MainContainer>
             <MainNav />
             <div>내 근처</div>
-            <Footer />
         </MainContainer>
     );
 }

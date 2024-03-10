@@ -5,6 +5,7 @@ import NeighborhoodPage from "../pages/NeighborhoodPage";
 import MyLocationPage from "../pages/MyLocationPage";
 import ChattingListPage from "../pages/ChattingListPage";
 import MyPage from "../pages/MyPage";
+import Footer from "./Footer";
 
 function Main(props) {
     const Container = styled.div`
@@ -18,6 +19,7 @@ function Main(props) {
         margin: auto;
         margin-top: 5vh;
         min-width: 350px;
+        position: relative;
     `;
 
     return (
@@ -30,6 +32,7 @@ function Main(props) {
                 <Route path="/chatting-list" element={<ChattingListPage />} />
                 <Route path="/my-page" element={<MyPage />} />
             </Routes>
+            <Footer></Footer>
         </Container>
     );
 }
