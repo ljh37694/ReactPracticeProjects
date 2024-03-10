@@ -1,10 +1,8 @@
-import MainNav from "../ui/MainNav";
 import styled from "styled-components";
-import PostList from "../ui/PostList";
-import WriteQuickBtn from "../ui/WirteQuickBtn";
+import MainNav from "../ui/MainNav";
 import Footer from "../ui/Footer";
 
-function HomePage(props) {
+function MyLocationPage(props) {
     const MainContainer = styled.div`
         width: 100%;
         height: 100%;
@@ -19,11 +17,10 @@ function HomePage(props) {
     return (
         <MainContainer>
             <MainNav />
-            <PostList />
-            <WriteQuickBtn />
-            <Footer></Footer>
+            <div>내 근처</div>
+            <Footer />
         </MainContainer>
     );
 }
 
-export default HomePage;
+export default MyLocationPage;

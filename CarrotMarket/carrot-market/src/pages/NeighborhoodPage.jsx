@@ -1,10 +1,8 @@
-import MainNav from "../ui/MainNav";
 import styled from "styled-components";
-import PostList from "../ui/PostList";
-import WriteQuickBtn from "../ui/WirteQuickBtn";
+import MainNav from "../ui/MainNav";
 import Footer from "../ui/Footer";
 
-function HomePage(props) {
+function NeighborhoodPage(props) {
     const MainContainer = styled.div`
         width: 100%;
         height: 100%;
@@ -19,11 +17,10 @@ function HomePage(props) {
     return (
         <MainContainer>
             <MainNav />
-            <PostList />
-            <WriteQuickBtn />
-            <Footer></Footer>
+            <div style={{ float : "left"} }>동네생활</div>
+            <Footer />
         </MainContainer>
     );
 }
 
-export default HomePage;
+export default NeighborhoodPage;
