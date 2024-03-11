@@ -23,6 +23,7 @@ function MainPage(props) {
         min-width: 350px;
         display: flex;
         flex-direction: column;
+        font-family: "Nanum Gothic";
     `;
 
     const NavContainer = styled.div`

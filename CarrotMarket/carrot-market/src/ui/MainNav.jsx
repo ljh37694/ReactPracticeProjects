@@ -9,7 +9,6 @@ function MainNav(props) {
         height: 100%;
         width: 100%;
         color: #fff;
-        font-family: "Nanum Gothic";
         font-size: 20px;
         margin: auto;
         text-align: center;
