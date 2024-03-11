@@ -5,8 +5,8 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 function WriteQuickBtn(props) {
     const BtnContainer = styled.div`
         position: absolute;
-        right: 5%;
-        bottom: 13%;
+        right: 8%;
+        bottom: 1%;
         border-radius: 100px;
         color: #fff;
         background-color: orange;
