@@ -21,6 +21,7 @@ function Footer(props) {
         text-align: center;
         display: flex;
         align-items: center;
+        justify-content: space-around;
         padding-top: 5%;
 
         &:focus {
