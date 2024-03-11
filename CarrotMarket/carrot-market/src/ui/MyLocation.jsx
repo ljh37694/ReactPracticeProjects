@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import MainNav from "../ui/MainNav";
-import Footer from "../ui/Footer";
 
-function MyLocationPage(props) {
+function MyLocation(props) {
     const MainContainer = styled.div`
         width: 100%;
         height: 100%;
@@ -16,10 +14,9 @@ function MyLocationPage(props) {
 
     return (
         <MainContainer>
-            <MainNav />
             <div>내 근처</div>
         </MainContainer>
     );
 }
 
-export default MyLocationPage;
+export default MyLocation;

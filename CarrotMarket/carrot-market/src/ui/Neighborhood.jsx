@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import MainNav from "../ui/MainNav";
-import Footer from "../ui/Footer";
 
-function ChattingListPage(props) {
+function Neighborhood(props) {
     const MainContainer = styled.div`
         width: 100%;
         height: 100%;
@@ -16,10 +14,9 @@ function ChattingListPage(props) {
 
     return (
         <MainContainer>
-            <MainNav />
-            <div>채팅</div>
+            <div style={{ float : "left"} }>동네생활</div>
         </MainContainer>
     );
 }
 
-export default ChattingListPage;
+export default Neighborhood;

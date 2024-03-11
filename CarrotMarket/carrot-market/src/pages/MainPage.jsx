@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { Outlet, Route, Routes } from "react-router-dom";
 import Home from "../ui/Home";
-import NeighborhoodPage from "./NeighborhoodPage";
-import MyLocationPage from "./MyLocationPage";
-import ChattingListPage from "./ChattingListPage";
-import MyPage from "./MyPage";
+import Neighborhood from "../ui/Neighborhood";
+import MyLocation from "../ui/MyLocation";
+import ChattingList from "../ui/ChattingList";
+import User from "../ui/User";
 import Footer from "../ui/Footer";
 import MainNav from "../ui/MainNav";
 import WriteQuickBtn from "../ui/WirteQuickBtn";
@@ -53,12 +53,78 @@ function MainPage(props) {
                         </>
                     }
                 />
-                <Route path="/home" element={<Home />} />
-                <Route path="/neighborhood" element={<NeighborhoodPage />} />
-                <Route path="/my-location" element={<MyLocationPage />} />
-                <Route path="/chatting-list" element={<ChattingListPage />} />
-                <Route path="/my-page" element={<MyPage />} />
+                <Route
+                    path="/home"
+                    element={
+                        <>
+                            <NavContainer>
+                                <MainNav />
+                            </NavContainer>
+                            <ContentsContainer>
+                                <Home />
+                                <WriteQuickBtn />
+                            </ContentsContainer>
+                        </>
+                    }
+                />
+                <Route
+                    path="/neighborhood"
+                    element={
+                        <>
+                            <NavContainer>
+                                <MainNav />
+                            </NavContainer>
+                            <ContentsContainer>
+                                <Neighborhood />
+                                <WriteQuickBtn />
+                            </ContentsContainer>
+                        </>
+                    }
+                />
+                <Route
+                    path="/my-location"
+                    element={
+                        <>
+                            <NavContainer>
+                                <MainNav />
+                            </NavContainer>
+                            <ContentsContainer>
+                                <MyLocation />
+                                <WriteQuickBtn />
+                            </ContentsContainer>
+                        </>
+                    }
+                />
+                <Route
+                    path="/chatting-list"
+                    element={
+                        <>
+                            <NavContainer>
+                                <MainNav />
+                            </NavContainer>
+                            <ContentsContainer>
+                                <ChattingList />
+                                <WriteQuickBtn />
+                            </ContentsContainer>
+                        </>
+                    }
+                />
+                <Route
+                    path="/my-page"
+                    element={
+                        <>
+                            <NavContainer>
+                                <MainNav />
+                            </NavContainer>
+                            <ContentsContainer>
+                                <User />
+                                <WriteQuickBtn />
+                            </ContentsContainer>
+                        </>
+                    }
+                />
             </Routes>
+
             <Footer></Footer>
         </Container>
     );

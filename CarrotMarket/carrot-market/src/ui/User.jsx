@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import MainNav from "../ui/MainNav";
-import Footer from "../ui/Footer";
 
-function MyPage(props) {
+function User(props) {
     const MainContainer = styled.div`
         width: 100%;
         height: 100%;
@@ -16,10 +14,9 @@ function MyPage(props) {
 
     return (
         <MainContainer>
-            <MainNav />
             <div>내 당근</div>
         </MainContainer>
     );
 }
 
-export default MyPage;
+export default User;
