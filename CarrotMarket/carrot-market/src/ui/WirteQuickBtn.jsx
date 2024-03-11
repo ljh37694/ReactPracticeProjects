@@ -32,7 +32,7 @@ function WriteQuickBtn(props) {
                 <FontAwesomeIcon icon={faPlus} />
             </Btn>
         </BtnContainer>
-    )
+    );
 }
 
 export default WriteQuickBtn;
