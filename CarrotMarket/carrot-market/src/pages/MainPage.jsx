@@ -136,7 +136,7 @@ function MainPage(props) {
                 setOption={setOption}
                 selectMenu={selectMenu}
                 setSelectMenu={setSelectMenu}
-            ></Footer>
+            />
         </Container>
     );
 }
