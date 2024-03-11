@@ -13,7 +13,6 @@ function MainNav(props) {
         font-size: 20px;
         margin: auto;
         text-align: center;
-        padding: 10px;
         border: none;
         margin: auto;
     `;
