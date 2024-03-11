@@ -16,28 +16,35 @@ function Footer(props) {
 
     const FooterContainer = styled.footer`
         color: #fff;
-        position: absolute;
-        bottom: 10px;
-        left: 0px;
         width: 100%;
+        height: 10%;
         text-align: center;
+        display: flex;
+        align-items: center;
+        padding-top: 5%;
 
         &:focus {
             color: #6e6e6e;
+        }
+
+        & > div {
+            width: 100%;
         }
     `;
 
     const Menu = styled.div`
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        justify-content: space-between;
         cursor: pointer;
+        font-size: 28px;
     `;
 
     const MenuTitle = styled.p`
+        margin: 0px;
         font-size: 14px;
-        margin-top: 5px;
+        margin-top: 0.5em;
     `;
 
     const footerMenuData = [

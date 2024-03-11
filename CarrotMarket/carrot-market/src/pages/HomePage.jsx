@@ -11,14 +11,12 @@ function HomePage(props) {
         margin: auto;
         background-color: #1b1b1b;
         border: none;
-        position: relative;
         overflow: hidden;
         color: #fff;
     `;
 
     return (
         <MainContainer>
-            <MainNav />
             <PostList />
             <WriteQuickBtn />
         </MainContainer>

@@ -5,9 +5,8 @@ import { Row, Col } from "react-bootstrap";
 
 function MainNav(props) {
     const Nav = styled.nav`
-        position: absolute;
         border: 1px solid #eee;
-        height: 20%;
+        height: 100%;
         width: 100%;
         color: #fff;
         font-family: "Nanum Gothic";

@@ -6,6 +6,7 @@ import MyLocationPage from "../pages/MyLocationPage";
 import ChattingListPage from "../pages/ChattingListPage";
 import MyPage from "../pages/MyPage";
 import Footer from "./Footer";
+import MainNav from "./MainNav";
 
 function Main(props) {
     const Container = styled.div`
@@ -19,13 +20,36 @@ function Main(props) {
         margin: auto;
         margin-top: 5vh;
         min-width: 350px;
-        position: relative;
+        display: flex;
+        flex-direction: column;
+    `;
+
+    const NavContainer = styled.div`
+        width: 100%;
+        height: 10%;
+    `;
+
+    const ContentsContainer = styled.main`
+        width: 100%;
+        height: 80%;
     `;
 
     return (
         <Container>
             <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route
+                    path="/"
+                    element={
+                        <>
+                            <NavContainer>
+                                <MainNav />
+                            </NavContainer>
+                            <ContentsContainer>
+                                <HomePage />
+                            </ContentsContainer>
+                        </>
+                    }
+                />
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/neighborhood" element={<NeighborhoodPage />} />
                 <Route path="/my-location" element={<MyLocationPage />} />
