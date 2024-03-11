@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { Outlet, Route, Routes } from "react-router-dom";
-import Home from "../ui/Home";
-import Neighborhood from "../ui/Neighborhood";
-import MyLocation from "../ui/MyLocation";
-import ChattingList from "../ui/ChattingList";
-import User from "../ui/User";
+import Home from "../contents/Home";
+import Neighborhood from "../contents/Neighborhood";
+import MyLocation from "../contents/MyLocation";
+import ChattingList from "../contents/ChattingList";
+import User from "../contents/User";
 import Footer from "../ui/Footer";
 import MainNav from "../ui/MainNav";
 import WriteQuickBtn from "../ui/WirteQuickBtn";

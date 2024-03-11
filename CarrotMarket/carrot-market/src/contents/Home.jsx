@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import PostList from "./PostList";
+import PostList from "../ui/PostList";
 
 function Home(props) {
     const MainContainer = styled.div`
