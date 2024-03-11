@@ -11,6 +11,11 @@ import MainNav from "../ui/MainNav";
 import WriteQuickBtn from "../ui/WirteQuickBtn";
 
 function MainPage(props) {
+    // states
+    let [option, setOption] = useState(0);
+    let [selectMenu, setSelectMenu] = useState(0);
+
+    // styled-components
     const Container = styled.div`
         background-color: #1b1b1b;
         border: none;
@@ -37,8 +42,6 @@ function MainPage(props) {
         height: 80%;
         position: relative;
     `;
-
-    let [option, setOption] = useState(0);
 
     return (
         <Container>
@@ -129,7 +132,11 @@ function MainPage(props) {
                 />
             </Routes>
 
-            <Footer setOption={setOption}></Footer>
+            <Footer
+                setOption={setOption}
+                selectMenu={selectMenu}
+                setSelectMenu={setSelectMenu}
+            ></Footer>
         </Container>
     );
 }

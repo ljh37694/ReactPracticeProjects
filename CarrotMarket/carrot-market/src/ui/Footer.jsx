@@ -12,8 +12,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function Footer(props) {
-    let [selectMenu, setSelectMenu] = useState(0);
-    let { setOption } = props;
+    
+    let { setOption, selectMenu, setSelectMenu } = props;
 
     const FooterContainer = styled.footer`
         color: #fff;
@@ -76,8 +76,8 @@ function Footer(props) {
                             <Link
                                 to={data.link}
                                 onClick={() => {
-                                    setSelectMenu(idx);
                                     setOption(idx);
+                                    setSelectMenu(idx);
                                 }}
                                 style={{ textDecorationLine: "none" }}
                             >
