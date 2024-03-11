@@ -9,39 +9,39 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
+let Nav = styled.nav`
+    border: 1px solid #eee;
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    font-size: 20px;
+    margin: auto;
+    text-align: center;
+    border: none;
+    margin: auto;
+    display: flex;
+    align-items: center;
+`;
+
+let NavTitle = styled.h3`
+    font-size: 24px;
+`;
+
+let MenuIconContainer = styled.div`
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    flex-grow: 1;
+`;
+
+let IconContainer = styled.div`
+    font-size: 24px;
+    color: #fff;
+    width: 2.5em;
+`;
+
 function MainNav(props) {
     let { option } = props;
-
-    const Nav = styled.nav`
-        border: 1px solid #eee;
-        height: 100%;
-        width: 100%;
-        color: #fff;
-        font-size: 20px;
-        margin: auto;
-        text-align: center;
-        border: none;
-        margin: auto;
-        display: flex;
-        align-items: center;
-    `;
-
-    const NavTitle = styled.h3`
-        font-size: 24px;
-    `;
-
-    const MenuIconContainer = styled.div`
-        display: flex;
-        align-items: end;
-        justify-content: end;
-        flex-grow: 1;
-    `;
-
-    const IconContainer = styled.div`
-        font-size: 24px;
-        color: #fff;
-        width: 2.5em;
-    `;
 
     const navMenuList = [
         {
