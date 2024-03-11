@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import { Outlet, Route, Routes } from "react-router-dom";
-import HomePage from "../pages/HomePage";
-import NeighborhoodPage from "../pages/NeighborhoodPage";
-import MyLocationPage from "../pages/MyLocationPage";
-import ChattingListPage from "../pages/ChattingListPage";
-import MyPage from "../pages/MyPage";
-import Footer from "./Footer";
-import MainNav from "./MainNav";
+import Home from "../ui/Home";
+import NeighborhoodPage from "./NeighborhoodPage";
+import MyLocationPage from "./MyLocationPage";
+import ChattingListPage from "./ChattingListPage";
+import MyPage from "./MyPage";
+import Footer from "../ui/Footer";
+import MainNav from "../ui/MainNav";
+import WriteQuickBtn from "../ui/WirteQuickBtn";
 
-function Main(props) {
+function MainPage(props) {
     const Container = styled.div`
         background-color: #1b1b1b;
         border: none;
@@ -32,6 +33,7 @@ function Main(props) {
     const ContentsContainer = styled.main`
         width: 100%;
         height: 80%;
+        position: relative;
     `;
 
     return (
@@ -45,12 +47,13 @@ function Main(props) {
                                 <MainNav />
                             </NavContainer>
                             <ContentsContainer>
-                                <HomePage />
+                                <Home />
+                                <WriteQuickBtn />
                             </ContentsContainer>
                         </>
                     }
                 />
-                <Route path="/home" element={<HomePage />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/neighborhood" element={<NeighborhoodPage />} />
                 <Route path="/my-location" element={<MyLocationPage />} />
                 <Route path="/chatting-list" element={<ChattingListPage />} />
@@ -61,4 +64,4 @@ function Main(props) {
     );
 }
 
-export default Main;
+export default MainPage;
