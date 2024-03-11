@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { useState } from "react";
 import Home from "../contents/Home";
 import Neighborhood from "../contents/Neighborhood";
 import MyLocation from "../contents/MyLocation";
@@ -37,6 +38,8 @@ function MainPage(props) {
         position: relative;
     `;
 
+    let [option, setOption] = useState(0);
+
     return (
         <Container>
             <Routes>
@@ -45,7 +48,7 @@ function MainPage(props) {
                     element={
                         <>
                             <NavContainer>
-                                <MainNav />
+                                <MainNav option={option} />
                             </NavContainer>
                             <ContentsContainer>
                                 <Home />
@@ -59,7 +62,7 @@ function MainPage(props) {
                     element={
                         <>
                             <NavContainer>
-                                <MainNav />
+                                <MainNav option={option} />
                             </NavContainer>
                             <ContentsContainer>
                                 <Home />
@@ -73,7 +76,7 @@ function MainPage(props) {
                     element={
                         <>
                             <NavContainer>
-                                <MainNav />
+                                <MainNav option={option} />
                             </NavContainer>
                             <ContentsContainer>
                                 <Neighborhood />
@@ -87,7 +90,7 @@ function MainPage(props) {
                     element={
                         <>
                             <NavContainer>
-                                <MainNav />
+                                <MainNav option={option} />
                             </NavContainer>
                             <ContentsContainer>
                                 <MyLocation />
@@ -101,7 +104,7 @@ function MainPage(props) {
                     element={
                         <>
                             <NavContainer>
-                                <MainNav />
+                                <MainNav option={option} />
                             </NavContainer>
                             <ContentsContainer>
                                 <ChattingList />
@@ -115,7 +118,7 @@ function MainPage(props) {
                     element={
                         <>
                             <NavContainer>
-                                <MainNav />
+                                <MainNav option={option} />
                             </NavContainer>
                             <ContentsContainer>
                                 <User />
@@ -126,7 +129,7 @@ function MainPage(props) {
                 />
             </Routes>
 
-            <Footer></Footer>
+            <Footer setOption={setOption}></Footer>
         </Container>
     );
 }

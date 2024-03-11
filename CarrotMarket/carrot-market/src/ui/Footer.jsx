@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 
 function Footer(props) {
     let [selectMenu, setSelectMenu] = useState(0);
+    let { setOption } = props;
 
     const FooterContainer = styled.footer`
         color: #fff;
@@ -49,11 +50,11 @@ function Footer(props) {
     `;
 
     const footerMenuData = [
-        { icon: faHouse, title: "홈", link : "/home" },
-        { icon: faBuilding, title: "동네생활", link : "/neighborhood"},
-        { icon: faLocationDot, title: "내 근처", link : "/my-location" },
-        { icon: faComments, title: "채팅", link : "/chatting-list" },
-        { icon: faUser, title: "나의 당근", link : "/my-page" },
+        { icon: faHouse, title: "홈", link: "/home" },
+        { icon: faBuilding, title: "동네생활", link: "/neighborhood" },
+        { icon: faLocationDot, title: "내 근처", link: "/my-location" },
+        { icon: faComments, title: "채팅", link: "/chatting-list" },
+        { icon: faUser, title: "나의 당근", link: "/my-page" },
     ];
 
     useEffect(() => {
@@ -72,11 +73,15 @@ function Footer(props) {
                 {footerMenuData.map((data, idx) => {
                     return (
                         <Col>
-                            <Link to={data.link} onClick={() => setSelectMenu(idx)} style={{ textDecorationLine : "none" }}>
-                                <Menu
-                                    className="menu-btn"
-                                    data-id={idx}
-                                >
+                            <Link
+                                to={data.link}
+                                onClick={() => {
+                                    setSelectMenu(idx);
+                                    setOption(idx);
+                                }}
+                                style={{ textDecorationLine: "none" }}
+                            >
+                                <Menu className="menu-btn" data-id={idx}>
                                     <FontAwesomeIcon icon={data.icon} />
                                     <MenuTitle>{data.title}</MenuTitle>
                                 </Menu>

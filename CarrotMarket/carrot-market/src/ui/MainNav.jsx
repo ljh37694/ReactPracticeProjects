@@ -1,9 +1,17 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faBell } from "@fortawesome/free-solid-svg-icons";
-import { Row, Col } from "react-bootstrap";
+import {
+    faMagnifyingGlass,
+    faBell,
+    faUser,
+    faExpand,
+    faGear,
+} from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function MainNav(props) {
+    let { option } = props;
+
     const Nav = styled.nav`
         border: 1px solid #eee;
         height: 100%;
@@ -14,20 +22,65 @@ function MainNav(props) {
         text-align: center;
         border: none;
         margin: auto;
+        display: flex;
+        align-items: center;
     `;
+
+    const NavTitle = styled.h3`
+        font-size: 24px;
+    `;
+
+    const MenuIconContainer = styled.div`
+        display: flex;
+        align-items: end;
+        justify-content: end;
+        flex-grow: 1;
+    `;
+
+    const IconContainer = styled.div`
+        font-size: 24px;
+        color: #fff;
+        width: 2.5em;
+    `;
+
+    const navMenuList = [
+        {
+            title: "송정동",
+            icons: [faMagnifyingGlass, faBell],
+        },
+        {
+            title: "송정동",
+            icons: [faUser, faMagnifyingGlass, faBell],
+        },
+        {
+            title: "송정동",
+            icons: [faMagnifyingGlass, faBell],
+        },
+        {
+            title: "채팅",
+            icons: [faExpand, faBell],
+        },
+        {
+            title: "나의 당근",
+            icons: [faGear],
+        },
+    ];
 
     return (
         <Nav>
-            <Row>
-                <Col xs={4} md={4} className="text-start">마포구</Col>
-                <Col xs={4} md={6}></Col>
-                <Col xs={2} md={1}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </Col>
-                <Col xs={2} md={1}>
-                    <FontAwesomeIcon icon={faBell} />
-                </Col>
-            </Row>
+            <NavTitle> {navMenuList[option].title}</NavTitle>
+
+            <MenuIconContainer>
+                {navMenuList[option].icons.map((item, idx) => {
+                    return (
+                        <Link to="/home">
+                            <IconContainer>
+                                <FontAwesomeIcon icon={item}></FontAwesomeIcon>
+                            </IconContainer>
+                        </Link>
+                    );
+                })}
+            </MenuIconContainer>
         </Nav>
     );
 }
