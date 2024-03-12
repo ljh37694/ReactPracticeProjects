@@ -43,28 +43,28 @@ let IconContainer = styled.div`
 function MainNav(props) {
     let { option } = props;
 
-    const navMenuList = [
-        {
+    const navMenuList = {
+        home: {
             title: "송정동",
             icons: [faMagnifyingGlass, faBell],
         },
-        {
+        neighborhood: {
             title: "송정동",
             icons: [faUser, faMagnifyingGlass, faBell],
         },
-        {
+        myLocation: {
             title: "송정동",
             icons: [faMagnifyingGlass, faBell],
         },
-        {
+        chattingList: {
             title: "채팅",
             icons: [faExpand, faBell],
         },
-        {
+        user: {
             title: "나의 당근",
             icons: [faGear],
         },
-    ];
+    };
 
     return (
         <Nav>

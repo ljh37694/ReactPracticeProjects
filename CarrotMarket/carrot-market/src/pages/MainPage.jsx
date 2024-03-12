@@ -40,8 +40,8 @@ let ContentsContainer = styled.main`
 
 function MainPage(props) {
     // states
-    let [option, setOption] = useState(0);
-    let [selectMenu, setSelectMenu] = useState(0);
+    let [option, setOption] = useState("home");
+    let [footerMenu, setFooterMenu] = useState(0);
 
     return (
         <Container>
@@ -63,8 +63,8 @@ function MainPage(props) {
 
             <Footer
                 setOption={setOption}
-                selectMenu={selectMenu}
-                setSelectMenu={setSelectMenu}
+                selectMenu={footerMenu}
+                setSelectMenu={setFooterMenu}
             />
         </Container>
     );

@@ -50,11 +50,11 @@ function Footer(props) {
     let { setOption, selectMenu, setSelectMenu } = props;
 
     const footerMenuData = [
-        { icon: faHouse, title: "홈", link: "/home" },
-        { icon: faBuilding, title: "동네생활", link: "/neighborhood" },
-        { icon: faLocationDot, title: "내 근처", link: "/my-location" },
-        { icon: faComments, title: "채팅", link: "/chatting-list" },
-        { icon: faUser, title: "나의 당근", link: "/my-page" },
+        { icon: faHouse, title: "홈", link: "/home", id: "home" },
+        { icon: faBuilding, title: "동네생활", link: "/neighborhood", id: "neighborhood" },
+        { icon: faLocationDot, title: "내 근처", link: "/my-location", id: "myLocation" },
+        { icon: faComments, title: "채팅", link: "/chatting-list", id : "chattingList"},
+        { icon: faUser, title: "나의 당근", link: "/my-page", id : "user"},
     ];
 
     useEffect(() => {
@@ -76,12 +76,12 @@ function Footer(props) {
                             <Link
                                 to={data.link}
                                 onClick={() => {
-                                    setOption(idx);
+                                    setOption(data.id);
                                     setSelectMenu(idx);
                                 }}
                                 style={{ textDecorationLine: "none" }}
                             >
-                                <Menu className="menu-btn" data-id={idx}>
+                                <Menu className="menu-btn" data-id={data.id}>
                                     <FontAwesomeIcon icon={data.icon} />
                                     <MenuTitle>{data.title}</MenuTitle>
                                 </Menu>
