@@ -1,0 +1,69 @@
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faChevronLeft,
+    faEllipsisVertical,
+    faHouse,
+    faShare,
+} from "@fortawesome/free-solid-svg-icons";
+
+const Nav = styled.nav`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+`;
+
+const LeftMenu = styled.div`
+    height: 100%;
+    display: flex;
+`;
+
+const RightMenu = styled.div`
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: end;
+`;
+
+const IconContainer = styled.div`
+    width: 2.5em;
+`;
+
+function DetailNav(props) {
+    const navMenuList = {
+        detail: {
+            left: [faChevronLeft, faHouse],
+            right: [faShare, faEllipsisVertical],
+        },
+    };
+
+    return (
+        <Nav>
+            <LeftMenu>
+                {navMenuList["detail"].left.map((item) => {
+                    return (
+                        <IconContainer>
+                            <FontAwesomeIcon icon={item}></FontAwesomeIcon>
+                        </IconContainer>
+                    );
+                })}
+            </LeftMenu>
+
+            <RightMenu>
+                {navMenuList["detail"].right.map((item) => {
+                    return (
+                        <IconContainer>
+                            <FontAwesomeIcon icon={item}></FontAwesomeIcon>
+                        </IconContainer>
+                    );
+                })}
+            </RightMenu>
+        </Nav>
+    );
+}
+
+export default DetailNav;

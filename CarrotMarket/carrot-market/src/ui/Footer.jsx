@@ -50,11 +50,11 @@ function Footer(props) {
     let { setOption, selectMenu, setSelectMenu } = props;
 
     const footerMenuData = [
-        { icon: faHouse, title: "홈", link: "/home", id: "home" },
-        { icon: faBuilding, title: "동네생활", link: "/neighborhood", id: "neighborhood" },
-        { icon: faLocationDot, title: "내 근처", link: "/my-location", id: "myLocation" },
-        { icon: faComments, title: "채팅", link: "/chatting-list", id : "chattingList"},
-        { icon: faUser, title: "나의 당근", link: "/my-page", id : "user"},
+        { icon: faHouse, title: "홈", link: "/main/home", id: "home" },
+        { icon: faBuilding, title: "동네생활", link: "/main/neighborhood", id: "neighborhood" },
+        { icon: faLocationDot, title: "내 근처", link: "/main/my-location", id: "myLocation" },
+        { icon: faComments, title: "채팅", link: "/main/chatting-list", id : "chattingList"},
+        { icon: faUser, title: "나의 당근", link: "/main/my-page", id : "user"},
     ];
 
     useEffect(() => {
