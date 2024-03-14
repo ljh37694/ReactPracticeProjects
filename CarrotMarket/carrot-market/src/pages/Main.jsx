@@ -50,6 +50,26 @@ function Main(props) {
             {/* main page */}
             <Routes>
                 <Route
+                    path="/"
+                    element={
+                        <>
+                            <NavContainer>
+                                <MainNav option={option} />
+                            </NavContainer>
+
+                            <ContentsContainer>
+                                <Home />
+                                <WriteQuickBtn />
+                            </ContentsContainer>
+                            <Footer
+                                setOption={setOption}
+                                selectMenu={footerMenu}
+                                setSelectMenu={setFooterMenu}
+                            />
+                        </>
+                    }
+                />
+                <Route
                     path="/main"
                     element={
                         <>
