@@ -15,12 +15,12 @@ const Nav = styled.nav`
     align-items: center;
     color: #fff;
     font-size: 24px;
-    text-align: center;
 `;
 
 const LeftMenu = styled.div`
     height: 100%;
     display: flex;
+    text-align: start;
 `;
 
 const RightMenu = styled.div`
@@ -28,6 +28,7 @@ const RightMenu = styled.div`
     flex-grow: 1;
     display: flex;
     justify-content: end;
+    text-align: end;
 `;
 
 const IconContainer = styled.div`
