@@ -6,6 +6,7 @@ import {
     faHouse,
     faShare,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const Nav = styled.nav`
     width: 100%;
@@ -34,9 +35,15 @@ const IconContainer = styled.div`
 `;
 
 function DetailNav(props) {
+    const navigate = useNavigate();
+
     const navMenuList = {
         detail: {
-            left: [faChevronLeft, faHouse],
+            left: [
+                { icon: faChevronLeft, onClick: () => navigate(-1) },
+                { icon: faHouse, onClick: () => navigate("/main/home") },
+            ],
+
             right: [faShare, faEllipsisVertical],
         },
     };
@@ -47,7 +54,10 @@ function DetailNav(props) {
                 {navMenuList["detail"].left.map((item) => {
                     return (
                         <IconContainer>
-                            <FontAwesomeIcon icon={item}></FontAwesomeIcon>
+                            <FontAwesomeIcon
+                                icon={item.icon}
+                                onClick={item.onClick}
+                            ></FontAwesomeIcon>
                         </IconContainer>
                     );
                 })}
