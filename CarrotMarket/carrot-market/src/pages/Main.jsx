@@ -19,10 +19,9 @@ let Container = styled.div`
     border-radius: 20px;
     padding: 30px;
     margin-top: 50px;
-    width: 50vw;
-    height: 90vh;
+    width: 40vw;
+    height: 100vh;
     margin: auto;
-    margin-top: 5vh;
     min-width: 350px;
     display: flex;
     flex-direction: column;
