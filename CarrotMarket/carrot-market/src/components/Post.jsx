@@ -57,10 +57,10 @@ let CountContainer = styled.div`
 `;
 
 function Post(props) {
-    let { posts } = props;
+    let { onClick } = props;
 
     return (
-        <PostContainer>
+        <PostContainer onClick={onClick}>
             <PostImage src="https://blog.kakaocdn.net/dn/tWx11/btqDag5h7y3/6aY75vJNfOPMyNicZo53c0/img.png"></PostImage>
             <ContentsContainer>
                 <PostTitle>품절 임박! 닌텐도 스위치 팝니다</PostTitle>

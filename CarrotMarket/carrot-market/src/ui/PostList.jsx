@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Post from "../components/Post";
+import { useNavigate } from "react-router-dom";
 
 let PostsContainer = styled.div`
     width: 100%;
@@ -8,17 +9,24 @@ let PostsContainer = styled.div`
     &::-webkit-scrollbar {
         display: none; /* 스크롤바 숨기기 */
     }
+
+    & * {
+        text-decoration-line: none;
+    }
 `;
 
 function PostList(props) {
+    const navigate = useNavigate();
+
     return (
         <PostsContainer>
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
+            <Post onClick={() => navigate("/detail")} />
+            <Post onClick={() => navigate("/detail")} />
+            <Post onClick={() => navigate("/detail")} />
+            <Post onClick={() => navigate("/detail")} />
+            <Post onClick={() => navigate("/detail")} />
+            <Post onClick={() => navigate("/detail")} />
+            <Post onClick={() => navigate("/detail")} />
         </PostsContainer>
     );
 }
