@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 let BtnContainer = styled.div`
     position: absolute;
@@ -27,11 +28,13 @@ let Btn = styled.button`
 
 function WriteQuickBtn(props) {
     return (
-        <BtnContainer>
-            <Btn>
-                <FontAwesomeIcon icon={faPlus} />
-            </Btn>
-        </BtnContainer>
+        <Link to="/write-post">
+            <BtnContainer>
+                <Btn>
+                    <FontAwesomeIcon icon={faPlus} />
+                </Btn>
+            </BtnContainer>
+        </Link>
     );
 }
 
