@@ -12,6 +12,7 @@ import WriteQuickBtn from "../ui/WirteQuickBtn";
 import DetailNav from "../ui/DetailNav";
 import DetailInfo from "../ui/DetailInfo";
 import WritePostNav from "../ui/WritePostNav";
+import WritePost from "../contents/WritePost";
 
 // styled-components
 let Container = styled.div`
@@ -110,13 +111,19 @@ function Main(props) {
                     }
                 ></Route>
 
-                <Route path="write-post" element={
-                    <NavContainer>
-                        <WritePostNav />
-                    </NavContainer>
-                }>
-
-                </Route>
+                <Route
+                    path="write-post"
+                    element={
+                        <>
+                            <NavContainer>
+                                <WritePostNav />
+                            </NavContainer>
+                            <ContentsContainer>
+                                <WritePost />
+                            </ContentsContainer>
+                        </>
+                    }
+                ></Route>
             </Routes>
         </Container>
     );
