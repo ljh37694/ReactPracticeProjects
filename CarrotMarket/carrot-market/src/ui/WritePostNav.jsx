@@ -2,13 +2,17 @@ import styled from "styled-components";
 import { Row, Col } from "react-bootstrap";
 import { BoldLargeText, LargeText, NormalText } from "../components/Texts";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 
 function WritePostNav(props) {
     return (
         <Row className="align-items-center h-100">
             <Col xs={4} className="text-start">
                 <Link to="/main/home" style={{textDecorationLine : "none"}}>
-                    <LargeText>X</LargeText>
+                    <LargeText>
+                        <FontAwesomeIcon icon={faX} />
+                    </LargeText>
                 </Link>
             </Col>
             <Col xs={4} className="text-center">
