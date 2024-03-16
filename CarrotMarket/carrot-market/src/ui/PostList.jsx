@@ -5,11 +5,6 @@ import { useNavigate } from "react-router-dom";
 let PostsContainer = styled.div`
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
-    &::-webkit-scrollbar {
-        display: none; /* 스크롤바 숨기기 */
-    }
-
     & * {
         text-decoration-line: none;
     }

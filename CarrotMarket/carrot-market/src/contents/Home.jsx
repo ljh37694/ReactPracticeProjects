@@ -7,7 +7,6 @@ let MainContainer = styled.div`
     margin: auto;
     background-color: #1b1b1b;
     border: none;
-    overflow: hidden;
     color: #fff;
 `;
 

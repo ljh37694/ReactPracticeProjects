@@ -21,7 +21,7 @@ let Container = styled.div`
     background-color: #1b1b1b;
     border: none;
     border-radius: 20px;
-    padding: 0px 20px;
+    padding: 1px 20px;
     margin-top: 50px;
     width: 40vw;
     height: 100vh;
@@ -30,22 +30,31 @@ let Container = styled.div`
     display: flex;
     flex-direction: column;
     font-family: "Nanum Gothic";
+    box-sizing: border-box;
 `;
 
 let NavContainer = styled.div`
     width: 100%;
     height: 10%;
+    padding: 3px;
 `;
 
 let ContentsContainer = styled.main`
     width: 100%;
     height: 80%;
     position: relative;
+    overflow-y: scroll;
+    padding: 3px;
+
+    &::-webkit-scrollbar {
+        display: none; /* 스크롤바 숨기기 */
+    }
 `;
 
 const FooterContainer = styled.footer`
     width: 100%;
     height: 10%;
+    padding: 3px;
 `;
 
 function Main(props) {
