@@ -43,18 +43,9 @@ const StyledTextarea = styled.textarea`
     width: 100%;
     background-color: inherit;
     resize: none;
-    height: 15em;
+    min-height: 15em;
     margin-top: 10px;
     padding: 10px;
-`;
-
-const SubmitButton = styled.button`
-    background-color: ${CARROT};
-    border-radius: 5px;
-    border: none;
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
 `;
 
 function WritePost(props) {
@@ -89,7 +80,7 @@ function WritePost(props) {
 
     return (
         <>
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={onSubmit} id="write-form">
                 <AttachedImageContainer>
                     <FontAwesomeIcon icon={faCamera} />
                     <NormalText color="#6e6e6e">0/10</NormalText>
@@ -111,10 +102,13 @@ function WritePost(props) {
                     placeholder={text}
                     name="content"
                     onChange={(e) => setContent(e.target.value)}
+                    onInput={(e) => {
+                        const textarea = e.currentTarget;
+
+                        textarea.style.height = "auto";
+                        textarea.style.height = textarea.scrollHeight + 9 + "px";
+                    }}
                 />
-                <SubmitButton type="submit">
-                    <BoldLargeText>작성 완료</BoldLargeText>
-                </SubmitButton>
             </Form>
         </>
     );

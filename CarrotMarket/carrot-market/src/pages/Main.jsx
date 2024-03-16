@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Route, Routes, Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Home from "../contents/Home";
 import Neighborhood from "../contents/Neighborhood";
 import MyLocation from "../contents/MyLocation";
@@ -15,6 +15,7 @@ import WritePostNav from "../ui/WritePostNav";
 import WritePost from "../contents/WritePost";
 import postData from "../postData";
 import DetailFooter from "../ui/DetailFooter";
+import WritePostFooter from "../ui/WritePostFooter";
 
 // styled-components
 let Container = styled.div`
@@ -148,6 +149,9 @@ function Main(props) {
                             <ContentsContainer>
                                 <WritePost data={data} setData={setData} />
                             </ContentsContainer>
+                            <FooterContainer>
+                                <WritePostFooter />
+                            </FooterContainer>
                         </>
                     }
                 />
