@@ -14,7 +14,7 @@ let MainContainer = styled.div`
 function Home(props) {
     return (
         <MainContainer>
-            <PostList />
+            <PostList data={props.data} />
         </MainContainer>
     );
 }

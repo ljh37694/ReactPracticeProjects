@@ -57,15 +57,15 @@ let CountContainer = styled.div`
 `;
 
 function Post(props) {
-    let { onClick } = props;
+    let { onClick, data } = props;
 
     return (
         <PostContainer onClick={onClick}>
             <PostImage src="https://blog.kakaocdn.net/dn/tWx11/btqDag5h7y3/6aY75vJNfOPMyNicZo53c0/img.png"></PostImage>
             <ContentsContainer>
-                <PostTitle>품절 임박! 닌텐도 스위치 팝니다</PostTitle>
+                <PostTitle>{data.title}</PostTitle>
                 <PostDetail>송정동 · 3시간 전</PostDetail>
-                <PostPrice>230,000원</PostPrice>
+                <PostPrice>{data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원</PostPrice>
                 <PostFooter>
                     <CountContainer>
                         <FontAwesomeIcon icon={faComments} />
