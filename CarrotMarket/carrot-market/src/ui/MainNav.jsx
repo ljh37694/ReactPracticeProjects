@@ -18,7 +18,6 @@ let Nav = styled.nav`
     margin: auto;
     text-align: center;
     border: none;
-    margin: auto;
     display: flex;
     align-items: center;
 `;
