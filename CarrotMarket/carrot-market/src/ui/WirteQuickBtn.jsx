@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 let BtnContainer = styled.div`
     position: absolute;
-    right: 6%;
-    bottom: 1%;
+    right: 9%;
+    bottom: 13%;
     border-radius: 100px;
     color: #fff;
     background-color: orange;

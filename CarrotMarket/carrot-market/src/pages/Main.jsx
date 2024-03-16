@@ -32,6 +32,7 @@ let Container = styled.div`
     flex-direction: column;
     font-family: "Nanum Gothic";
     box-sizing: border-box;
+    position: relative;
 `;
 
 let NavContainer = styled.div`
@@ -43,7 +44,6 @@ let NavContainer = styled.div`
 let ContentsContainer = styled.main`
     width: 100%;
     height: 80%;
-    position: relative;
     overflow-y: scroll;
     padding: 3px;
 
@@ -78,8 +78,8 @@ function Main(props) {
 
                             <ContentsContainer>
                                 <Home data={data} setData={setData} />
-                                <WriteQuickBtn />
                             </ContentsContainer>
+                            <WriteQuickBtn />
                             <FooterContainer>
                                 <Footer
                                     setOption={setOption}
