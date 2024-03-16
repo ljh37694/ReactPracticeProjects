@@ -6,20 +6,22 @@ import Neighborhood from "../contents/Neighborhood";
 import MyLocation from "../contents/MyLocation";
 import ChattingList from "../contents/ChattingList";
 import User from "../contents/User";
-import Footer from "../ui/Footer";
+import Footer from "../ui/MainFooter";
 import MainNav from "../ui/MainNav";
 import WriteQuickBtn from "../ui/WirteQuickBtn";
 import DetailNav from "../ui/DetailNav";
 import DetailInfo from "../ui/DetailInfo";
 import WritePostNav from "../ui/WritePostNav";
 import WritePost from "../contents/WritePost";
+import postData from "../postData";
+import DetailFooter from "../ui/DetailFooter";
 
 // styled-components
 let Container = styled.div`
     background-color: #1b1b1b;
     border: none;
     border-radius: 20px;
-    padding: 30px;
+    padding: 0px 20px;
     margin-top: 50px;
     width: 40vw;
     height: 100vh;
@@ -32,7 +34,7 @@ let Container = styled.div`
 
 let NavContainer = styled.div`
     width: 100%;
-    height: 7%;
+    height: 10%;
 `;
 
 let ContentsContainer = styled.main`
@@ -41,10 +43,16 @@ let ContentsContainer = styled.main`
     position: relative;
 `;
 
+const FooterContainer = styled.footer`
+    width: 100%;
+    height: 10%;
+`;
+
 function Main(props) {
     // states
     let [option, setOption] = useState("home");
     let [footerMenu, setFooterMenu] = useState(0);
+    let [data, setData] = useState(postData);
 
     return (
         <Container>
@@ -59,14 +67,16 @@ function Main(props) {
                             </NavContainer>
 
                             <ContentsContainer>
-                                <Home />
+                                <Home data={data} setData={setData} />
                                 <WriteQuickBtn />
                             </ContentsContainer>
-                            <Footer
-                                setOption={setOption}
-                                selectMenu={footerMenu}
-                                setSelectMenu={setFooterMenu}
-                            />
+                            <FooterContainer>
+                                <Footer
+                                    setOption={setOption}
+                                    selectMenu={footerMenu}
+                                    setSelectMenu={setFooterMenu}
+                                />
+                            </FooterContainer>
                         </>
                     }
                 />
@@ -82,15 +92,20 @@ function Main(props) {
                                 <Outlet />
                                 <WriteQuickBtn />
                             </ContentsContainer>
-                            <Footer
-                                setOption={setOption}
-                                selectMenu={footerMenu}
-                                setSelectMenu={setFooterMenu}
-                            />
+                            <FooterContainer>
+                                <Footer
+                                    setOption={setOption}
+                                    selectMenu={footerMenu}
+                                    setSelectMenu={setFooterMenu}
+                                />
+                            </FooterContainer>
                         </>
                     }
                 >
-                    <Route path="home" element={<Home />} />
+                    <Route
+                        path="home"
+                        element={<Home data={data} setData={setData} />}
+                    />
                     <Route path="neighborhood" element={<Neighborhood />} />
                     <Route path="my-location" element={<MyLocation />} />
                     <Route path="chatting-list" element={<ChattingList />} />
@@ -98,15 +113,18 @@ function Main(props) {
                 </Route>
 
                 <Route
-                    path="/detail"
+                    path="/detail/:idx"
                     element={
                         <>
                             <NavContainer>
                                 <DetailNav />
                             </NavContainer>
                             <ContentsContainer>
-                                <DetailInfo />
+                                <DetailInfo data={data} />
                             </ContentsContainer>
+                            <FooterContainer>
+                                <DetailFooter />
+                            </FooterContainer>
                         </>
                     }
                 ></Route>
@@ -119,11 +137,11 @@ function Main(props) {
                                 <WritePostNav />
                             </NavContainer>
                             <ContentsContainer>
-                                <WritePost />
+                                <WritePost data={data} setData={setData} />
                             </ContentsContainer>
                         </>
                     }
-                ></Route>
+                />
             </Routes>
         </Container>
     );

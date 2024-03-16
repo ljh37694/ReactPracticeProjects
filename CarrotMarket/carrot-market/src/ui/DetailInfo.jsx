@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { BoldLargeText, BoldNormalText, NormalText } from "../components/Texts";
+import { useParams } from "react-router-dom";
 
 let ContentsContainer = styled.div`
     width: 100%;
@@ -54,6 +55,11 @@ const TextContainer = styled.div`
 `;
 
 function DetailInfo(props) {
+    const { data } = props;
+    const { idx } = useParams();
+
+    const postData = data[parseInt(idx)];
+
     return (
         <ContentsContainer>
             <IamgeContainer src="https://blog.kakaocdn.net/dn/tWx11/btqDag5h7y3/6aY75vJNfOPMyNicZo53c0/img.png" />
@@ -66,15 +72,13 @@ function DetailInfo(props) {
                     </div>
                 </UserProfileContainer>
                 <UserTemperatureContainer>
-                    <BoldNormalText color="#49c442">36.5℃  😃</BoldNormalText>
+                    <BoldNormalText color="#49c442">36.5℃ 😃</BoldNormalText>
                 </UserTemperatureContainer>
             </UserInfoContainer>
             <TextContainer>
-                <BoldLargeText>닌텐도 스위치 팝니다.</BoldLargeText>
+                <BoldLargeText>{postData.title}</BoldLargeText>
                 <NormalText color="#6e6e6e">취미/게임 · 1시간 전</NormalText>
-                <NormalText>
-                    닌텐도 스위치 팝니다.
-                </NormalText>
+                <NormalText className="mt-3">{postData.content}</NormalText>
             </TextContainer>
         </ContentsContainer>
     );

@@ -21,6 +21,7 @@ const LeftMenu = styled.div`
     height: 100%;
     display: flex;
     text-align: start;
+    align-items: center;
 `;
 
 const RightMenu = styled.div`
@@ -28,6 +29,7 @@ const RightMenu = styled.div`
     flex-grow: 1;
     display: flex;
     justify-content: end;
+    align-items: center;
     text-align: end;
 `;
 
