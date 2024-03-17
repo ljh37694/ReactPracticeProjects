@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Route, Routes, Outlet } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Home from "../contents/Home";
 import Neighborhood from "../contents/Neighborhood";
 import MyLocation from "../contents/MyLocation";
@@ -16,6 +16,7 @@ import WritePost from "../contents/WritePost";
 import postData from "../postData";
 import DetailFooter from "../ui/DetailFooter";
 import WritePostFooter from "../ui/WritePostFooter";
+import axios from "axios";
 
 // styled-components
 let Container = styled.div`
@@ -63,6 +64,14 @@ function Main(props) {
     let [option, setOption] = useState("home");
     let [footerMenu, setFooterMenu] = useState(0);
     let [data, setData] = useState(postData);
+
+    useEffect(() => {
+        axios.get("http://localhost:1234/post-data")
+        .then((res) => {
+            setData(JSON.parse(res.data));
+        })
+        .catch(e => console.log(e));
+    }, []);
 
     return (
         <Container>

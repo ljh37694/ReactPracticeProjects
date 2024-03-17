@@ -5,6 +5,7 @@ import { BoldNormalText, NormalText, BoldLargeText } from "../components/Texts";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CARROT, GREY } from "../components/Color";
+import axios from "axios";
 
 const Container = styled.div`
     border-radius: 10px;
@@ -63,19 +64,21 @@ function WritePost(props) {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        setData([
-            {
-                title: title,
-                photo: [
-                    "https://blog.kakaocdn.net/dn/tWx11/btqDag5h7y3/6aY75vJNfOPMyNicZo53c0/img.png",
-                ],
-                price: price,
-                content: content,
-            },
-            ...data,
-        ]);
+        const curData = {
+            title: title,
+            photo: [
+                "https://blog.kakaocdn.net/dn/tWx11/btqDag5h7y3/6aY75vJNfOPMyNicZo53c0/img.png",
+            ],
+            price: price,
+            content: content,
+        };
+
+        setData([curData, ...data]);
 
         navigate("/main/home");
+
+        axios.post("http://localhost:1234/write-post", curData)
+        .catch(e => console.log(e));
     };
 
     return (
@@ -106,7 +109,8 @@ function WritePost(props) {
                         const textarea = e.currentTarget;
 
                         textarea.style.height = "auto";
-                        textarea.style.height = textarea.scrollHeight + 9 + "px";
+                        textarea.style.height =
+                            textarea.scrollHeight + 9 + "px";
                     }}
                 />
             </Form>
