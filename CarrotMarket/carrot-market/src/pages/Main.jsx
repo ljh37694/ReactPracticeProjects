@@ -17,6 +17,13 @@ import postData from "../postData";
 import DetailFooter from "../ui/DetailFooter";
 import WritePostFooter from "../ui/WritePostFooter";
 import axios from "axios";
+import Start from "../contents/Start";
+import StartFooter from "../ui/StartFooter";
+import Login from "../contents/Login";
+import LoginFooter from "../ui/LoginFooter";
+import LoginNav from "../ui/LoginNav";
+import SignUp from "../contents/SignUp";
+import SignUpFooter from "../ui/SignUpFooter";
 
 // styled-components
 let Container = styled.div`
@@ -66,39 +73,18 @@ function Main(props) {
     let [data, setData] = useState(postData);
 
     useEffect(() => {
-        axios.get("http://localhost:1234/post-data")
-        .then((res) => {
-            setData(JSON.parse(res.data));
-        })
-        .catch(e => console.log(e));
+        axios
+            .get("http://localhost:1234/post-data")
+            .then((res) => {
+                setData(JSON.parse(res.data));
+            })
+            .catch((e) => console.log(e));
     }, []);
 
     return (
         <Container>
             {/* main page */}
             <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <>
-                            <NavContainer>
-                                <MainNav option={option} />
-                            </NavContainer>
-
-                            <ContentsContainer>
-                                <Home data={data} setData={setData} />
-                            </ContentsContainer>
-                            <WriteQuickBtn />
-                            <FooterContainer>
-                                <Footer
-                                    setOption={setOption}
-                                    selectMenu={footerMenu}
-                                    setSelectMenu={setFooterMenu}
-                                />
-                            </FooterContainer>
-                        </>
-                    }
-                />
                 <Route
                     path="/main"
                     element={
@@ -164,6 +150,53 @@ function Main(props) {
                         </>
                     }
                 />
+
+                <Route
+                    path="/"
+                    element={
+                        <>
+                            <NavContainer />
+                            <ContentsContainer>
+                                <Start />
+                            </ContentsContainer>
+                            <FooterContainer>
+                                <StartFooter />
+                            </FooterContainer>
+                        </>
+                    }
+                />
+
+                <Route
+                    path="/login"
+                    element={
+                        <>
+                            <NavContainer>
+                                <LoginNav />
+                            </NavContainer>
+
+                            <ContentsContainer>
+                                <Login />
+                            </ContentsContainer>
+
+                            <FooterContainer>
+                                <LoginFooter />
+                            </FooterContainer>
+                        </>
+                    }
+                />
+                <Route path="/sign-up" element={
+                    <>
+                        <NavContainer>
+                            <LoginNav />
+                        </NavContainer>
+                        <ContentsContainer>
+                            <SignUp />
+                        </ContentsContainer>
+                        <FooterContainer>
+                            <SignUpFooter />
+                        </FooterContainer>
+                    </>
+                } />
             </Routes>
         </Container>
     );
