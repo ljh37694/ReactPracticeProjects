@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { GREY } from "../components/Color";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
-const LoginForm = styled.form`
+const SignUpForm = styled.form`
     width: 100%;
     height: 100%;
     display: flex;
@@ -26,16 +28,52 @@ const CarrotImage = styled.img`
 `;
 
 function SignUp(props) {
+    const { userId, setUserId, password, setPassword, nickname, setNickname } = props;
+    const data = { nickname: nickname, userId: userId, password: password };
+    const navigate = useNavigate();
+
     return (
-        <LoginForm onSubmit={() => console.log(1)}>
+        <SignUpForm
+            id="sign-up-form"
+            onSubmit={async (e) => {
+                e.preventDefault();
+
+                try {
+                    const response = await axios.post(
+                        "http://localhost:1234/sign-up",
+                        data
+                    );
+                    console.log("회원가입 성공!", response);
+
+                    if (response.data == "성공") {
+                        navigate("/main/home");
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
+            }}
+        >
             <CarrotImage src="https://brandnew.daangn.com/static/83204de0c76f5d19f87a4cd3d02a23df/49a66/logoImage.png" />
 
-
-            <StyledInput type="text" placeholder="닉네임을 입력하세요." />
-            <StyledInput type="text" placeholder="아이디를 입력하세요." />
-            <StyledInput type="password" placeholder="비밀번호를 입력하세요." />
-            <StyledInput type="password" placeholder="한번 더 비밀번호를 입력하세요." />
-        </LoginForm>
+            <StyledInput
+                type="text"
+                placeholder="닉네임을 입력하세요."
+                value={nickname}
+                onInput={(e) => setNickname(e.currentTarget.value)}
+            />
+            <StyledInput
+                type="text"
+                placeholder="아이디를 입력하세요."
+                value={userId}
+                onInput={(e) => setUserId(e.currentTarget.value)}
+            />
+            <StyledInput
+                type="password"
+                placeholder="비밀번호를 입력하세요."
+                value={password}
+                onInput={(e) => setPassword(e.currentTarget.value)}
+            />
+        </SignUpForm>
     );
 }
 

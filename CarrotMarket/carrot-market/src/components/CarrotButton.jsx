@@ -14,10 +14,10 @@ const StyledButton = styled.button`
 `;
 
 function CarrotButton(props) {
-    const { text, width, onClick } = props;
+    const { type, form, text, width, onClick } = props;
 
     return (
-        <StyledButton width={width} onClick={onClick}>
+        <StyledButton type={type} form={form} width={width} onClick={onClick}>
             <BoldLargeText>{text}</BoldLargeText>
         </StyledButton>
     );

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import CarrotButton from "../components/CarrotButton";
+import axios from "axios";
 
 const Container = styled.div`
     width: 100%;
@@ -12,11 +13,9 @@ const Container = styled.div`
 `;
 
 function SignUpFooter(props) {
-    const navigate = useNavigate();
-
     return (
         <Container>
-            <CarrotButton text="회원가입" onClick={() => navigate("/main/home")} />
+            <CarrotButton type="submit" form="sign-up-form" text="회원가입" />
         </Container>
     );
 }

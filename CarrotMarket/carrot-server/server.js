@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const app = express();
 const { MongoClient } = require("mongodb");
 app.use(express.json());
@@ -41,5 +42,26 @@ app.post("/write-post", async (req, res) => {
         const data = await db.collection("posts").insertOne(req.body);
     } catch(e) {
         console.log(e);
+    }
+});
+
+app.post("/sign-up", async (req, res) => {
+    try {
+        let userData = req.body;
+        const saltRounds = 10;
+        userData.password = await bcrypt.hash(userData.password, saltRounds);
+
+        const nickname = await db.collection("users").find({ nickname: userData.nickname }).toArray();
+        const userId = await db.collection("users").find({userId: userData.userId }).toArray();
+
+        await db.collection("users").insertOne({
+            nickname: userData.nickname,
+            userId: userData.userId,
+            password: userData.password,
+        });
+
+        res.send("성공");
+    } catch (error) {
+        console.log(error);
     }
 });

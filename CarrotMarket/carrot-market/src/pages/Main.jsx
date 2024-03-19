@@ -71,6 +71,9 @@ function Main(props) {
     let [option, setOption] = useState("home");
     let [footerMenu, setFooterMenu] = useState(0);
     let [data, setData] = useState(postData);
+    let [userId, setUserId] = useState("");
+    let [password, setPassword] = useState("");
+    let [nickname, setNickname] = useState("");
 
     useEffect(() => {
         axios
@@ -190,7 +193,7 @@ function Main(props) {
                             <LoginNav />
                         </NavContainer>
                         <ContentsContainer>
-                            <SignUp />
+                            <SignUp userId={userId} setUserId={setUserId} password={password} setPassword={setPassword} nickname={nickname} setNickname={setNickname} />
                         </ContentsContainer>
                         <FooterContainer>
                             <SignUpFooter />
