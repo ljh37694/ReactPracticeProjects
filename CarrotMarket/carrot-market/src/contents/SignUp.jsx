@@ -50,6 +50,8 @@ function SignUp(props) {
                     }
                 } catch (e) {
                     console.log(e);
+
+                    alert(e.response.data);
                 }
             }}
         >
