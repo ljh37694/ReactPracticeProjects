@@ -46,22 +46,27 @@ function MainNav(props) {
         home: {
             title: "송정동",
             icons: [faMagnifyingGlass, faBell],
+            paths: ["/main/setting"],
         },
         neighborhood: {
             title: "송정동",
             icons: [faUser, faMagnifyingGlass, faBell],
+            paths: ["/main/setting"],
         },
         myLocation: {
             title: "송정동",
             icons: [faMagnifyingGlass, faBell],
+            paths: ["/main/setting"],
         },
         chattingList: {
             title: "채팅",
             icons: [faExpand, faBell],
+            paths: ["/main/setting"],
         },
         user: {
             title: "나의 당근",
             icons: [faGear],
+            paths: ["/main/setting"],
         },
     };
 
@@ -72,7 +77,7 @@ function MainNav(props) {
             <MenuIconContainer>
                 {navMenuList[option].icons.map((item, idx) => {
                     return (
-                        <Link to="/home">
+                        <Link to={navMenuList[option].paths[idx]}>
                             <IconContainer>
                                 <FontAwesomeIcon icon={item}></FontAwesomeIcon>
                             </IconContainer>

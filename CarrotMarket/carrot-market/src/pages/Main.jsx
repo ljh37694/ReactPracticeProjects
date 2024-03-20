@@ -24,6 +24,8 @@ import LoginFooter from "../ui/LoginFooter";
 import LoginNav from "../ui/LoginNav";
 import SignUp from "../contents/SignUp";
 import SignUpFooter from "../ui/SignUpFooter";
+import ProtectedRoute from "../contents/ProtectedRoute";
+import Setting from "../contents/Setting";
 
 // styled-components
 let Container = styled.div`
@@ -86,74 +88,7 @@ function Main(props) {
 
     return (
         <Container>
-            {/* main page */}
             <Routes>
-                <Route
-                    path="/main"
-                    element={
-                        <>
-                            <NavContainer>
-                                <MainNav option={option} />
-                            </NavContainer>
-
-                            <ContentsContainer>
-                                <Outlet />
-                                <WriteQuickBtn />
-                            </ContentsContainer>
-                            <FooterContainer>
-                                <Footer
-                                    setOption={setOption}
-                                    selectMenu={footerMenu}
-                                    setSelectMenu={setFooterMenu}
-                                />
-                            </FooterContainer>
-                        </>
-                    }
-                >
-                    <Route
-                        path="home"
-                        element={<Home data={data} setData={setData} />}
-                    />
-                    <Route path="neighborhood" element={<Neighborhood />} />
-                    <Route path="my-location" element={<MyLocation />} />
-                    <Route path="chatting-list" element={<ChattingList />} />
-                    <Route path="my-page" element={<User />} />
-                </Route>
-
-                <Route
-                    path="/detail/:idx"
-                    element={
-                        <>
-                            <NavContainer>
-                                <DetailNav />
-                            </NavContainer>
-                            <ContentsContainer>
-                                <DetailInfo data={data} />
-                            </ContentsContainer>
-                            <FooterContainer>
-                                <DetailFooter />
-                            </FooterContainer>
-                        </>
-                    }
-                ></Route>
-
-                <Route
-                    path="write-post"
-                    element={
-                        <>
-                            <NavContainer>
-                                <WritePostNav />
-                            </NavContainer>
-                            <ContentsContainer>
-                                <WritePost data={data} setData={setData} />
-                            </ContentsContainer>
-                            <FooterContainer>
-                                <WritePostFooter />
-                            </FooterContainer>
-                        </>
-                    }
-                />
-
                 <Route
                     path="/"
                     element={
@@ -178,7 +113,14 @@ function Main(props) {
                             </NavContainer>
 
                             <ContentsContainer>
-                                <Login />
+                                <Login
+                                    userId={userId}
+                                    setUserId={setUserId}
+                                    password={password}
+                                    setPassword={setPassword}
+                                    nickname={nickname}
+                                    setNickname={setNickname}
+                                />
                             </ContentsContainer>
 
                             <FooterContainer>
@@ -187,19 +129,104 @@ function Main(props) {
                         </>
                     }
                 />
-                <Route path="/sign-up" element={
-                    <>
-                        <NavContainer>
-                            <LoginNav />
-                        </NavContainer>
-                        <ContentsContainer>
-                            <SignUp userId={userId} setUserId={setUserId} password={password} setPassword={setPassword} nickname={nickname} setNickname={setNickname} />
-                        </ContentsContainer>
-                        <FooterContainer>
-                            <SignUpFooter />
-                        </FooterContainer>
-                    </>
-                } />
+                <Route
+                    path="/sign-up"
+                    element={
+                        <>
+                            <NavContainer>
+                                <LoginNav />
+                            </NavContainer>
+                            <ContentsContainer>
+                                <SignUp
+                                    userId={userId}
+                                    setUserId={setUserId}
+                                    password={password}
+                                    setPassword={setPassword}
+                                />
+                            </ContentsContainer>
+                            <FooterContainer>
+                                <SignUpFooter />
+                            </FooterContainer>
+                        </>
+                    }
+                />
+
+                {/* main page */}
+                <Route element={<ProtectedRoute />}>
+                    <Route
+                        path="/main"
+                        element={
+                            <>
+                                <NavContainer>
+                                    <MainNav option={option} />
+                                </NavContainer>
+
+                                <ContentsContainer>
+                                    <Outlet />
+                                </ContentsContainer>
+                                <FooterContainer>
+                                    <Footer
+                                        setOption={setOption}
+                                        selectMenu={footerMenu}
+                                        setSelectMenu={setFooterMenu}
+                                    />
+                                </FooterContainer>
+                            </>
+                        }
+                    >
+                        <Route
+                            path="home"
+                            element={
+                                <>
+                                    <Home data={data} setData={setData} />
+                                    <WriteQuickBtn />
+                                </>
+                            }
+                        />
+                        <Route path="neighborhood" element={<Neighborhood />} />
+                        <Route path="my-location" element={<MyLocation />} />
+                        <Route
+                            path="chatting-list"
+                            element={<ChattingList />}
+                        />
+                        <Route path="my-page" element={<User />} />
+                        <Route path="setting" element={<Setting />} />
+                    </Route>
+
+                    <Route
+                        path="/detail/:idx"
+                        element={
+                            <>
+                                <NavContainer>
+                                    <DetailNav />
+                                </NavContainer>
+                                <ContentsContainer>
+                                    <DetailInfo data={data} />
+                                </ContentsContainer>
+                                <FooterContainer>
+                                    <DetailFooter />
+                                </FooterContainer>
+                            </>
+                        }
+                    ></Route>
+
+                    <Route
+                        path="write-post"
+                        element={
+                            <>
+                                <NavContainer>
+                                    <WritePostNav />
+                                </NavContainer>
+                                <ContentsContainer>
+                                    <WritePost data={data} setData={setData} />
+                                </ContentsContainer>
+                                <FooterContainer>
+                                    <WritePostFooter />
+                                </FooterContainer>
+                            </>
+                        }
+                    />
+                </Route>
             </Routes>
         </Container>
     );

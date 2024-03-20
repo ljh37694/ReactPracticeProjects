@@ -11,7 +11,7 @@ const Container = styled.div`
 function LoginFooter(props) {
     return (
         <Container>
-            <CarrotButton text="로그인" />
+            <CarrotButton type="submit" form="login-form" text="로그인" />
         </Container>
     );
 }

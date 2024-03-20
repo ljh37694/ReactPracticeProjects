@@ -1,5 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
 const app = express();
 const { MongoClient } = require("mongodb");
 app.use(express.json());
@@ -73,14 +76,37 @@ app.post("/sign-up", async (req, res) => {
                 password: userData.password,
             });
 
-            
             res.send("성공");
-        }
-
-        else {
+        } else {
             res.status(400).send("닉네임 또는 아이디가 중복입니다.");
         }
     } catch (error) {
         console.log(error);
+    }
+});
+
+app.post("/login", async (req, res) => {
+    const { userId, password } = req.body;
+
+    try {
+        const user = await db.collection("users").findOne({ userId: userId });
+
+        if (user == null || !(await bcrypt.compare(password, user.password))) {
+            res.status(400).send("아이디 또는 비밀번호가 틀렸습니다.");
+        } else {
+            const token = jwt.sign(
+                {
+                    id: user.userId,
+                    username: user.nickname,
+                },
+                process.env.JWT_SECRET
+            );
+
+            console.log(token);
+
+            res.json({ token });
+        }
+    } catch (e) {
+        console.log(e);
     }
 });
