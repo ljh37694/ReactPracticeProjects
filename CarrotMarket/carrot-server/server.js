@@ -12,7 +12,7 @@ app.use(cors());
 let db;
 
 const url =
-    "mongodb+srv://ljh37694:hi37694*@forum.6p5dx3j.mongodb.net/?retryWrites=true&w=majority";
+    `mongodb+srv://ljh37694:${process.env.DB_PW}@forum.6p5dx3j.mongodb.net/?retryWrites=true&w=majority`
 
 new MongoClient(url)
     .connect()
@@ -21,7 +21,7 @@ new MongoClient(url)
         db = client.db("CarrotMarket");
 
         // 서버 열기
-        app.listen(1234, () => {
+        app.listen(process.env.PORT, () => {
             console.log("http://localhost:1234 에서 서버 실행 중");
         });
     })
