@@ -13,7 +13,7 @@ const LoginForm = styled.form`
 `;
 
 const StyledInput = styled.input`
-    width: 30em;
+    width: 80%;
     height: 3em;
     padding: 10px;
     border: 1px solid ${GREY};
