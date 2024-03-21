@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Chatting from "../components/Chatting";
 
 let MainContainer = styled.div`
     width: 100%;
@@ -14,7 +15,7 @@ let MainContainer = styled.div`
 function ChattingList(props) {
     return (
         <MainContainer>
-            <div>채팅</div>
+            <Chatting />
         </MainContainer>
     );
 }
