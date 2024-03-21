@@ -33,28 +33,47 @@ function Login(props) {
     const navigate = useNavigate();
 
     return (
-        <LoginForm id="login-form" onSubmit={async (e) => {
-            e.preventDefault();
+        <LoginForm
+            id="login-form"
+            onSubmit={async (e) => {
+                e.preventDefault();
 
-            try {
-                const response = await axios.post("http://localhost:1234/login", { userId, password });
-                const token = response.data.token;
+                try {
+                    await axios
+                        .post("http://localhost:1234/login", {
+                            userId,
+                            password,
+                        })
+                        .then((response) => {
+                            const token = response.data.token;
 
-                localStorage.setItem("token", token);
+                            console.log(response);
 
-                console.log("로그인 성공", token);
+                            localStorage.setItem("token", token);
 
-                navigate("/main/home");
-            } catch(error) {
-                console.log(error);
+                            console.log("로그인 성공", token);
 
-                alert(error.response.data);
-            }
-        }}>
+                            navigate("/main/home");
+                        });
+                } catch (error) {
+                    console.log(error);
+
+                    alert(error.response.data);
+                }
+            }}
+        >
             <CarrotImage src="https://brandnew.daangn.com/static/83204de0c76f5d19f87a4cd3d02a23df/49a66/logoImage.png" />
 
-            <StyledInput type="text" placeholder="아이디를 입력하세요." onInput={e => setUserId(e.currentTarget.value)} />
-            <StyledInput type="password" placeholder="비밀번호를 입력하세요." onInput={e => setPassword(e.currentTarget.value)} />
+            <StyledInput
+                type="text"
+                placeholder="아이디를 입력하세요."
+                onInput={(e) => setUserId(e.currentTarget.value)}
+            />
+            <StyledInput
+                type="password"
+                placeholder="비밀번호를 입력하세요."
+                onInput={(e) => setPassword(e.currentTarget.value)}
+            />
         </LoginForm>
     );
 }
