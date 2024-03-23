@@ -99,7 +99,8 @@ app.post("/login", async (req, res) => {
                     id: user.userId,
                     username: user.nickname,
                 },
-                process.env.JWT_SECRET
+                process.env.JWT_SECRET,
+                { expiresIn: 60 * 10 },
             );
 
             console.log(token);
