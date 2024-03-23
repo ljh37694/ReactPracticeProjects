@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Chatting from "../components/Chatting";
+import ChattingRoom from "../components/ChattingRoom";
 
 let MainContainer = styled.div`
     width: 100%;
@@ -12,12 +12,16 @@ let MainContainer = styled.div`
     color: #fff;
 `;
 
-function ChattingList(props) {
+function ChattingRoomList(props) {
+
     return (
         <MainContainer>
-            <Chatting />
+            <ChattingRoom />
+            <ChattingRoom />
+            <ChattingRoom />
+            <ChattingRoom />
         </MainContainer>
     );
 }
 
-export default ChattingList;
+export default ChattingRoomList;

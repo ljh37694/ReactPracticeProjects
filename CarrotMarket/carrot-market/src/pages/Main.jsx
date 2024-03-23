@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Home from "../contents/Home";
 import Neighborhood from "../contents/Neighborhood";
 import MyLocation from "../contents/MyLocation";
-import ChattingList from "../contents/ChattingList";
+import ChattingRoomList from "../contents/ChattingRoomList";
 import User from "../contents/User";
 import Footer from "../ui/MainFooter";
 import MainNav from "../ui/MainNav";
@@ -187,7 +187,7 @@ function Main(props) {
                         <Route path="my-location" element={<MyLocation />} />
                         <Route
                             path="chatting-list"
-                            element={<ChattingList />}
+                            element={<ChattingRoomList />}
                         />
                         <Route path="my-page" element={<User />} />
                         <Route path="setting" element={<Setting />} />
