@@ -13,7 +13,6 @@ let PostsContainer = styled.div`
 function PostList(props) {
     const { data } = props;
     const navigate = useNavigate();
-    const onClickPost = () => navigate("/detail");
 
     return (
         <PostsContainer>
