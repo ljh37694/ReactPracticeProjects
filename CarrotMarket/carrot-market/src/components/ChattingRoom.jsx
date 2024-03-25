@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { LargeText, NormalText } from "./Texts";
+import { NormalText } from "./Texts";
 import { GREY, BLACK } from "./Color";
 
 const Container = styled.div`
@@ -55,7 +55,7 @@ function ChattingRoom(props) {
             <ProfileImage src={profileImg} />
             <ContentsContainer>
                 <ContentsTopContainer>
-                    <LargeText>{nickname}</LargeText>
+                    <NormalText>{nickname}</NormalText>
                     <NormalText color={GREY}>{location}</NormalText>
                 </ContentsTopContainer>
                 <ContentsBottomContainer>
