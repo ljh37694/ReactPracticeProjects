@@ -2,8 +2,12 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const { Server } = require("socket.io");
+const { createServer } = require("http");
 
 const app = express();
+const server = createServer(app);
+const io = new Server(server);
 const { MongoClient } = require("mongodb");
 app.use(express.json());
 var cors = require("cors");
@@ -105,9 +109,14 @@ app.post("/login", async (req, res) => {
 
             console.log(token);
 
-            res.json({ token });
+            res.json({ token: token,  });
         }
     } catch (e) {
         console.log(e);
     }
+});
+
+
+app.get("/user/:id", (req, res) => {
+    
 });
