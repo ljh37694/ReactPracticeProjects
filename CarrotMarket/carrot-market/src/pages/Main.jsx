@@ -26,6 +26,8 @@ import SignUp from "../contents/SignUp";
 import SignUpFooter from "../ui/SignUpFooter";
 import ProtectedRoute from "../contents/ProtectedRoute";
 import Setting from "../contents/Setting";
+import Chatting from "../components/Chatting";
+import ChattingFooter from "../ui/ChattingFooter";
 
 // styled-components
 let Container = styled.div`
@@ -73,6 +75,14 @@ function Main(props) {
     let [userId, setUserId] = useState("");
     let [password, setPassword] = useState("");
     let [nickname, setNickname] = useState("");
+    const [chattingList, setChattingList] = useState([
+        {
+            msg: "안녕",
+        },
+        {
+            msg: "하이요",
+        },
+    ]);
 
     useEffect(() => {
         axios
@@ -224,6 +234,20 @@ function Main(props) {
                         }
                     />
                 </Route>
+
+                <Route path="/chat" element={
+                    <>
+                        <NavContainer>
+                            <WritePostNav />
+                        </NavContainer>
+                        <ContentsContainer>
+                            <Chatting />
+                        </ContentsContainer>
+                        <FooterContainer>
+                            <ChattingFooter />
+                        </FooterContainer>
+                    </>
+                } />
             </Routes>
         </Container>
     );
