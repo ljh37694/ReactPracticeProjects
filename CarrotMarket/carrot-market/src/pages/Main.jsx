@@ -46,13 +46,13 @@ let Container = styled.div`
 
 let NavContainer = styled.div`
     width: 100%;
-    height: 15%;
+    height: 10%;
     padding: 3px;
 `;
 
 let ContentsContainer = styled.main`
     width: 100%;
-    height: 70%;
+    height: 80%;
     overflow-y: scroll;
     padding: 3px;
 
@@ -63,7 +63,7 @@ let ContentsContainer = styled.main`
 
 const FooterContainer = styled.footer`
     width: 100%;
-    height: 15%;
+    height: 10%;
     padding: 3px;
 `;
 
@@ -78,9 +78,11 @@ function Main(props) {
     const [chattingList, setChattingList] = useState([
         {
             msg: "안녕",
+            userId: "asdf"
         },
         {
             msg: "하이요",
+            userId: "ljh37694"
         },
     ]);
 
@@ -241,10 +243,10 @@ function Main(props) {
                             <WritePostNav />
                         </NavContainer>
                         <ContentsContainer>
-                            <Chatting />
+                            <Chatting chatList={chattingList} userId={userId} />
                         </ContentsContainer>
                         <FooterContainer>
-                            <ChattingFooter />
+                            <ChattingFooter chatList={chattingList} setChatList={setChattingList} />
                         </FooterContainer>
                     </>
                 } />

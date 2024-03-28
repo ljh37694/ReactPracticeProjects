@@ -22,6 +22,7 @@ const ChatBox = styled.div`
     display: flex;
     align-items: center;
     vertical-align: middle;
+    margin-bottom: 10px;
 `;
 
 const BlackChatBox = styled(ChatBox)`
@@ -35,19 +36,27 @@ const CarrotChatBox = styled(ChatBox)`
 `;
 
 function Chatting(props) {
-    
+    let { chatList, userId } = props;
+
+    console.log(userId);
+
     return (
         <Container>
-            <ChatContainer>
-                <BlackChatBox>
-                    <NormalText>안녕하세요</NormalText>
-                </BlackChatBox>
-            </ChatContainer>
-            <ChatContainer>
-                <CarrotChatBox>
-                    <NormalText>안녕하세요</NormalText>
-                </CarrotChatBox>
-            </ChatContainer>
+            {chatList.map((data) => {
+                return (
+                    <ChatContainer>
+                        {data.userId == userId ? (
+                            <CarrotChatBox>
+                                <NormalText>{data.msg}</NormalText>
+                            </CarrotChatBox>
+                        ) : (
+                            <BlackChatBox>
+                                <NormalText>{data.msg}</NormalText>
+                            </BlackChatBox>
+                        )}
+                    </ChatContainer>
+                );
+            })}
         </Container>
     );
 }

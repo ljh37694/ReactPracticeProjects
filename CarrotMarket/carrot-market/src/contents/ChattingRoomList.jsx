@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ChattingRoom from "../components/ChattingRoom";
+import { useNavigate } from "react-router-dom";
 
 let MainContainer = styled.div`
     width: 100%;
@@ -13,9 +14,12 @@ let MainContainer = styled.div`
 `;
 
 function ChattingRoomList(props) {
+    const navigate = useNavigate();
 
     return (
-        <MainContainer>
+        <MainContainer onClick={(e) => {
+            navigate("/chat");
+        }}>
             <ChattingRoom />
             <ChattingRoom />
             <ChattingRoom />

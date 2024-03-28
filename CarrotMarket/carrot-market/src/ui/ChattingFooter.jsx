@@ -42,18 +42,28 @@ const Button = styled.button`
 `;
 
 function ChattingFooter(props) {
-
+    let { chatList, setChatList } = props;
+    let [msg, setMsg] = useState("");
 
     return (
         <Container>
-            <ChattingForm onSubmit={() => {
-
+            <ChattingForm onSubmit={(e) => {
+                e.preventDefault();
+                setChatList([...chatList, {
+                    userId: "ljh37694",
+                    msg: msg
+                }]);
+                
+                setMsg("");
             }}>
                 <Button>
                     <FontAwesomeIcon icon={faPlus} />
                 </Button>
                 <ChatContainer>
-                    <ChatInput />
+                    <ChatInput id="chat-input" value={msg} onChange={(e) => {
+                        setMsg(e.target.value);
+                        console.log(msg);
+                    }} />
                 </ChatContainer>
                 <Button type="submit">
                     <FontAwesomeIcon icon={faPaperPlane} />
