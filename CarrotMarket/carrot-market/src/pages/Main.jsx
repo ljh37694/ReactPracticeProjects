@@ -33,13 +33,10 @@ let Container = styled.div`
     border: none;
     border-radius: 20px;
     padding: 1px 20px;
-    margin-top: 50px;
     width: 40vw;
     height: 100vh;
     margin: auto;
-    min-width: 350px;
-    display: flex;
-    flex-direction: column;
+    min-width: 400px;
     font-family: "Nanum Gothic";
     box-sizing: border-box;
     position: relative;
@@ -47,13 +44,13 @@ let Container = styled.div`
 
 let NavContainer = styled.div`
     width: 100%;
-    height: 10%;
+    height: 15%;
     padding: 3px;
 `;
 
 let ContentsContainer = styled.main`
     width: 100%;
-    height: 80%;
+    height: 70%;
     overflow-y: scroll;
     padding: 3px;
 
@@ -64,7 +61,7 @@ let ContentsContainer = styled.main`
 
 const FooterContainer = styled.footer`
     width: 100%;
-    height: 10%;
+    height: 15%;
     padding: 3px;
 `;
 

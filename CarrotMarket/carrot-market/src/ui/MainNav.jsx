@@ -8,6 +8,7 @@ import {
     faGear,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { NormalText } from "../components/Texts";
 
 let Nav = styled.nav`
     border: 1px solid #eee;
@@ -20,6 +21,7 @@ let Nav = styled.nav`
     border: none;
     display: flex;
     align-items: center;
+    justify-content: center;
 `;
 
 let NavTitle = styled.h3`
@@ -34,7 +36,7 @@ let MenuIconContainer = styled.div`
 `;
 
 let IconContainer = styled.div`
-    font-size: 24px;
+    font-size: 22x;
     color: #fff;
     width: 2.5em;
 `;
@@ -72,7 +74,9 @@ function MainNav(props) {
 
     return (
         <Nav>
-            <NavTitle> {navMenuList[option].title}</NavTitle>
+            <NavTitle>
+                <NormalText>{navMenuList[option].title}</NormalText>
+            </NavTitle>
 
             <MenuIconContainer>
                 {navMenuList[option].icons.map((item, idx) => {
