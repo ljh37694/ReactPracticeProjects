@@ -8,7 +8,7 @@ import {
     faGear,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { NormalText } from "../components/Texts";
+import { BoldLargeText } from "../components/Texts";
 
 let Nav = styled.nav`
     border: 1px solid #eee;
@@ -75,7 +75,7 @@ function MainNav(props) {
     return (
         <Nav>
             <NavTitle>
-                <NormalText>{navMenuList[option].title}</NormalText>
+                <BoldLargeText>{navMenuList[option].title}</BoldLargeText>
             </NavTitle>
 
             <MenuIconContainer>
