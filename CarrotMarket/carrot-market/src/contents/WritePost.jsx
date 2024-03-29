@@ -50,7 +50,7 @@ const StyledTextarea = styled.textarea`
 `;
 
 function WritePost(props) {
-    const { data, setData } = props;
+    const { data, setData, userId } = props;
     const navigate = useNavigate();
     const text =
         "송정동에 올릴 게시글 내용을 작성해 주세요. (판매 금지 물품은 게시가 제한될 수 있어요.)\n\n" +
@@ -71,6 +71,7 @@ function WritePost(props) {
             ],
             price: price,
             content: content,
+            userId: userId,
         };
 
         setData([curData, ...data]);
@@ -78,6 +79,9 @@ function WritePost(props) {
         navigate("/main/home");
 
         axios.post("http://localhost:1234/write-post", curData)
+        .then((res) => {
+            curData._id = res.data;
+        })
         .catch(e => console.log(e));
     };
 

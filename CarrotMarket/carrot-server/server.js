@@ -53,6 +53,8 @@ app.get("/post-data", async (req, res) => {
 app.post("/write-post", async (req, res) => {
     try {
         const data = await db.collection("posts").insertOne(req.body);
+
+        res.send(data.insertedId);
     } catch (e) {
         console.log(e);
     }

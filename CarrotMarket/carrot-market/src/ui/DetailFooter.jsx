@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { CARROT, WHITE, GREY } from "../components/Color";
 import { BoldLargeText, BoldNormalText, NormalText } from "../components/Texts";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const FooterContainer = styled.div`
     height: 100%;
@@ -48,22 +49,30 @@ const ChattingButton = styled.button`
 `;
 
 function DetailFooter(props) {
+    const { userId, data } = props;
     const [heart, setHeart] = useState(false);
+    const { idx } = useParams();
+
+    const postData = data[parseInt(idx)];
 
     return (
         <FooterContainer>
             <HeartContainer>
-                <FontAwesomeIcon className="ps-2" icon={faHeart} onClick={(e) => {
-                    e.currentTarget.style.color = heart ? CARROT : GREY;
-                    setHeart(!heart);
-                }} />
+                <FontAwesomeIcon
+                    className="ps-2"
+                    icon={faHeart}
+                    onClick={(e) => {
+                        e.currentTarget.style.color = heart ? CARROT : GREY;
+                        setHeart(!heart);
+                    }}
+                />
             </HeartContainer>
             <PriceContainer>
                 <BoldLargeText>8,000</BoldLargeText>
                 <NormalText color={GREY}>가격 제안 불가</NormalText>
             </PriceContainer>
             <ButtonContainer>
-                <ChattingButton>채팅하기</ChattingButton>
+                {postData.userId === userId ? null : <ChattingButton>채팅하기</ChattingButton>}
             </ButtonContainer>
         </FooterContainer>
     );

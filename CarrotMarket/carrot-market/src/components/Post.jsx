@@ -60,7 +60,7 @@ function Post(props) {
     let { onClick, data } = props;
 
     return (
-        <PostContainer onClick={onClick}>
+        <PostContainer onClick={onClick} id={data._id}>
             <PostImage src="https://blog.kakaocdn.net/dn/tWx11/btqDag5h7y3/6aY75vJNfOPMyNicZo53c0/img.png"></PostImage>
             <ContentsContainer>
                 <PostTitle>{data.title}</PostTitle>

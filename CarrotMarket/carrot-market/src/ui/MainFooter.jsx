@@ -45,7 +45,7 @@ let MenuTitle = styled.p`
     margin-top: 0.5em;
 `;
 
-function Footer(props) {
+function MainFooter(props) {
     let { setOption, selectMenu, setSelectMenu } = props;
 
     const footerMenuData = [
@@ -93,4 +93,4 @@ function Footer(props) {
     );
 }
 
-export default Footer;
+export default MainFooter;

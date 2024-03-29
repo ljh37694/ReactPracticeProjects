@@ -6,11 +6,11 @@ import Neighborhood from "../contents/Neighborhood";
 import MyLocation from "../contents/MyLocation";
 import ChattingRoomList from "../contents/ChattingRoomList";
 import User from "../contents/User";
-import Footer from "../ui/MainFooter";
+import MainFooter from "../ui/MainFooter";
 import MainNav from "../ui/MainNav";
 import WriteQuickBtn from "../ui/WirteQuickBtn";
 import DetailNav from "../ui/DetailNav";
-import DetailInfo from "../ui/DetailInfo";
+import DetailInfo from "../contents/DetailInfo";
 import WritePostNav from "../ui/WritePostNav";
 import WritePost from "../contents/WritePost";
 import postData from "../postData";
@@ -184,7 +184,7 @@ function Main(props) {
                                     <Outlet />
                                 </ContentsContainer>
                                 <FooterContainer>
-                                    <Footer
+                                    <MainFooter
                                         setOption={setOption}
                                         selectMenu={footerMenu}
                                         setSelectMenu={setFooterMenu}
@@ -223,7 +223,7 @@ function Main(props) {
                                     <DetailInfo data={data} />
                                 </ContentsContainer>
                                 <FooterContainer>
-                                    <DetailFooter />
+                                    <DetailFooter userId={userId} data={data} />
                                 </FooterContainer>
                             </>
                         }
@@ -237,7 +237,7 @@ function Main(props) {
                                     <WritePostNav />
                                 </NavContainer>
                                 <ContentsContainer>
-                                    <WritePost data={data} setData={setData} />
+                                    <WritePost data={data} setData={setData} userId={userId} />
                                 </ContentsContainer>
                                 <FooterContainer>
                                     <WritePostFooter />
