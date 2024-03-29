@@ -78,11 +78,11 @@ function Main(props) {
     const [chattingList, setChattingList] = useState([
         {
             msg: "안녕",
-            userId: "asdf"
+            userId: "asdf",
         },
         {
             msg: "하이요",
-            userId: "ljh37694"
+            userId: "ljh37694",
         },
     ]);
 
@@ -91,6 +91,16 @@ function Main(props) {
             .get("http://localhost:1234/post-data")
             .then((res) => {
                 setData(JSON.parse(res.data));
+            })
+            .catch((e) => console.log(e));
+
+        axios
+            .get(
+                "http://localhost:1234/user-data" +
+                    localStorage.getItem("token")
+            )
+            .then((res) => {
+                setUserId(res.data.id);
             })
             .catch((e) => console.log(e));
     }, []);
@@ -237,19 +247,29 @@ function Main(props) {
                     />
                 </Route>
 
-                <Route path="/chat" element={
-                    <>
-                        <NavContainer>
-                            <WritePostNav />
-                        </NavContainer>
-                        <ContentsContainer>
-                            <Chatting chatList={chattingList} userId={userId} />
-                        </ContentsContainer>
-                        <FooterContainer>
-                            <ChattingFooter chatList={chattingList} setChatList={setChattingList} />
-                        </FooterContainer>
-                    </>
-                } />
+                <Route
+                    path="/chat"
+                    element={
+                        <>
+                            <NavContainer>
+                                <WritePostNav />
+                            </NavContainer>
+                            <ContentsContainer>
+                                <Chatting
+                                    chatList={chattingList}
+                                    userId={userId}
+                                />
+                            </ContentsContainer>
+                            <FooterContainer>
+                                <ChattingFooter
+                                    chatList={chattingList}
+                                    setChatList={setChattingList}
+                                    userId={userId}
+                                />
+                            </FooterContainer>
+                        </>
+                    }
+                />
             </Routes>
         </Container>
     );

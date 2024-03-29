@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BLACK, CARROT, GREY } from "./Color";
+import { CARROT, GREY } from "./Color";
 import { NormalText } from "./Texts";
 
 const Container = styled.div`
@@ -38,14 +38,12 @@ const CarrotChatBox = styled(ChatBox)`
 function Chatting(props) {
     let { chatList, userId } = props;
 
-    console.log(userId);
-
     return (
         <Container>
             {chatList.map((data) => {
                 return (
                     <ChatContainer>
-                        {data.userId == userId ? (
+                        {data.userId === userId ? (
                             <CarrotChatBox>
                                 <NormalText>{data.msg}</NormalText>
                             </CarrotChatBox>

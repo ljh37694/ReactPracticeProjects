@@ -14,8 +14,8 @@ const Container = styled.div`
 `;
 
 const CarrotImage = styled.img`
-    width: 10em;
-    margin: 100px auto;
+    width: 8em;
+    margin: 2em auto;
 `;
 
 function Start(props) {

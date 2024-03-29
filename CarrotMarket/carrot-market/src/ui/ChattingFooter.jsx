@@ -42,7 +42,7 @@ const Button = styled.button`
 `;
 
 function ChattingFooter(props) {
-    let { chatList, setChatList } = props;
+    let { chatList, setChatList, userId } = props;
     let [msg, setMsg] = useState("");
 
     return (
@@ -50,7 +50,7 @@ function ChattingFooter(props) {
             <ChattingForm onSubmit={(e) => {
                 e.preventDefault();
                 setChatList([...chatList, {
-                    userId: "ljh37694",
+                    userId: userId,
                     msg: msg
                 }]);
                 
