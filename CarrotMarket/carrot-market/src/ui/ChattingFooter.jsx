@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { BLUEBLACK, GREY, WHITE } from "../components/Color";
-import { Col, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
