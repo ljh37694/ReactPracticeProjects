@@ -117,6 +117,11 @@ app.post("/login", async (req, res) => {
 });
 
 
-app.get("/user/:id", (req, res) => {
-    
+app.get("/user-data", (req, res) => {
+    let token = req.query.token;
+    const userData = jwt.decode(token);
+
+    console.log(userData);
+
+    res.json(userData);
 });
