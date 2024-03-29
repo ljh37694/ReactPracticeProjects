@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { CARROT, GREY } from "./Color";
 import { NormalText } from "./Texts";
+import { io } from "socket.io-client";
 
 const Container = styled.div`
     width: 100%;
@@ -37,6 +38,7 @@ const CarrotChatBox = styled(ChatBox)`
 
 function Chatting(props) {
     let { chatList, userId } = props;
+    const socket = io("https://localhost:1234");
 
     return (
         <Container>

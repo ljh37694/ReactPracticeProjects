@@ -125,3 +125,11 @@ app.get("/user-data", (req, res) => {
 
     res.json(userData);
 });
+
+io.on("connection", (socket) => {
+    console.log("socket connected");
+});
+
+io.on("disconnection", (socket) => {
+    console.log("socket disconneted");
+})
