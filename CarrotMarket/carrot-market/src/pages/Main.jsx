@@ -206,7 +206,7 @@ function Main(props) {
                         <Route path="my-location" element={<MyLocation />} />
                         <Route
                             path="chatting-list"
-                            element={<ChattingRoomList />}
+                            element={<ChattingRoomList userId={userId} />}
                         />
                         <Route path="my-page" element={<User />} />
                         <Route path="setting" element={<Setting />} />
@@ -237,7 +237,11 @@ function Main(props) {
                                     <WritePostNav />
                                 </NavContainer>
                                 <ContentsContainer>
-                                    <WritePost data={data} setData={setData} userId={userId} />
+                                    <WritePost
+                                        data={data}
+                                        setData={setData}
+                                        userId={userId}
+                                    />
                                 </ContentsContainer>
                                 <FooterContainer>
                                     <WritePostFooter />
@@ -245,31 +249,30 @@ function Main(props) {
                             </>
                         }
                     />
+                    <Route
+                        path="/chat"
+                        element={
+                            <>
+                                <NavContainer>
+                                    <WritePostNav />
+                                </NavContainer>
+                                <ContentsContainer>
+                                    <Chatting
+                                        chatList={chattingList}
+                                        userId={userId}
+                                    />
+                                </ContentsContainer>
+                                <FooterContainer>
+                                    <ChattingFooter
+                                        chatList={chattingList}
+                                        setChatList={setChattingList}
+                                        userId={userId}
+                                    />
+                                </FooterContainer>
+                            </>
+                        }
+                    />
                 </Route>
-
-                <Route
-                    path="/chat"
-                    element={
-                        <>
-                            <NavContainer>
-                                <WritePostNav />
-                            </NavContainer>
-                            <ContentsContainer>
-                                <Chatting
-                                    chatList={chattingList}
-                                    userId={userId}
-                                />
-                            </ContentsContainer>
-                            <FooterContainer>
-                                <ChattingFooter
-                                    chatList={chattingList}
-                                    setChatList={setChattingList}
-                                    userId={userId}
-                                />
-                            </FooterContainer>
-                        </>
-                    }
-                />
             </Routes>
         </Container>
     );
