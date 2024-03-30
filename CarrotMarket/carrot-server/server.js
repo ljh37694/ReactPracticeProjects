@@ -8,7 +8,7 @@ const { createServer } = require("http");
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 app.use(express.json());
 var cors = require("cors");
 app.use(cors());
@@ -109,8 +109,6 @@ app.post("/login", async (req, res) => {
                 { expiresIn: 60 * 10 },
             );
 
-            console.log(token);
-
             res.json({ token: token,  });
         }
     } catch (e) {
@@ -120,12 +118,74 @@ app.post("/login", async (req, res) => {
 
 
 app.get("/user-data", (req, res) => {
-    let token = req.query.token;
+    const token = req.headers.authorization;
     const userData = jwt.decode(token);
 
-    console.log(userData);
-
     res.json(userData);
+});
+
+app.get("/user-valid", async (req, res) => {
+    const token = req.headers.authorization;
+
+    try {
+        const vaild = await jwt.verify(token, process.env.JWT_SECRET);
+
+        if (vaild) {
+            res.send(true);
+        } else {
+            res.status(400).send(false);
+        }
+        
+    } catch(e) {
+        console.log(e);
+    }
+
+});
+
+app.get("/chatting-room", async (req, res) => {
+    try {
+        const { postId, userId, writerId } = req.query;
+
+        if (!postId || !userId || !writerId) {
+            res.status(400).send("아이디가 비어 있음");
+        }
+
+        const chattingRoom = await db.collection("chattingRoom").findOne({postId: new ObjectId(postId), members: [userId, writerId]});
+        let roomId;
+
+        if (chattingRoom === null) {
+            const result = await db.collection("chattingRoom").insertOne({postId: new ObjectId(postId), members: [userId, writerId]});
+            roomId = result.insertedId;
+        } else {
+            roomId = chattingRoom._id;
+        }
+
+        const chatList = await db.collection("chats").find({roomId: roomId}).toArray();
+
+        res.send({
+            roomId: roomId,
+            chatList: chatList,
+        });
+
+    } catch(e) {
+        console.log(e);
+    }
+});
+
+app.get("/chatting-list", async (req, res) => {
+    const userId = req.query.userId;
+
+    console.log(userId);
+
+    try {
+        const chattingList = await db.collection("chattingRoom").find({ members: { $in: [userId]}}).toArray();
+
+        console.log(chattingList);
+
+        res.send(chattingList);
+    } catch(e) {
+        console.log(e);
+    }
 });
 
 io.on("connection", (socket) => {
@@ -134,4 +194,4 @@ io.on("connection", (socket) => {
 
 io.on("disconnection", (socket) => {
     console.log("socket disconneted");
-})
+}); 

@@ -38,7 +38,7 @@ const CarrotChatBox = styled(ChatBox)`
 
 function Chatting(props) {
     let { chatList, userId } = props;
-    const socket = io("https://localhost:1234");
+    //const socket = io("https://localhost:1234");
 
     return (
         <Container>

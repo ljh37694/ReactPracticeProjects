@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import ChattingRoom from "../components/ChattingRoom";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
 
 let MainContainer = styled.div`
     width: 100%;
@@ -14,16 +16,20 @@ let MainContainer = styled.div`
 `;
 
 function ChattingRoomList(props) {
+    const { userId, chattingRoomList } = props;
     const navigate = useNavigate();
 
     return (
-        <MainContainer onClick={(e) => {
-            navigate("/chat");
-        }}>
-            <ChattingRoom />
-            <ChattingRoom />
-            <ChattingRoom />
-            <ChattingRoom />
+        <MainContainer
+            onClick={(e) => {
+                if (e.target.classList.contains("chatting-room")) {
+                    navigate("/chat/" + e.currentTarget.id);
+                }
+            }}
+        >
+            {chattingRoomList.map((data) => {
+                return <ChattingRoom data={data} />;
+            })}
         </MainContainer>
     );
 }

@@ -5,6 +5,7 @@ import { CARROT, WHITE, GREY } from "../components/Color";
 import { BoldLargeText, BoldNormalText, NormalText } from "../components/Texts";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const FooterContainer = styled.div`
     height: 100%;
@@ -55,6 +56,16 @@ function DetailFooter(props) {
 
     const postData = data[parseInt(idx)];
 
+    console.log(postData);
+
+    const onClickChattingBtn = () => {
+        axios.get(`http://localhost:1234/chatting-room?postId=${postData._id}&userId=${userId}&writerId=${postData.userId}`)
+        .then((res) => {
+            console.log(res.data);
+        })
+        .catch((e) => console.log(e));
+    }
+
     return (
         <FooterContainer>
             <HeartContainer>
@@ -72,7 +83,7 @@ function DetailFooter(props) {
                 <NormalText color={GREY}>가격 제안 불가</NormalText>
             </PriceContainer>
             <ButtonContainer>
-                {postData.userId === userId ? null : <ChattingButton>채팅하기</ChattingButton>}
+                {postData.userId === userId ? null : <ChattingButton onClick={onClickChattingBtn}>채팅하기</ChattingButton>}
             </ButtonContainer>
         </FooterContainer>
     );

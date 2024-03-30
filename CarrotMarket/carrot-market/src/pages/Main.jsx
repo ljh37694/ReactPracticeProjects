@@ -86,7 +86,10 @@ function Main(props) {
         },
     ]);
 
+    const [chattingRoomList, setChattingRoomList] = useState([]);
+
     useEffect(() => {
+        console.log(localStorage.getItem("token"));
         axios
             .get("http://localhost:1234/post-data")
             .then((res) => {
@@ -95,15 +98,24 @@ function Main(props) {
             .catch((e) => console.log(e));
 
         axios
-            .get(
-                "http://localhost:1234/user-data" +
-                    localStorage.getItem("token")
-            )
+            .get("http://localhost:1234/user-data", {
+                headers: {
+                    Authorization: localStorage.getItem("token"),
+                },
+            })
             .then((res) => {
                 setUserId(res.data.id);
             })
             .catch((e) => console.log(e));
+
+        axios
+            .get("http://localhost:1234/chatting-list?userId=" + userId)
+            .then((res) => {
+                setChattingRoomList(res.data);
+            });
     }, []);
+
+    useEffect(() => {}, [chattingRoomList]);
 
     return (
         <Container>
@@ -206,7 +218,12 @@ function Main(props) {
                         <Route path="my-location" element={<MyLocation />} />
                         <Route
                             path="chatting-list"
-                            element={<ChattingRoomList userId={userId} />}
+                            element={
+                                <ChattingRoomList
+                                    userId={userId}
+                                    chattingRoomList={chattingRoomList}
+                                />
+                            }
                         />
                         <Route path="my-page" element={<User />} />
                         <Route path="setting" element={<Setting />} />
