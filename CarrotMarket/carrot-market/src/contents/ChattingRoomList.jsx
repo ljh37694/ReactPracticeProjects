@@ -20,15 +20,11 @@ function ChattingRoomList(props) {
     const navigate = useNavigate();
 
     return (
-        <MainContainer
-            onClick={(e) => {
-                if (e.target.classList.contains("chatting-room")) {
-                    navigate("/chat/" + e.currentTarget.id);
-                }
-            }}
-        >
+        <MainContainer>
             {chattingRoomList.map((data) => {
-                return <ChattingRoom data={data} />;
+                return <ChattingRoom data={data} onClick={() => {
+                    navigate("/chat?roomId=" + data._id);
+                }} />;
             })}
         </MainContainer>
     );
