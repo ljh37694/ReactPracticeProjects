@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Route, Routes, Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Home from "../contents/Home";
 import Neighborhood from "../contents/Neighborhood";
 import MyLocation from "../contents/MyLocation";
@@ -75,18 +75,14 @@ function Main(props) {
     let [userId, setUserId] = useState("");
     let [password, setPassword] = useState("");
     let [nickname, setNickname] = useState("");
-    let [chattingList, setChattingList] = useState([
+    let [chatList, setChatList] = useState([]);
+    let [chattingRoomList, setChattingRoomList] = useState([
         {
-            msg: "안녕",
             userId: "asdf",
-        },
-        {
-            msg: "하이요",
-            userId: "ljh37694",
+            msg: "진짜 왜 안 됨?",
+            roomId: "6607a621a36d4d0170bd788c",
         },
     ]);
-
-    let [chattingRoomList, setChattingRoomList] = useState([]);
 
     useEffect(() => {
         console.log(localStorage.getItem("token"));
@@ -107,13 +103,15 @@ function Main(props) {
                 setUserId(res.data.id);
             })
             .catch((e) => console.log(e));
+    }, []);
 
+    useEffect(() => {
         axios
-            .get("http://localhost:1234/chatting-list?userId=" + userId)
+            .get("http://localhost:1234/chatting-room-list?userId=" + userId)
             .then((res) => {
                 setChattingRoomList(res.data);
             });
-    }, []);
+    }, [userId]);
 
     return (
         <Container>
@@ -269,18 +267,19 @@ function Main(props) {
                         element={
                             <>
                                 <NavContainer>
-                                    <WritePostNav />
+                                    <DetailNav />
                                 </NavContainer>
                                 <ContentsContainer>
                                     <Chatting
-                                        chatList={chattingList}
+                                        chatList={chatList}
+                                        setChatList={setChatList}
                                         userId={userId}
                                     />
                                 </ContentsContainer>
                                 <FooterContainer>
                                     <ChattingFooter
-                                        chatList={chattingList}
-                                        setChatList={setChattingList}
+                                        chatList={chatList}
+                                        setChatList={setChatList}
                                         userId={userId}
                                     />
                                 </FooterContainer>

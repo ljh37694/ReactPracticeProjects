@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { CARROT, GREY } from "./Color";
 import { NormalText } from "./Texts";
-import { io } from "socket.io-client";
+import { useLocation } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import axios from "axios";
 
 const Container = styled.div`
     width: 100%;
@@ -37,8 +39,25 @@ const CarrotChatBox = styled(ChatBox)`
 `;
 
 function Chatting(props) {
-    let { chatList, userId } = props;
-    //const socket = io("https://localhost:1234");
+    let { chatList, setChatList, userId, ref } = props;
+    const { search } = useLocation();
+    const queryParams = new URLSearchParams(search);
+    const roomId = queryParams.get("roomId");
+    const chatEndRef = useRef(null);
+
+    useEffect(() => {
+        axios.get("http://localhost:1234/chatList?roomId=" + roomId)
+        .then((res) => {
+            setChatList(res.data);
+
+            console.log(chatList);
+        })
+        .catch(e => console.log(e));
+    }, []);
+
+    useEffect(() => {
+        chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }, [chatList]);
 
     return (
         <Container>
@@ -57,6 +76,7 @@ function Chatting(props) {
                     </ChatContainer>
                 );
             })}
+            <div ref={chatEndRef}></div>
         </Container>
     );
 }

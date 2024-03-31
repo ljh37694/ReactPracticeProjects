@@ -7,7 +7,11 @@ const { createServer } = require("http");
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+    },
+});
 const { MongoClient, ObjectId } = require("mongodb");
 app.use(express.json());
 var cors = require("cors");
@@ -15,8 +19,7 @@ app.use(cors());
 
 let db;
 
-const url =
-    `mongodb+srv://ljh37694:${process.env.DB_PW}@forum.6p5dx3j.mongodb.net/?retryWrites=true&w=majority`
+const url = `mongodb+srv://ljh37694:${process.env.DB_PW}@forum.6p5dx3j.mongodb.net/?retryWrites=true&w=majority`;
 
 new MongoClient(url)
     .connect()
@@ -25,7 +28,7 @@ new MongoClient(url)
         db = client.db("CarrotMarket");
 
         // 서버 열기
-        app.listen(process.env.PORT, () => {
+        server.listen(process.env.PORT, () => {
             console.log("http://localhost:1234 에서 서버 실행 중");
         });
     })
@@ -106,16 +109,15 @@ app.post("/login", async (req, res) => {
                     username: user.nickname,
                 },
                 process.env.JWT_SECRET,
-                { expiresIn: 60 * 10 },
+                { expiresIn: 60 * 10 }
             );
 
-            res.json({ token: token,  });
+            res.json({ token: token });
         }
     } catch (e) {
         console.log(e);
     }
 });
-
 
 app.get("/user-data", (req, res) => {
     const token = req.headers.authorization;
@@ -135,11 +137,9 @@ app.get("/user-valid", async (req, res) => {
         } else {
             res.status(400).send(false);
         }
-        
-    } catch(e) {
+    } catch (e) {
         console.log(e);
     }
-
 });
 
 app.get("/chatting-room", async (req, res) => {
@@ -150,48 +150,83 @@ app.get("/chatting-room", async (req, res) => {
             res.status(400).send("아이디가 비어 있음");
         }
 
-        const chattingRoom = await db.collection("chattingRoom").findOne({postId: new ObjectId(postId), members: [userId, writerId]});
+        const chattingRoom = await db
+            .collection("chattingRoom")
+            .findOne({
+                postId: new ObjectId(postId),
+                members: [userId, writerId],
+            });
         let roomId;
 
         if (chattingRoom === null) {
-            const result = await db.collection("chattingRoom").insertOne({postId: new ObjectId(postId), members: [userId, writerId]});
+            const result = await db
+                .collection("chattingRoom")
+                .insertOne({
+                    postId: new ObjectId(postId),
+                    members: [userId, writerId],
+                });
             roomId = result.insertedId;
         } else {
             roomId = chattingRoom._id;
         }
 
-        const chatList = await db.collection("chats").find({roomId: roomId}).toArray();
+        const chatList = await db
+            .collection("chats")
+            .find({ roomId: roomId })
+            .toArray();
 
         res.send({
             roomId: roomId,
             chatList: chatList,
         });
-
-    } catch(e) {
+    } catch (e) {
         console.log(e);
     }
 });
 
-app.get("/chatting-list", async (req, res) => {
+app.get("/chatting-room-list", async (req, res) => {
     const userId = req.query.userId;
 
     console.log(userId);
 
     try {
-        const chattingList = await db.collection("chattingRoom").find({ members: { $in: [userId]}}).toArray();
+        const chattingList = await db
+            .collection("chattingRoom")
+            .find({ members: { $in: [userId] } })
+            .toArray();
 
         console.log(chattingList);
 
         res.send(chattingList);
-    } catch(e) {
+    } catch (e) {
         console.log(e);
     }
 });
 
+app.get("/chatList", async (req, res) => {
+    const roomId = req.query.roomId;
+    const chatList = await db.collection("chats").find({ roomId: roomId }).toArray();
+
+    res.send(chatList);
+});
+
 io.on("connection", (socket) => {
     console.log("socket connected");
+
+    socket.on("sendMessage", async (chat) => {
+        socket.to(chat.roomId).emit("receiveMessage", chat);
+        await db.collection("chats").insertOne(chat);
+
+        console.log(chat);
+    });
+
+    socket.on("ask-join", (roomId) => {
+        socket.join(roomId);
+
+        console.log(roomId + "룸에 넣음");
+    });
 });
 
 io.on("disconnection", (socket) => {
     console.log("socket disconneted");
-}); 
+});
