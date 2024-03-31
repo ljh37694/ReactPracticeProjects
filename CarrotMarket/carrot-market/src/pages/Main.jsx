@@ -75,7 +75,7 @@ function Main(props) {
     let [userId, setUserId] = useState("");
     let [password, setPassword] = useState("");
     let [nickname, setNickname] = useState("");
-    const [chattingList, setChattingList] = useState([
+    let [chattingList, setChattingList] = useState([
         {
             msg: "안녕",
             userId: "asdf",
@@ -86,7 +86,7 @@ function Main(props) {
         },
     ]);
 
-    const [chattingRoomList, setChattingRoomList] = useState([]);
+    let [chattingRoomList, setChattingRoomList] = useState([]);
 
     useEffect(() => {
         console.log(localStorage.getItem("token"));
@@ -114,8 +114,6 @@ function Main(props) {
                 setChattingRoomList(res.data);
             });
     }, []);
-
-    useEffect(() => {}, [chattingRoomList]);
 
     return (
         <Container>
