@@ -132,13 +132,15 @@ app.get("/user-valid", async (req, res) => {
     try {
         const vaild = await jwt.verify(token, process.env.JWT_SECRET);
 
+        console.log(vaild);
+
         if (vaild) {
             res.send(true);
         } else {
             res.status(400).send(false);
         }
     } catch (e) {
-        console.log(e);
+        res.status(400).send(false);
     }
 });
 
@@ -194,8 +196,6 @@ app.get("/chatting-room-list", async (req, res) => {
             .collection("chattingRoom")
             .find({ members: { $in: [userId] } })
             .toArray();
-
-        console.log(chattingList);
 
         res.send(chattingList);
     } catch (e) {
