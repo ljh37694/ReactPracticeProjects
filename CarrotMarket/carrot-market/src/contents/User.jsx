@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BoldLargeText } from "../components/Texts";
 
 let MainContainer = styled.div`
     width: 100%;
@@ -12,9 +13,11 @@ let MainContainer = styled.div`
 `;
 
 function User(props) {
+    const { userId } = props;
+
     return (
         <MainContainer>
-            <div>내 당근</div>
+            <BoldLargeText>{userId}</BoldLargeText>
         </MainContainer>
     );
 }

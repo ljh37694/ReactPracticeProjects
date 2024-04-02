@@ -221,7 +221,7 @@ function Main(props) {
                                 />
                             }
                         />
-                        <Route path="my-page" element={<User />} />
+                        <Route path="my-page" element={<User userId={userId} />} />
                         <Route path="setting" element={<Setting />} />
                     </Route>
 
