@@ -39,7 +39,7 @@ const CarrotChatBox = styled(ChatBox)`
 `;
 
 function Chatting(props) {
-    let { chatList, setChatList, userId, ref } = props;
+    let { chatList, setChatList, userId } = props;
     const { search } = useLocation();
     const queryParams = new URLSearchParams(search);
     const roomId = queryParams.get("roomId");
