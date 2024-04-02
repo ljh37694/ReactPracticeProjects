@@ -41,7 +41,7 @@ const ContentsBottomContainer = styled.div`
 `;
 
 function ChattingRoom(props) {
-    const { data, onClick } = props;
+    const { userId, data, onClick } = props;
     const tmp = {
         nickname: "포코",
         profileImg: "https://cdn.gukjenews.com/news/photo/202210/2576950_2583875_450.jpg",
@@ -56,7 +56,7 @@ function ChattingRoom(props) {
             <ProfileImage src={profileImg} />
             <ContentsContainer>
                 <ContentsTopContainer>
-                    <NormalText>{nickname}</NormalText>
+                    <NormalText>{userId == data.members[0] ? data.members[1] : data.members[0]}</NormalText>
                     <NormalText color={GREY}>{location}</NormalText>
                 </ContentsTopContainer>
                 <ContentsBottomContainer>

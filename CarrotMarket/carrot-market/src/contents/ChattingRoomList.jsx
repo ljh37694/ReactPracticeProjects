@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import ChattingRoom from "../components/ChattingRoom";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import axios from "axios";
 
 let MainContainer = styled.div`
     width: 100%;
@@ -22,7 +20,7 @@ function ChattingRoomList(props) {
     return (
         <MainContainer>
             {chattingRoomList.map((data) => {
-                return <ChattingRoom data={data} onClick={() => {
+                return <ChattingRoom userId={userId} data={data} onClick={() => {
                     navigate("/chat?roomId=" + data._id);
                 }} />;
             })}
