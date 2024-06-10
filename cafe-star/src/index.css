@@ -88,7 +88,7 @@ code {
 
 .main-panel {
   box-shadow: rgba(0, 0, 0, 0.1) 5px 0px 15px 0px;
-  position: relative;
+  position: absolute;
   left: 80px;
   top: 0px;
   height: 100vh;
@@ -112,4 +112,13 @@ code {
   background-color: inherit;
   top: calc(50% - 25px);
   right: -20px;
+  color: var(--coffee-color);
+}
+
+#map {
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  left: 80px;
+  z-index: 1;
 }
