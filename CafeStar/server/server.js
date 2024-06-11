@@ -16,8 +16,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/search', async (req, res) => {
-  await axios.get('https://map.kakao.com/link/search/' + req.query.query)
-  .then((res) => {
-    console.log(res);
+  await axios({
+    method: 'get',
+    url: 'https://dapi.kakao.com/v2/search/cafe?query=' + req.query.query,
+    headers: {Authorization: `KakaoAK 332d1dcce7412fed04cda94864970afc`}
   })
+  .then((response) => {
+    res.json(response.data.documents);
+  })
+  .catch((e) => console.log(e));
 });
