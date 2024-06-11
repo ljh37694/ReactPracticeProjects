@@ -10,6 +10,8 @@ function MainPanel(props) {
       <button className="main-panel-close-button" onClick={() => setIsClose(!isClose)}>
         <FontAwesomeIcon icon={ isClose === true ? faChevronLeft : faChevronRight} />
       </button>
+
+      <input />
     </div>
   );
 }
