@@ -19,7 +19,7 @@ app.get('/search', async (req, res) => {
   await axios({
     method: 'get',
     url: 'https://dapi.kakao.com/v2/search/cafe?query=' + req.query.query,
-    headers: {Authorization: `KakaoAK 332d1dcce7412fed04cda94864970afc`}
+    headers: {Authorization: `KakaoAK ${process.env.REST_API_KEY}`}
   })
   .then((response) => {
     res.json(response.data.documents);
