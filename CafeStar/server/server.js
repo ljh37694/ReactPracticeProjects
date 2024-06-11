@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+require("dotenv").config();
 const PORT = 5000;
 
 const app = express();
@@ -18,7 +19,7 @@ app.get('/', (req, res) => {
 app.get('/search', async (req, res) => {
   await axios({
     method: 'get',
-    url: 'https://dapi.kakao.com/v2/search/cafe?query=' + req.query.query,
+    url: 'https://dapi.kakao.com/v2/local/search/keyword.json?query=음식점 > 카페' + req.query.query,
     headers: {Authorization: `KakaoAK ${process.env.REST_API_KEY}`}
   })
   .then((response) => {
