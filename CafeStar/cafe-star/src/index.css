@@ -30,7 +30,7 @@ code {
     monospace;
 }
 
-#main-page {
+#main-page, input {
   background-color: var(--cream-color);
   color: var(--coffee-color);
   font-family: 'ONE-Mobile-POP', 'Courier New', Courier, monospace;

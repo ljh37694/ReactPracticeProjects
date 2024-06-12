@@ -6,6 +6,7 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import CafeCard from "../components/CafeCard";
 
 function MainPanel(props) {
   let [isClose, setIsClose] = useState(false);
@@ -13,6 +14,7 @@ function MainPanel(props) {
 
   return (
     <div className={`main-panel ${isClose === true ? "main-panel-close" : ""}`}>
+      {/* 패널 닫기 버튼 */}
       <button
         className="main-panel-close-button"
         onClick={() => setIsClose(!isClose)}
@@ -55,10 +57,19 @@ function MainPanel(props) {
               icon={faX}
               onClick={() => {
                 document.getElementById("search-input").value = "";
+                setActiveX(false);
               }}
             />
           ) : null}
         </div>
+      </div>
+
+      <div className="panel-content-container">
+        <CafeCard />
+        <CafeCard />
+        <CafeCard />
+        <CafeCard />
+
       </div>
     </div>
   );
