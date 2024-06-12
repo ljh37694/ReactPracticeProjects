@@ -139,7 +139,7 @@ code {
 }
 
 #search-input {
-  width: 80%;
+  width: 100%;
   font-size: 24px;
   border: none;
   outline: none;
@@ -148,7 +148,7 @@ code {
 
 .search-icon, .x-button {
   font-size: 24px;
-  width: 10%;
+  width: 15%;
 }
 
 .x-button {
