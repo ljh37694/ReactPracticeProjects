@@ -9,6 +9,7 @@
   --border-color: rgba(0, 0, 0, 0.15);
   --coffee-color: #6f4e37;
   --cream-color: #FAF0D6;
+  --gray-color: rgb(143, 143, 143);
 }
 
 div, main, header, footer, nav {
@@ -176,11 +177,20 @@ code {
 }
 
 .cafe-card {
-  height: 100px;
+  height: 200px;
   width: 100%;
+  border-bottom: 1px solid var(--border-color);
+  padding: 24px 0;
 }
 
 .cafe-card-title, .cafe-card-title:visited {
   font-size: 24px;
   text-decoration-line: none;
+  color: #ffce54;
+}
+
+.cafe-card-address {
+  color: var(--gray-color);
+  font-size: 14px;
+  margin-bottom: 0;
 }
