@@ -7,10 +7,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import CafeCard from "../components/CafeCard";
+import { useSelector, useDispatch } from "react-redux";
+import { setsearchData } from "../redux/states/searchData";
 
 function MainPanel(props) {
   let [isClose, setIsClose] = useState(false);
   let [activeX, setActiveX] = useState(false);
+  const searchData = useSelector((state) => state.searchData.value);
+
+  const dispatch = useDispatch();
 
   return (
     <div className={`main-panel ${isClose === true ? "main-panel-close" : ""}`}>
@@ -37,7 +42,12 @@ function MainPanel(props) {
 
             fetch("http://localhost:5000/search?query=" + text)
               .then((res) => res.json())
-              .then((data) => console.log(data));
+              .then((data) => {
+                console.log(data);
+                dispatch(setsearchData(data));
+
+                console.log(searchData);
+              });
           }}
         >
           <input
@@ -65,11 +75,17 @@ function MainPanel(props) {
       </div>
 
       <div className="panel-content-container">
-        <CafeCard />
-        <CafeCard />
-        <CafeCard />
-        <CafeCard />
+        <div className="cafe-card-container">
+          {
+            searchData.map((data, idx) => {
+              console.log(data, idx);
 
+              return (
+                <CafeCard data={data} />
+              );
+            })
+          }
+        </div>
       </div>
     </div>
   );
