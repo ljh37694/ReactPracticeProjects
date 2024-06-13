@@ -1,29 +1,30 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { setKakaoMap } from "../redux/states/kakaoMap";
 
 const { kakao } = window;
 
 function Map(props) {
+	const mapContainer = useRef();
+	const dispatch = useDispatch();
+
   useEffect(() => {
 		const container = document.getElementById('map');
-    
-		const options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
 
-		const map = new kakao.maps.Map(container, options);
+		kakao.maps.load(() => {
+			const options = {
+				center: new kakao.maps.LatLng(33.450701, 126.570667),
+				level: 3
+			};
 
-		// 아래와 같이 옵션을 입력하지 않아도 된다
-		const zoomControl = new kakao.maps.ZoomControl();
-
-		// 지도 오른쪽에 줌 컨트롤이 표시되도록 지도에 컨트롤을 추가한다.
-		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+			dispatch(setKakaoMap(new kakao.maps.Map(container, options)));
+		});
 
 		console.log(kakao.maps);
-  }, []);
+  }, [mapContainer]);
 
   return (
-    <div id="map"></div>
+    <div id="map" ref={mapContainer}></div>
   );
 }
 
