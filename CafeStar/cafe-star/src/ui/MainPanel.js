@@ -7,7 +7,7 @@ import { useState } from "react";
 
 // Components
 import SearchInput from "./SearchInput";
-import CafeCardList from "../components/CafeCardList";
+import CafeCardList from "./CafeCardList";
 
 function MainPanel(props) {
   let [isClose, setIsClose] = useState(false);
