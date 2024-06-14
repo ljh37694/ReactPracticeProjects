@@ -16,6 +16,11 @@ div, main, header, footer, nav {
   box-sizing: border-box;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -37,6 +42,8 @@ code {
   font-family: 'ONE-Mobile-POP', 'Courier New', Courier, monospace;
 }
 
+
+/* Side Navbar Style */
 .side-nav {
   position: absolute;
   height: 100vh;
@@ -88,6 +95,7 @@ code {
   justify-content: center;
 }
 
+/* Main Panel Style */
 .main-panel {
   box-shadow: rgba(0, 0, 0, 0.1) 5px 0px 15px 0px;
   position: absolute;
@@ -123,6 +131,18 @@ code {
   color: var(--coffee-color);
 }
 
+.x-button {
+  text-align: right;
+}
+
+.panel-content-container {
+  overflow-y: hidden;
+  flex-grow: 1;
+  width: 100%;
+  padding-top: 30px;
+}
+
+/* Map Style */
 #map {
   height: 100vh;
   width: calc(100vw - 80px);
@@ -132,6 +152,7 @@ code {
   z-index: 0;
 }
 
+/* Search Input Style */
 .search-input-container {
   border: 3px solid var(--coffee-color);
   padding: 10px 20px;
@@ -155,17 +176,7 @@ code {
   width: 15%;
 }
 
-.x-button {
-  text-align: right;
-}
-
-.panel-content-container {
-  overflow-y: hidden;
-  flex-grow: 1;
-  width: 100%;
-  padding-top: 30px;
-}
-
+/* Cafe Card  Style*/
 .cafe-card-container {
   overflow-y: scroll;
   height: 100%;
@@ -192,9 +203,21 @@ code {
 .cafe-card-address {
   color: var(--gray-color);
   font-size: 14px;
-  margin-bottom: 0;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
+.cafe-card-rating-container {
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.cafe-card-star-container {
+  margin-right: 10px;
+}
+
+/* Location Info Style */
 .location-info {
   height: 100px;
   width: 300px;
