@@ -1,10 +1,10 @@
-import { faHouse, faStar, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faMagnifyingGlass, faStar, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
 function SideNav(props) {
   let [activeMenu, setActiveMenu] = useState(0);
-  const icons = [faHouse, faStar];
+  const icons = [faMagnifyingGlass, faLocationDot, faStar];
 
   return (
     <nav className="side-nav">
