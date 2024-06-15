@@ -4,13 +4,14 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-
-// Components
-import SearchInput from "./SearchInput";
-import CafeCardList from "./CafeCardList";
+import { useDispatch, useSelector } from "react-redux";
+import SearchPanel from "../components/SearchPanel";
 
 function MainPanel(props) {
   let [isClose, setIsClose] = useState(false);
+  const dispatch = useDispatch();
+  const currentMenu = useSelector(state => state.currentMenu.value);
+  const panelContentList = [SearchPanel];
 
   return (
     <div className={`main-panel ${isClose === true ? "main-panel-close" : ""}`}>
@@ -23,12 +24,10 @@ function MainPanel(props) {
           icon={isClose === true ? faChevronLeft : faChevronRight}
         />
       </button>
-
-      <SearchInput />
-
-      <div className="panel-content-container">
-        <CafeCardList />
-      </div>
+      
+      <section className="main-panel-content">
+        <SearchPanel />
+      </section>
     </div>
   );
 }
