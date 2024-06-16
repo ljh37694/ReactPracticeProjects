@@ -1,6 +1,6 @@
 import { faMagnifyingGlass, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { setsearchData } from "../redux/states/searchData";
+import { setCafeList } from "../redux/states/cafeList";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
@@ -25,7 +25,7 @@ function SearchInput(props) {
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
-              dispatch(setsearchData(data));
+              dispatch(setCafeList(data));
             })
             .catch(e => console.log(e))
         }}

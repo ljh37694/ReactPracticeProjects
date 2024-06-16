@@ -1,14 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import searchData from "./states/searchData";
+import cafeList from "./states/cafeList";
 import kakaoMap from "./states/kakaoMap";
-import nearbyCafes from "./states/nearbyCafes";
 import currentMenu from "./states/currentMenu";
 
 export const store = configureStore({
   reducer: { 
-    searchData: searchData,
+    cafeList: cafeList,
     kakaoMap: kakaoMap,
-    nearbyCafes: nearbyCafes,
     currentMenu: currentMenu,
   },
   middleware: (getDefaultMiddleWare) => getDefaultMiddleWare({
