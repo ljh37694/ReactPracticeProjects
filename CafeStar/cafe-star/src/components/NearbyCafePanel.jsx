@@ -15,6 +15,12 @@ function NearbyCafePanel (prosp) {
       const curPos = new window.kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
 
       places.categorySearch('CE7', (res) => {
+        res.forEach((data) => {
+          data.isFovorite = false;
+        });
+
+        console.log(res);
+
         dispatch(setCafeList(res));
       }, { location: curPos });
     });
@@ -24,9 +30,7 @@ function NearbyCafePanel (prosp) {
     <div className="panel-container">
       <h4 className="title">내 근처 카페</h4>
 
-      <div className="search-panel-content">
-        <CafeCardList cafeList={cafeList} />
-      </div>
+      <CafeCardList cafeList={cafeList} />
     </div>
   );
 }

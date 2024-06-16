@@ -25,6 +25,11 @@ function SearchInput(props) {
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
+
+              data.forEach((data) => {
+                data.isFavorite = false;
+              });
+              
               dispatch(setCafeList(data));
             })
             .catch(e => console.log(e))
