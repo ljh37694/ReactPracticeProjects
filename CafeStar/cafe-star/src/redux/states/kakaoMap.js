@@ -12,6 +12,6 @@ export const kakaoMapSlice = createSlice({
   },
 });
 
-export const { setKakaoMap: setKakaoMap } = kakaoMapSlice.actions;
+export const { setKakaoMap} = kakaoMapSlice.actions;
 
 export default kakaoMapSlice.reducer;
