@@ -1,10 +1,13 @@
 import { faLocationDot, faMagnifyingGlass, faStar, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setcurrentMenu } from "../redux/states/currentMenu";
 
 function SideNav(props) {
   let [activeMenu, setActiveMenu] = useState(0);
   const icons = [faMagnifyingGlass, faLocationDot, faStar];
+  const dispatch = useDispatch();
 
   return (
     <nav className="side-nav">
@@ -21,6 +24,7 @@ function SideNav(props) {
               }`}
               onClick={() => {
                 setActiveMenu(idx);
+                dispatch(setcurrentMenu(idx));
               }}
               key={idx}
             >

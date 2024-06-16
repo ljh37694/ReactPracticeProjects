@@ -6,12 +6,13 @@ import {
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SearchPanel from "../components/SearchPanel";
+import NearbyCafePanel from "../components/NearbyCafePanel";
 
 function MainPanel(props) {
   let [isClose, setIsClose] = useState(false);
   const dispatch = useDispatch();
   const currentMenu = useSelector(state => state.currentMenu.value);
-  const panelContentList = [SearchPanel];
+  const panelContentList = [<SearchPanel />, <NearbyCafePanel />];
 
   return (
     <div className={`main-panel ${isClose === true ? "main-panel-close" : ""}`}>
@@ -26,7 +27,7 @@ function MainPanel(props) {
       </button>
       
       <section className="main-panel-content">
-        <SearchPanel />
+        { panelContentList[currentMenu] }
       </section>
     </div>
   );

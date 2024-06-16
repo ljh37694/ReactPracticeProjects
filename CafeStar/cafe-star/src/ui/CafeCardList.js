@@ -1,25 +1,10 @@
 import { useEffect } from "react";
 import CafeCard from "../components/CafeCard";
-import { useSelector, useDispatch } from "react-redux";
-import { setsearchData } from "../redux/states/searchData";
+import { useSelector } from "react-redux";
 
 function CafeCardList(props) {
   const kakaoMap = useSelector(state => state.kakaoMap.value);
-  const places = new window.kakao.maps.services.Places();
   const { cafeList } = props;
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((pos) => {
-      console.log(pos.coords);
-      const curPos = new window.kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-
-      places.categorySearch('CE7', (res) => {
-        dispatch(setsearchData(res));
-      }, { location: curPos });
-    });
-  }, [kakaoMap]);
 
   useEffect(() => {
     cafeList.forEach((data) => {

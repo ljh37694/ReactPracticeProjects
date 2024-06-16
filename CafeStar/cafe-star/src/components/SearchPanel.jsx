@@ -1,17 +1,16 @@
 import SearchInput from "../ui/SearchInput";
 import CafeCardList from "../ui/CafeCardList";
-import searchData from "../redux/states/searchData";
 import { useSelector } from "react-redux";
 
 function SearchPanel(props) {
-  const searchData = useSelector(state => state.searchData.value);
+  const cafeList = useSelector(state => state.cafeList.value);
 
   return (
-    <div className="search-panel-container">
+    <div className="panel-container">
       <SearchInput />
 
       <div className="search-panel-content">
-        <CafeCardList cafeList={searchData} />
+        <CafeCardList cafeList={cafeList} />
       </div>
     </div>
   );
