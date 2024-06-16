@@ -9,7 +9,8 @@
   --border-color: rgba(0, 0, 0, 0.15);
   --coffee-color: #6f4e37;
   --cream-color: #FAF0D6;
-  --gray-color: rgb(143, 143, 143);
+  --gray-color: rgb(185, 185, 185);
+  --star-color: #ffce54;
 }
 
 div, main, header, footer, nav {
@@ -147,7 +148,7 @@ code {
   flex-direction: column;
 }
 
-.search-panel-content {
+.cafe-card-list-container {
   flex-grow: 1;
   overflow-y: hidden;
   height: 100%;
@@ -209,6 +210,11 @@ code {
   padding: 24px 0;
 }
 
+.cafe-card-title-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .cafe-card-title, .cafe-card-title:visited {
   font-size: 24px;
   text-decoration-line: none;
@@ -257,4 +263,13 @@ code {
 .location-info-address {
   font-size: 14px;
   color: var(--gray-color);
+}
+
+.favorite-button {
+  color: var(--gray-color);
+  font-size: 20px;
+}
+
+.active-favorite-button {
+  color: var(--star-color);
 }

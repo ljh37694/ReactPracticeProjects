@@ -9,9 +9,7 @@ function SearchPanel(props) {
     <div className="panel-container">
       <SearchInput />
 
-      <div className="search-panel-content">
-        <CafeCardList cafeList={cafeList} />
-      </div>
+      <CafeCardList cafeList={cafeList} />
     </div>
   );
 }

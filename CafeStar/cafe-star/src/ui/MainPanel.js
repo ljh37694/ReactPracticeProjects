@@ -4,15 +4,15 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import SearchPanel from "../components/SearchPanel";
 import NearbyCafePanel from "../components/NearbyCafePanel";
+import FavoriteCafePanel from "../components/FavoriteCafePanel";
 
 function MainPanel(props) {
   let [isClose, setIsClose] = useState(false);
-  const dispatch = useDispatch();
   const currentMenu = useSelector(state => state.currentMenu.value);
-  const panelContentList = [<SearchPanel />, <NearbyCafePanel />];
+  const panelContentList = [<SearchPanel />, <NearbyCafePanel />, <FavoriteCafePanel />];
 
   return (
     <div className={`main-panel ${isClose === true ? "main-panel-close" : ""}`}>

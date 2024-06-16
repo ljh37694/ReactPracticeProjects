@@ -1,31 +1,58 @@
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { pushFavoriteCafe } from "../redux/states/favoriteCafeList";
 
 function CafeCard(props) {
   const { data } = props;
-  const kakaoMap = useSelector(state => state.kakaoMap.value);
+  const kakaoMap = useSelector((state) => state.kakaoMap.value);
   const star = 5.0;
+  const [isFavorite, setIsFavorite] = useState(false);
+  const favoriteCafeList = useSelector(state => state.favoriteCafeList.value);
+
+  const dispatch = useDispatch();
 
   return (
-    <div className="cafe-card" onClick={() => {
-      kakaoMap.setCenter(new window.kakao.maps.LatLng(data.y, data.x));
-    }}>
-      <a className="cafe-card-title" href={ data.place_url }>{ data.place_name }</a>
-      <p className="cafe-card-address">{ data.address_name }</p>
+    <div className="cafe-card">
+      <section className="cafe-card-title-container">
+        <a className="cafe-card-title" href={data.place_url}>
+          {data.place_name}
+        </a>
+        <div>
+          <label
+            className={`favorite-button ${isFavorite ? 'active-favorite-button' : '' }`}
+            onClick={(e) => {
+              setIsFavorite(!isFavorite);
 
-      <div className="cafe-card-rating-container">
-        <div className="cafe-card-star-container">
-          {
-            [...new Array(star)].map(() => {
-              return (
-                <FontAwesomeIcon icon={faStar} />
-              );
-            })
-          }
+              if (isFavorite === false) {
+                dispatch(pushFavoriteCafe(data));
+
+                console.log(favoriteCafeList);
+              }
+            }}
+          >
+            <FontAwesomeIcon icon={faStar} />
+          </label>
         </div>
-        <p>{star.toFixed(1)}</p>
-      </div>
+      </section>
+
+      <section
+        onClick={(e) => {
+          kakaoMap.setCenter(new window.kakao.maps.LatLng(data.y, data.x));
+        }}
+      >
+        <p className="cafe-card-address">{data.address_name}</p>
+
+        <div className="cafe-card-rating-container">
+          <div className="cafe-card-star-container">
+            {[...new Array(star)].map(() => {
+              return <FontAwesomeIcon icon={faStar} />;
+            })}
+          </div>
+          <p>{star.toFixed(1)}</p>
+        </div>
+      </section>
     </div>
   );
 }
