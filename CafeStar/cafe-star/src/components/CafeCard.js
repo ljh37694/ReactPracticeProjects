@@ -8,13 +8,13 @@ function CafeCard(props) {
   const { data } = props;
   const kakaoMap = useSelector((state) => state.kakaoMap.value);
   const star = 5.0;
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(data.isFavorite);
   const favoriteCafeList = useSelector(state => state.favoriteCafeList.value);
 
   const dispatch = useDispatch();
 
   return (
-    <div className="cafe-card">
+    <div className="cafe-card" key={data.id}>
       <section className="cafe-card-title-container">
         <a className="cafe-card-title" href={data.place_url}>
           {data.place_name}
@@ -26,9 +26,17 @@ function CafeCard(props) {
               setIsFavorite(!isFavorite);
 
               if (isFavorite === false) {
-                dispatch(pushFavoriteCafe(data));
+                const dataIndex = favoriteCafeList.findIndex(item => item.id === data.id);
 
-                console.log(favoriteCafeList);
+                if (dataIndex !== -1) {
+                  const curData = { ...favoriteCafeList[dataIndex] };
+
+                  curData.isFavorite = true;
+
+                  dispatch(pushFavoriteCafe(curData));
+                } else {
+                  favoriteCafeList.splice(dataIndex, 1);
+                }
               }
             }}
           >

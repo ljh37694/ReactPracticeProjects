@@ -16,7 +16,7 @@ function NearbyCafePanel (prosp) {
 
       places.categorySearch('CE7', (res) => {
         res.forEach((data) => {
-          data.isFovorite = false;
+          data.isFavorite = false;
         });
 
         console.log(res);
