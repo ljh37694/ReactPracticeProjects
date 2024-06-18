@@ -1,8 +1,21 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+const { MongoClient } = require('mongodb');
 require("dotenv").config();
+
+let db;
+
 const PORT = 5000;
+const uri = `mongodb+srv://ljh37694:${process.env.DB_PASSWORD}@forum.6p5dx3j.mongodb.net/?retryWrites=true&w=majority&appName=Forum`;
+new MongoClient(uri)
+  .connect()
+  .then((client) => {
+    console.log("DB 연결 성공");
+
+    db = client.db("Forum");
+  })
+  .catch(err => console.log(err));
 
 const app = express();
 
