@@ -10,11 +10,22 @@ export const favoriteCafeListSlice = createSlice({
       state.value = [...action.payload];
     },
     pushFavoriteCafe: (state, action) => {
-      state.value.push(action.payload);
-    }
+      fetch('http://localhost:5000/favorite-cafes/push', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(action.payload),
+      })
+        .then((response) => response.json())
+        .then(data => state.value.push(data));
+    },
+    removeFavoriteCafe: (state, action) => {
+      state.value.splice(state.value.findIndex(item => item.id === action.payload.data.id), 1);
+    },
   },
 });
 
-export const { setFavoriteCafeList, pushFavoriteCafe } = favoriteCafeListSlice.actions;
+export const { setFavoriteCafeList, pushFavoriteCafe, removeFavoriteCafe } = favoriteCafeListSlice.actions;
 
 export default favoriteCafeListSlice.reducer;

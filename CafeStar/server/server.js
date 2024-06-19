@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 require("dotenv").config();
 
 let db;
@@ -13,13 +13,14 @@ new MongoClient(uri)
   .then((client) => {
     console.log("DB 연결 성공");
 
-    db = client.db("Forum");
+    db = client.db("CafeStar");
   })
   .catch(err => console.log(err));
 
 const app = express();
 
 app.use(cors());
+app.use(express.json({ extended: true }));
 
 app.listen(PORT, () => {
   console.log('http://localhost:5000 에서 실행 중입니다.');
@@ -39,4 +40,27 @@ app.get('/search', async (req, res) => {
     res.json(response.data.documents);
   })
   .catch((e) => console.log(e));
+});
+
+app.get('/favorite-cafes/get', async (req, res) => {
+  const data = await db.collection('FavoriteCafes').find().toArray();
+
+  res.send(data);
+});
+
+app.post('/favorite-cafes/push', async (req, res) => {
+  await db.collection('FavoriteCafes').insertOne({
+    ...req.body,
+    _id: new ObjectId(),
+  });
+
+  console.log(req.body);
+});
+
+app.delete("/favorite-cafes/delete", async (req, res) => {
+  const result = await db.collection('FavoriteCafes').deleteOne({
+    id: req.body.id,
+  });
+
+  console.log(result);
 });
