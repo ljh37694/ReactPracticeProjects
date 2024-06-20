@@ -49,12 +49,11 @@ app.get('/favorite-cafes/get', async (req, res) => {
 });
 
 app.post('/favorite-cafes/push', async (req, res) => {
-  await db.collection('FavoriteCafes').insertOne({
+  const result = await db.collection('FavoriteCafes').insertOne({
     ...req.body,
-    _id: new ObjectId(),
   });
-
-  console.log(req.body);
+  
+  console.log(result);
 });
 
 app.delete("/favorite-cafes/delete", async (req, res) => {

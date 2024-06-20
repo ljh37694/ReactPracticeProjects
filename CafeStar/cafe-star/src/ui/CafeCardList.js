@@ -1,10 +1,21 @@
 import { useEffect } from "react";
 import CafeCard from "../components/CafeCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFavoriteCafeList } from "../redux/states/favoriteCafeList";
 
 function CafeCardList(props) {
+  const dispatch = useDispatch();
+
   const kakaoMap = useSelector((state) => state.kakaoMap.value);
   const { cafeList } = props;
+  const favoriteCafeList = useSelector(state => state.favoriteCafeList.value);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/favorite-cafes/get')
+    .then((res) => res.json())
+    .then((data) => dispatch(setFavoriteCafeList(data)))
+    .catch(e => console.log(e));
+  }, [favoriteCafeList]);
 
   useEffect(() => {
     cafeList.forEach((data) => {
@@ -37,7 +48,7 @@ function CafeCardList(props) {
     <div className="cafe-card-list-container">
       <div className="cafe-card-container">
         {cafeList.map((data) => {
-          return <CafeCard data={data} key={data.id} />;
+          return <CafeCard data={data} key={data.id} favor={favoriteCafeList.findIndex(item => item.id === data.id) !== -1} />;
         })}
       </div>
     </div>

@@ -2,24 +2,16 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { pushFavoriteCafe, removeFavoriteCafe } from "../redux/states/favoriteCafeList";
+import { setFavoriteCafeList ,pushFavoriteCafe, removeFavoriteCafe } from "../redux/states/favoriteCafeList";
 
 function CafeCard(props) {
-  const { data } = props;
-  const kakaoMap = useSelector((state) => state.kakaoMap.value);
-  const star = 5.0;
-  const [isFavorite, setIsFavorite] = useState(data.isFavorite);
-  const favoriteCafeList = useSelector(state => state.favoriteCafeList.value);
-
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (isFavorite) {
-      dispatch(pushFavoriteCafe(data));
-    } else {
-      dispatch(removeFavoriteCafe(data.id));
-    }
-  }, [isFavorite]);
+  const { data, favor } = props;
+  const kakaoMap = useSelector((state) => state.kakaoMap.value);
+  const star = 5.0;
+
+  const [isFavorite, setIsFavorite] = useState(favor);
 
   return (
     <div className="cafe-card" key={data.id}>
@@ -31,6 +23,17 @@ function CafeCard(props) {
           <label
             className={`favorite-button ${isFavorite ? 'active-favorite-button' : '' }`}
             onClick={(e) => {
+              if (isFavorite === true) {
+                dispatch(removeFavoriteCafe(data));
+              } else {
+                dispatch(pushFavoriteCafe(data));
+              }
+
+              fetch('http://localhost:5000/favorite-cafes/get')
+              .then((res) => res.json())
+              .then((data) => dispatch(setFavoriteCafeList(data)))
+              .catch(e => console.log(e));
+
               setIsFavorite(!isFavorite);
             }}
           >
