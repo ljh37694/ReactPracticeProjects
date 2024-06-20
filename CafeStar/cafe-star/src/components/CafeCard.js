@@ -1,6 +1,6 @@
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { pushFavoriteCafe, removeFavoriteCafe } from "../redux/states/favoriteCafeList";
 
@@ -13,6 +13,14 @@ function CafeCard(props) {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (isFavorite) {
+      dispatch(pushFavoriteCafe(data));
+    } else {
+      dispatch(removeFavoriteCafe(data.id));
+    }
+  }, [isFavorite]);
+
   return (
     <div className="cafe-card" key={data.id}>
       <section className="cafe-card-title-container">
@@ -24,20 +32,6 @@ function CafeCard(props) {
             className={`favorite-button ${isFavorite ? 'active-favorite-button' : '' }`}
             onClick={(e) => {
               setIsFavorite(!isFavorite);
-
-              if (isFavorite === false) {
-                const dataIndex = favoriteCafeList.findIndex(item => item.id === data.id);
-
-                if (dataIndex !== -1) {
-                  const curData = { ...favoriteCafeList[dataIndex] };
-
-                  curData.isFavorite = true;
-
-                  dispatch(pushFavoriteCafe(curData));
-                } else {
-                  dispatch(removeFavoriteCafe(favoriteCafeList[dataIndex]));
-                }
-              }
             }}
           >
             <FontAwesomeIcon icon={faStar} />

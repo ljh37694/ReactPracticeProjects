@@ -21,7 +21,13 @@ export const favoriteCafeListSlice = createSlice({
         .then(data => state.value.push(data));
     },
     removeFavoriteCafe: (state, action) => {
-      state.value.splice(state.value.findIndex(item => item.id === action.payload.data.id), 1);
+      state.value = state.value.splice(state.value.findIndex(item => item.id === action.payload), 1);
+
+      fetch('http://localhost:5000/favorite-cafes/delete?id=' + action.payload, {
+        method: "DELETE",
+      })
+      .then((response) => response.json())
+      .then(data => console.log(data));
     },
   },
 });

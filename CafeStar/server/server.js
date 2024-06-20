@@ -59,7 +59,7 @@ app.post('/favorite-cafes/push', async (req, res) => {
 
 app.delete("/favorite-cafes/delete", async (req, res) => {
   const result = await db.collection('FavoriteCafes').deleteOne({
-    id: req.body.id,
+    id: req.query.id,
   });
 
   console.log(result);
