@@ -5,7 +5,7 @@ import currentMenu from "./states/currentMenu";
 import favoriteCafeList from "./states/favoriteCafeList";
 
 export const store = configureStore({
-  reducer: { 
+  reducer: {
     cafeList: cafeList,
     kakaoMap: kakaoMap,
     currentMenu: currentMenu,

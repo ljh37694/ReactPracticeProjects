@@ -12,9 +12,23 @@ function CafeCardList(props) {
 
   useEffect(() => {
     fetch('http://localhost:5000/favorite-cafes/get')
-    .then((res) => res.json())
-    .then((data) => dispatch(setFavoriteCafeList(data)))
-    .catch(e => console.log(e));
+      .then((res) => res.json())
+      .then((data) => dispatch(setFavoriteCafeList(data)))
+      .catch(e => console.log(e));
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      fetch('http://localhost:5000/favorite-cafes/set', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data: favoriteCafeList,
+        }),
+      })
+    }
   }, [favoriteCafeList]);
 
   useEffect(() => {
@@ -48,7 +62,7 @@ function CafeCardList(props) {
     <div className="cafe-card-list-container">
       <div className="cafe-card-container">
         {cafeList.map((data) => {
-          return <CafeCard data={data} key={data.id} favor={favoriteCafeList.findIndex(item => item.id === data.id) !== -1} />;
+          return <CafeCard data={data} key={data.id} />;
         })}
       </div>
     </div>

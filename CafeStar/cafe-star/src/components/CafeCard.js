@@ -2,16 +2,28 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setFavoriteCafeList ,pushFavoriteCafe, removeFavoriteCafe } from "../redux/states/favoriteCafeList";
+import { pushFavoriteCafe, removeFavoriteCafe, setFavoriteCafeList } from "../redux/states/favoriteCafeList";
 
 function CafeCard(props) {
   const dispatch = useDispatch();
 
-  const { data, favor } = props;
+  const { data } = props;
   const kakaoMap = useSelector((state) => state.kakaoMap.value);
   const star = 5.0;
+  const favoriteCafeList = useSelector(state => state.favoriteCafeList.value);
 
-  const [isFavorite, setIsFavorite] = useState(favor);
+  const [isFavorite, setIsFavorite] = useState(favoriteCafeList.findIndex(item => item.id === data.id) !== -1);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/favorite-cafes/get')
+    .then((res) => res.json())
+    .then((data) => dispatch(setFavoriteCafeList(data)))
+    .catch(e => console.log(e));
+  }, []);
+
+  useEffect(() => {
+    setIsFavorite(favoriteCafeList.findIndex(item => item.id === data.id) !== -1);
+  }, [favoriteCafeList]);
 
   return (
     <div className="cafe-card" key={data.id}>
@@ -23,18 +35,13 @@ function CafeCard(props) {
           <label
             className={`favorite-button ${isFavorite ? 'active-favorite-button' : '' }`}
             onClick={(e) => {
+              setIsFavorite(!isFavorite);
+
               if (isFavorite === true) {
                 dispatch(removeFavoriteCafe(data));
               } else {
                 dispatch(pushFavoriteCafe(data));
-              }
-
-              fetch('http://localhost:5000/favorite-cafes/get')
-              .then((res) => res.json())
-              .then((data) => dispatch(setFavoriteCafeList(data)))
-              .catch(e => console.log(e));
-
-              setIsFavorite(!isFavorite);
+              }          
             }}
           >
             <FontAwesomeIcon icon={faStar} />
@@ -51,8 +58,8 @@ function CafeCard(props) {
 
         <div className="cafe-card-rating-container">
           <div className="cafe-card-star-container">
-            {[...new Array(star)].map(() => {
-              return <FontAwesomeIcon icon={faStar} />;
+            {[...new Array(star)].map((item, idx) => {
+              return <FontAwesomeIcon icon={faStar} key={idx} />;
             })}
           </div>
           <p>{star.toFixed(1)}</p>
