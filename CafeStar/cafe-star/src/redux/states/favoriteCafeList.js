@@ -16,9 +16,8 @@ export const favoriteCafeListSlice = createSlice({
     },
     removeFavoriteCafe: (state, action) => {
       const copyList = [...state.value];
-      copyList.splice((item) => item.id === action.payload.id, 1);
-
-      state.value = copyList;
+      
+      state.value = copyList.filter((item) => item.id !== action.payload.id);
     },
   },
 });
