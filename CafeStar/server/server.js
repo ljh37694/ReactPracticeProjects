@@ -63,7 +63,3 @@ app.delete("/favorite-cafes/delete", async (req, res) => {
 
   console.log(result);
 });
-
-app.post("/favorite-cafes/set", async (req, res) => {
-  console.log(req.body.data);
-})

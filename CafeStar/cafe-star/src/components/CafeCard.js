@@ -15,15 +15,7 @@ function CafeCard(props) {
   const [isFavorite, setIsFavorite] = useState(favoriteCafeList.findIndex(item => item.id === data.id) !== -1);
 
   useEffect(() => {
-    fetch('http://localhost:5000/favorite-cafes/get')
-    .then((res) => res.json())
-    .then((data) => dispatch(setFavoriteCafeList(data)))
-    .catch(e => console.log(e));
   }, []);
-
-  useEffect(() => {
-    setIsFavorite(favoriteCafeList.findIndex(item => item.id === data.id) !== -1);
-  }, [favoriteCafeList]);
 
   return (
     <div className="cafe-card" key={data.id}>

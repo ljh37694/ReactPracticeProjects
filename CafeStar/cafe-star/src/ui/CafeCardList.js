@@ -11,23 +11,14 @@ function CafeCardList(props) {
   const favoriteCafeList = useSelector(state => state.favoriteCafeList.value);
 
   useEffect(() => {
-    fetch('http://localhost:5000/favorite-cafes/get')
-      .then((res) => res.json())
-      .then((data) => dispatch(setFavoriteCafeList(data)))
-      .catch(e => console.log(e));
+    // fetch('http://localhost:5000/favorite-cafes/get')
+    //   .then((res) => res.json())
+    //   .then((data) => dispatch(setFavoriteCafeList(data)))
+    //   .catch(e => console.log(e));
   }, []);
 
   useEffect(() => {
     return () => {
-      fetch('http://localhost:5000/favorite-cafes/set', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          data: favoriteCafeList,
-        }),
-      })
     }
   }, [favoriteCafeList]);
 

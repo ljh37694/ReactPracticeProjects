@@ -9,10 +9,10 @@ function FavoriteCafePanel(props) {
   const favoriteCafeList = useSelector(state => state.favoriteCafeList.value);
 
   useEffect(() => {
-    fetch('http://localhost:5000/favorite-cafes/get')
-      .then((res) => res.json())
-      .then((data) => dispatch(setFavoriteCafeList(data)))
-      .catch(e => console.log(e));
+    // fetch('http://localhost:5000/favorite-cafes/get')
+    //   .then((res) => res.json())
+    //   .then((data) => dispatch(setFavoriteCafeList(data)))
+    //   .catch(e => console.log(e));
   }, []);
 
   return (
