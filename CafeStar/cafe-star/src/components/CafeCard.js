@@ -15,6 +15,7 @@ function CafeCard(props) {
   const [isFavorite, setIsFavorite] = useState(favoriteCafeList.findIndex(item => item.id === data.id) !== -1);
 
   useEffect(() => {
+
   }, []);
 
   return (
@@ -31,9 +32,21 @@ function CafeCard(props) {
 
               if (isFavorite === true) {
                 dispatch(removeFavoriteCafe(data));
+
+                fetch("http://localhost:5000/favorite-cafes/delete?id=" + data.id, {
+                  method: "DELETE",
+                });
               } else {
                 dispatch(pushFavoriteCafe(data));
-              }          
+
+                fetch("http://localhost:5000/favorite-cafes/push", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({...data}),
+                })
+              }
             }}
           >
             <FontAwesomeIcon icon={faStar} />
