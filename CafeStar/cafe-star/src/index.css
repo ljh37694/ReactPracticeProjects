@@ -273,3 +273,7 @@ code {
 .active-favorite-button {
   color: var(--star-color);
 }
+
+.star-score-container {
+  height: 20px;
+}

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { pushFavoriteCafe, removeFavoriteCafe } from "../redux/states/favoriteCafeList";
+import StarScore from "../ui/StarScore";
 
 function CafeCard(props) {
   const dispatch = useDispatch();
@@ -66,6 +67,8 @@ function CafeCard(props) {
             {[...new Array(star)].map((item, idx) => {
               return <FontAwesomeIcon icon={faStar} key={idx} />;
             })}
+
+            <StarScore />
           </div>
           <p>{star.toFixed(1)}</p>
         </div>
