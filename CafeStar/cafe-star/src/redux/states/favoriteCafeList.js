@@ -11,7 +11,7 @@ export const favoriteCafeListSlice = createSlice({
     },
     pushFavoriteCafe: (state, action) => {
       if (state.value.findIndex(item => item.id === action.payload.id) === -1) {
-        state.value = [action.payload, ...state.value];
+        state.value = [...state.value, action.payload];
       }
     },
     removeFavoriteCafe: (state, action) => {

@@ -2,7 +2,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { pushFavoriteCafe, removeFavoriteCafe, setFavoriteCafeList } from "../redux/states/favoriteCafeList";
+import { pushFavoriteCafe, removeFavoriteCafe } from "../redux/states/favoriteCafeList";
 
 function CafeCard(props) {
   const dispatch = useDispatch();
