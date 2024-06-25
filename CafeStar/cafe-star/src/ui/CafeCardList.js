@@ -17,7 +17,7 @@ function CafeCardList(props) {
   }, []);
 
   useEffect(() => {
-    cafeList.forEach((data) => {
+    cafeList.forEach((data, idx) => {
       const latlng = new window.kakao.maps.LatLng(data.y, data.x);
 
       const marker = new window.kakao.maps.Marker({
@@ -38,6 +38,10 @@ function CafeCardList(props) {
       });
 
       window.kakao.maps.event.addListener(marker, "click", () => {
+        infoWindow.open(kakaoMap, marker);
+      });
+
+      document.querySelectorAll('.cafe-card-content-container')[idx].addEventListener("click", () => {
         infoWindow.open(kakaoMap, marker);
       });
     });

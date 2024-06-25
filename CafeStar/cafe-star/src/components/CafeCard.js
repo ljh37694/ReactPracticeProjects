@@ -54,7 +54,7 @@ function CafeCard(props) {
         </div>
       </section>
 
-      <section
+      <section className="cafe-card-content-container"
         onClick={(e) => {
           kakaoMap.setCenter(new window.kakao.maps.LatLng(data.y, data.x));
         }}
