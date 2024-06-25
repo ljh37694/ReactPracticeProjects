@@ -8,19 +8,13 @@ function CafeCardList(props) {
 
   const kakaoMap = useSelector((state) => state.kakaoMap.value);
   const { cafeList } = props;
-  const favoriteCafeList = useSelector(state => state.favoriteCafeList.value);
-
+  
   useEffect(() => {
     fetch('http://localhost:5000/favorite-cafes/get')
       .then((res) => res.json())
       .then((data) => dispatch(setFavoriteCafeList(data)))
       .catch(e => console.log(e));
   }, []);
-
-  useEffect(() => {
-    return () => {
-    }
-  }, [favoriteCafeList]);
 
   useEffect(() => {
     cafeList.forEach((data) => {
