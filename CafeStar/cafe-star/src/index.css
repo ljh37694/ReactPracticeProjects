@@ -234,8 +234,20 @@ code {
   align-items: center;
 }
 
-.cafe-card-star-container {
-  margin-right: 10px;
+.star-score-container {
+  width: 135px;
+  position: relative;
+  margin-right: 1em;
+}
+
+.star-score {
+  height: 100%;
+  width: 100%;
+  color: var(--gray-color);
+}
+
+.active-star {
+  color: var(--coffee-color);
 }
 
 /* Location Info Style */
@@ -272,8 +284,4 @@ code {
 
 .active-favorite-button {
   color: var(--star-color);
-}
-
-.star-score-container {
-  height: 20px;
 }

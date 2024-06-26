@@ -63,13 +63,7 @@ function CafeCard(props) {
         <p className="cafe-card-address">{data.address_name}</p>
 
         <div className="cafe-card-rating-container">
-          <div className="cafe-card-star-container">
-            {[...new Array(star)].map((item, idx) => {
-              return <FontAwesomeIcon icon={faStar} key={idx} />;
-            })}
-
-            <StarScore />
-          </div>
+          <StarScore />
           <p>{star.toFixed(1)}</p>
         </div>
       </section>
