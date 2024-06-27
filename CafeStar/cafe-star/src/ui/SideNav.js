@@ -1,8 +1,14 @@
-import { faLocationDot, faMagnifyingGlass, faStar, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLocationDot,
+  faMagnifyingGlass,
+  faStar,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setcurrentMenu } from "../redux/states/currentMenu";
+import { Link } from "react-router-dom";
 
 function SideNav(props) {
   let [activeMenu, setActiveMenu] = useState(0);
@@ -36,7 +42,9 @@ function SideNav(props) {
 
       <div className="nav-footer">
         <div>
-          <FontAwesomeIcon icon={faUser} size="2x" />
+          <Link to="/login">
+            <FontAwesomeIcon icon={faUser} size="2x" />
+          </Link>
         </div>
       </div>
     </nav>
