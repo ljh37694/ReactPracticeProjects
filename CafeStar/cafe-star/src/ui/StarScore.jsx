@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 function StarScore(props) {
   const [starCount, setStarCount] = useState(0);
-  const [score, setScore] = useState(0);
+  const { score, setScore } = props;
 
   const width = 135;
 
@@ -14,7 +14,7 @@ function StarScore(props) {
   
     const pos = e.clientX - rect.left + 1;
 
-    setStarCount(pos / (width / 5));
+    setStarCount(parseInt(pos / (width / 5)) + 1);
   }
 
   const mouseClick = (e) => {

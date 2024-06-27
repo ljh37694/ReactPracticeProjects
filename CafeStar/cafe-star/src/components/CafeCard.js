@@ -14,6 +14,7 @@ function CafeCard(props) {
   const favoriteCafeList = useSelector(state => state.favoriteCafeList.value);
 
   const [isFavorite, setIsFavorite] = useState(false);
+  const [score, setScore] = useState(0.0);
 
   useState(() => {
     setIsFavorite(favoriteCafeList.findIndex(item => item.id === data.id) !== -1);
@@ -63,8 +64,8 @@ function CafeCard(props) {
         <p className="cafe-card-address">{data.address_name}</p>
 
         <div className="cafe-card-rating-container">
-          <StarScore />
-          <p>{star.toFixed(1)}</p>
+          <StarScore score={score} setScore={setScore} />
+          <p>{score.toFixed(1)}</p>
         </div>
       </section>
     </div>
