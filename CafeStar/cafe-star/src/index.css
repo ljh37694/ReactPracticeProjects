@@ -41,7 +41,7 @@ code {
     monospace;
 }
 
-#main-page, input {
+#main-page, #login-page, input {
   background-color: var(--cream-color);
   color: var(--coffee-color);
   font-family: 'ONE-Mobile-POP', 'Courier New', Courier, monospace;
@@ -170,6 +170,7 @@ code {
 
 .title {
   font-size: 28px;
+  color: var(--coffee-color);
 }
 
 /* Search Input Style */
@@ -289,4 +290,56 @@ code {
 
 .active-favorite-button {
   color: var(--star-color);
+}
+
+/* Login Page */
+#login-page {
+  background-color: var(--cream-color);
+  height: 100vh;
+  display: flex;
+}
+
+.login-form-container {
+  background-color: #fff;
+  width: 450px;
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+.login-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  width: 90%;
+  height: 75%;
+}
+
+.login-title {
+  margin-top: 80px;
+  margin-bottom: 40px;
+}
+
+.login-form-input, .login-form-input:focus-visible {
+  background-color: inherit;
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 0.6em;
+  font-size: 22px;
+  outline: none;
+}
+
+.login-button {
+  background-color: var(--coffee-color);
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  height: 45px;
+  color: var(--cream-color);
+  font-family: 'ONE-Mobile-POP';
+  margin-top: 30px;
 }
