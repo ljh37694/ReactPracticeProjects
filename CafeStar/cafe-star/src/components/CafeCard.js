@@ -1,6 +1,6 @@
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { pushFavoriteCafe, removeFavoriteCafe } from "../redux/states/favoriteCafeList";
 import StarScore from "../ui/StarScore";
@@ -8,17 +8,52 @@ import StarScore from "../ui/StarScore";
 function CafeCard(props) {
   const dispatch = useDispatch();
 
-  const { data } = props;
+  const { data, idx } = props;
   const kakaoMap = useSelector((state) => state.kakaoMap.value);
-  const star = 5.0;
   const favoriteCafeList = useSelector(state => state.favoriteCafeList.value);
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [score, setScore] = useState(0.0);
 
-  useState(() => {
+  useEffect(() => {
     setIsFavorite(favoriteCafeList.findIndex(item => item.id === data.id) !== -1);
   }, [favoriteCafeList]);
+
+  useEffect(() => {
+    const latlng = new window.kakao.maps.LatLng(data.y, data.x);
+
+    const marker = new window.kakao.maps.Marker({
+      map: kakaoMap,
+      position: latlng,
+      clickable: true,
+    });
+
+    const infoCentent = `<div class="location-info">
+        <p class="location-info-title">${data.place_name}</p>
+        <p class="location-info-address">${data.address_name}</p>
+      </div>`;
+
+    const infoWindow = new window.kakao.maps.InfoWindow({
+      position: latlng,
+      content: infoCentent,
+      removable: true,
+    });
+
+    const openInfoWindow = () => {
+      infoWindow.open(kakaoMap, marker);
+    }
+
+    const cafeCardContentContainer = document.querySelectorAll('.cafe-card-content-container')[idx];
+
+    window.kakao.maps.event.addListener(marker, "click", openInfoWindow);
+
+    cafeCardContentContainer.addEventListener('click', openInfoWindow);
+
+    return () => {
+      marker.setVisible(false);
+      cafeCardContentContainer.removeEventListener('click', openInfoWindow);
+    }
+  }, []);
 
   return (
     <div className="cafe-card" key={data.id}>
