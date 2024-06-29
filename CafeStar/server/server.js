@@ -63,3 +63,9 @@ app.delete("/favorite-cafes/delete", async (req, res) => {
 
   console.log(result);
 });
+
+app.post("/login", async (req, res) => {
+  const { id, pw } = req.body;
+
+  console.log(id, pw);
+});
