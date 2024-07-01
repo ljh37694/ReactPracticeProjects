@@ -28,6 +28,8 @@ app.listen(PORT, () => {
 
 app.get('/', (req, res) => {
   res.send('hi');
+
+  console.log(req.query);
 });
 
 app.get('/search', async (req, res) => {
@@ -69,3 +71,7 @@ app.post("/login", async (req, res) => {
 
   console.log(id, pw);
 });
+
+app.get("/oauth/kakao/callback", (req, res) => {
+  console.log(req.query);
+})

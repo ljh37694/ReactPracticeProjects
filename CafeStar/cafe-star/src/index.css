@@ -353,3 +353,10 @@ input, input[type=password] {
   font-family: 'ONE-Mobile-POP';
   margin-top: 30px;
 }
+
+.kakao-login-button {
+  background-image: url("../public/kakao_login_medium_wide.png");
+  width: 300px;
+  height: 45px;
+  margin-top: 100px;
+}
