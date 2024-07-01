@@ -33,6 +33,24 @@ function LoginPage(props) {
           <input type="password" className="login-form-input" name="pw" placeholder="비밀번호" autoComplete="off" />
           <button type="submit" className="login-button">로그인</button>
         </form>
+
+        <button onClick={() => {
+          try {
+            const url = `https://kauth.kakao.com/oauth/authorize?
+              response_type=code&
+              client_id=${process.env.REACT_APP_REST_API_KEY}&
+              redirect_uri=${process.env.REACT_APP_SERVER_URL}&
+              scope=account_email`;
+
+            console.log(url);
+
+            fetch(url, {
+              method: "GET",
+            });
+          } catch {
+            console.log("error");
+          }
+        }}>카카오톡으로 로그인</button>
       </section>
     </main>
   );
