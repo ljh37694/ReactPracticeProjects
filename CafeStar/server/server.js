@@ -5,6 +5,7 @@ const { MongoClient, ObjectId } = require('mongodb');
 require("dotenv").config();
 
 let db;
+let tokens;
 
 const PORT = 5000;
 const uri = `mongodb+srv://ljh37694:${process.env.DB_PASSWORD}@forum.6p5dx3j.mongodb.net/?retryWrites=true&w=majority&appName=Forum`;
@@ -28,8 +29,6 @@ app.listen(PORT, () => {
 
 app.get('/', (req, res) => {
   res.send('hi');
-
-  console.log(req.query);
 });
 
 app.get('/search', async (req, res) => {
@@ -72,6 +71,22 @@ app.post("/login", async (req, res) => {
   console.log(id, pw);
 });
 
-app.get("/oauth/kakao/callback", (req, res) => {
+app.get("/oauth/kakao/callback", async (req, res) => {
   console.log(req.query);
-})
+
+  await axios({
+    method: "POST",
+    url: 'https://kauth.kakao.com/oauth/token',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+    },
+    data: {
+      grant_type: "authorization_code",
+      client_id: process.env.REST_API_KEY,
+      redirect_uri: 'http://localhost:5000/oauth/kakao/callback',
+      code: req.query.code,
+    },
+  })
+  .then((res) => tokens = res.data)
+  .catch((e) => console.log(e));
+});

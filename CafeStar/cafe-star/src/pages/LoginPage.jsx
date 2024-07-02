@@ -1,5 +1,5 @@
 function LoginPage(props) {
-  const url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_REST_API_KEY}&scope=account_email,profile_nickname,profile_image,openid&redirect_uri=${process.env.REACT_APP_SERVER_URL}`;
+  const url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_REST_API_KEY}&scope=account_email,profile_nickname,profile_image,openid&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}`;
 
   return (
     <main id="login-page">
@@ -35,9 +35,7 @@ function LoginPage(props) {
           <input type="password" className="login-form-input" name="pw" placeholder="비밀번호" autoComplete="off" />
           <button type="submit" className="login-button">로그인</button>
 
-          <a href={url} className="kakao-login-button">
-            <label></label>
-          </a>
+          <a href={url} className="kakao-login-button"></a>
         </form>
       </section>
     </main>
