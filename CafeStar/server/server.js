@@ -74,6 +74,8 @@ app.post("/login", async (req, res) => {
 app.get("/oauth/kakao/callback", async (req, res) => {
   console.log(req.query);
 
+  res.redirect('http://localhost:3000');
+
   await axios({
     method: "POST",
     url: 'https://kauth.kakao.com/oauth/token',
@@ -87,6 +89,36 @@ app.get("/oauth/kakao/callback", async (req, res) => {
       code: req.query.code,
     },
   })
-  .then((res) => tokens = res.data)
+  .then(async(response) => {
+    tokens = res.data;
+    console.log(response.data);
+
+    await axios({
+      method: "GET",
+      url: "https://kapi.kakao.com/v2/user/me",
+      headers: {
+        'Authorization': `Bearer ${response.data.access_token}`,
+        'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+      }
+    })
+    .then((userData) => console.log(userData))
+    .catch(e => console.log(e));
+  })
   .catch((e) => console.log(e));
+});
+
+app.get('/user/token', async (req, res) => {
+  if (tokens) {
+    await axios({
+      method: "GET",
+      url: "https://kapi.kakao.com/v2/user/me",
+      headers: {
+        'Authorization': `Bearer ${tokens.access_token}`,
+        'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+      }
+    })
+    .catch(e => console.log(e));
+  } else {
+    res.redirect('http://localhost:3000/login');
+  }
 });
