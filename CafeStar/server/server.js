@@ -74,7 +74,7 @@ app.post("/login", async (req, res) => {
 app.get("/oauth/kakao/callback", async (req, res) => {
   console.log(req.query);
 
-  res.redirect('http://localhost:3000');
+  res.redirect('http://localhost:3000/login/check');
 
   await axios({
     method: "POST",
@@ -92,22 +92,13 @@ app.get("/oauth/kakao/callback", async (req, res) => {
   .then(async(response) => {
     tokens = res.data;
     console.log(response.data);
-
-    await axios({
-      method: "GET",
-      url: "https://kapi.kakao.com/v2/user/me",
-      headers: {
-        'Authorization': `Bearer ${response.data.access_token}`,
-        'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-      }
-    })
-    .then((userData) => console.log(userData))
-    .catch(e => console.log(e));
   })
   .catch((e) => console.log(e));
 });
 
 app.get('/user/token', async (req, res) => {
+  console.log(tokens);
+
   if (tokens) {
     await axios({
       method: "GET",
@@ -117,8 +108,14 @@ app.get('/user/token', async (req, res) => {
         'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
       }
     })
+    .then((data) => {
+      console.log(data);
+      res.send(JSON.stringify(data));
+    })
     .catch(e => console.log(e));
   } else {
-    res.redirect('http://localhost:3000/login');
+    res.send(JSON.stringify({
+      status: "logged in",
+    })); 
   }
 });
