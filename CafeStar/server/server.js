@@ -1,11 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+const jwt = require('jsonwebtoken');
 const { MongoClient, ObjectId } = require('mongodb');
 require("dotenv").config();
 
 let db;
-let tokens;
 
 const PORT = 5000;
 const uri = `mongodb+srv://ljh37694:${process.env.DB_PASSWORD}@forum.6p5dx3j.mongodb.net/?retryWrites=true&w=majority&appName=Forum`;
@@ -72,7 +72,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/oauth/kakao/callback", async (req, res) => {
-  console.log(req.query);
+  let tokens = null;
 
   res.redirect('http://localhost:3000/login/check');
 
@@ -90,14 +90,9 @@ app.get("/oauth/kakao/callback", async (req, res) => {
     },
   })
   .then(async(response) => {
-    tokens = res.data;
-    console.log(response.data);
+    tokens = response.data;
   })
   .catch((e) => console.log(e));
-});
-
-app.get('/user/token', async (req, res) => {
-  console.log(tokens);
 
   if (tokens) {
     await axios({
