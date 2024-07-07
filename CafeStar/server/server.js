@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const { MongoClient, ObjectId } = require('mongodb');
 require("dotenv").config();
 
@@ -103,14 +104,13 @@ app.get("/oauth/kakao/callback", async (req, res) => {
         'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
       }
     })
-    .then((data) => {
-      console.log(data);
-      res.send(JSON.stringify(data));
+    .then((response) => {
+      console.log(response.data);
     })
     .catch(e => console.log(e));
   } else {
     res.send(JSON.stringify({
       status: "logged in",
-    })); 
+    }));
   }
 });
