@@ -72,6 +72,12 @@ app.post("/login", async (req, res) => {
   console.log(id, pw);
 });
 
+app.post("/sign-up", async (req, res) => {
+  const { id, email, password } = req.body;
+  
+  console.log(req.body);
+});
+
 app.get("/oauth/kakao/callback", async (req, res) => {
   let tokens = null;
 
