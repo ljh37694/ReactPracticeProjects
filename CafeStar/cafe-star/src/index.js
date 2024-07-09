@@ -8,6 +8,8 @@ import { store } from "./redux/store";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import LoginCheckPage from "./pages/LoginCheckPage";
+import LoginForm from "./components/LoginForm";
+import SignUpForm from "./components/SignUpForm";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,7 +18,9 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/login" element={<LoginPage />} >
+          <Route path="/user" element={<LoginPage />} >
+            <Route path="login" element={<LoginForm />} />
+            <Route path="sign-up" element={<SignUpForm />} />
           </Route>
 
           <Route path="/login/check" element={<LoginCheckPage />} />

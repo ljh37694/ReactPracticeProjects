@@ -42,7 +42,7 @@ function SideNav(props) {
 
       <div className="nav-footer">
         <div>
-          <Link to="/login">
+          <Link to="/user/login">
             <FontAwesomeIcon icon={faUser} size="2x" />
           </Link>
         </div>

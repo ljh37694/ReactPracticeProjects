@@ -1,10 +1,9 @@
-import LoginForm from "../components/LoginForm";
-import SignUpForm from "../components/SignUpForm";
+import { Outlet } from "react-router-dom";
 
 function LoginPage(props) {
   return (
     <main id="login-page">
-      <SignUpForm />
+      <Outlet />
     </main>
   );
 }
