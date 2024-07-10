@@ -72,10 +72,39 @@ app.post("/login", async (req, res) => {
   console.log(id, pw);
 });
 
+app.get('/check/id-duplicate', async (req, res) => {
+  const result = await db.collection('Users').findOne({id: req.query.id});
+
+  console.log(result);
+
+  res.send({
+    isDuplicate: result !== null,
+  });
+});
+
+/*
+  user = {
+    _id: DB자체 id,
+    id: user가 입력한 아이디, 중복 X,
+    email: 형식에 맞는 이메일,
+    password: 영어, 숫자, 특수문자 포함 8자 이상
+  }
+*/
 app.post("/sign-up", async (req, res) => {
   const { id, email, password } = req.body;
+
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(password, salt);
+
+  console.log(hashedPassword);
+
+  const result = await db.collection('Users').insertOne({
+    id,
+    email,
+    password: hashedPassword,
+  });
   
-  console.log(req.body);
+  console.log(req.body, result);
 });
 
 app.get("/oauth/kakao/callback", async (req, res) => {

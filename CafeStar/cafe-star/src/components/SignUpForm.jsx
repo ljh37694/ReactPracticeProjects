@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 function SignUpForm(props) {
+  const [isDuplicate, setIsDupblicate] = useState(true);
+
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -22,6 +26,9 @@ function SignUpForm(props) {
     else if (!passwordRegex.test(userInfo.password)) {
       alert('비밀번호는 영어, 특수문자, 숫자 각 1개 이상 포함되어야 합니다');
     }
+    else if (isDuplicate === true) {
+      alert('아이디 중복을 확인하세요');
+    }
     else {
       console.log(userInfo);
 
@@ -36,6 +43,26 @@ function SignUpForm(props) {
     }
   }
 
+  const onClickIdDupblicate = (e) => {
+    e.preventDefault();
+
+    console.log(document.signUpForm.id.value);
+
+    fetch('http://localhost:5000/check/id-duplicate?id=' + document.signUpForm.id.value, {
+      method: "GET",
+    })
+    .then((response) => response.json())
+    .then(data => {
+      console.log(data);
+
+      if (data.isDuplicate) {
+        alert('이미 존재하는 아이디입니다');
+      }
+
+      setIsDupblicate(data.isDuplicate);
+    });
+  }
+
   return (
     <section className="login-form-container">
       <header>
@@ -43,7 +70,10 @@ function SignUpForm(props) {
       </header>
 
       <form className="login-form" name="signUpForm" onSubmit={onSubmit}>
-        <input type="text" className="login-form-input" name="id" placeholder="아이디를 입력하세요" />
+        <div>
+          <input type="text" className="login-form-input" name="id" placeholder="아이디를 입력하세요" />
+          <button onClick={onClickIdDupblicate}>중복확인</button>
+        </div>
         <input type="text" className="login-form-input" name="email" placeholder="이메일을 입력하세요" />
         <input type="password" className="login-form-input" name="password" placeholder="비밀번호를 입력하세요" />
 
