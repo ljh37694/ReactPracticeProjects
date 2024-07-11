@@ -1,9 +1,12 @@
 const jwt = require('jsonwebtoken');
+require("dotenv").config();
+
 const secretKey = process.env.JWT_SECRET_KEY;
 
 // access token 생성하고 및 return
-const generateAccessToken = (payload) => {
-  const token = jwt.sign(payload, secretKey, { expiresIn: '1h'});
+const generateToken = (payload, expirationTime) => {
+  console.log(secretKey);
+  const token = jwt.sign(payload, secretKey, { expiresIn: expirationTime });
 
   return token;
 };
@@ -16,6 +19,14 @@ const refreshAccessToken = (refreshToken) => {
       id: decoded.id,
     };
 
-    const newAccessToken = generateAccessToken(payload);
+    const newAccessToken = generateToken(payload);
+
+    return newAccessToken;
+  } catch (e) {
+    console.log(e);
+
+    return null;
   }
 };
+
+module.exports = { generateToken, refreshAccessToken };

@@ -3,7 +3,9 @@ const cors = require('cors');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
 const { MongoClient } = require('mongodb');
+const { refreshAccessToken, generateToken } = require('./jwt');
 require("dotenv").config();
 
 let db;
@@ -23,6 +25,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json({ extended: true }));
+app.use(cookieParser());
 
 app.listen(PORT, () => {
   console.log('http://localhost:5000 에서 실행 중입니다.');
@@ -69,14 +72,19 @@ app.delete("/favorite-cafes/delete", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { id, pw } = req.body;
 
-  const payload = {id};
-  const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
+  const payload = { id };
 
-  console.log(token);
+  const accessToken = generateToken(payload, '1h');
+  const refreshToken = generateToken(payload, '7d');
 
-  res.json({
-    token,
+  await db.collection('RefreshTokens').insertOne({
+    refreshToken,
   });
+
+  res.cookie('tokens', {
+    accessToken,
+    refreshToken,
+  }).redirect('/');
 
   console.log(id, pw);
 });
