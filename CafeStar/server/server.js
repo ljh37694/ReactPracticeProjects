@@ -3,7 +3,7 @@ const cors = require('cors');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const { MongoClient, ObjectId } = require('mongodb');
+const { MongoClient } = require('mongodb');
 require("dotenv").config();
 
 let db;
@@ -69,7 +69,35 @@ app.delete("/favorite-cafes/delete", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { id, pw } = req.body;
 
+  const payload = {id};
+  const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
+
+  console.log(token);
+
+  res.json({
+    token,
+  });
+
   console.log(id, pw);
+});
+
+app.post('/token/refresh', async (req, res) => {
+  const ReceivedRefreshToken = req.body.refreshToken;
+
+  try {
+    const decodedToken = jwt.verify(ReceivedRefreshToken, process.env.JWT_SECRET_KEY);
+    console.log(decodedToken);
+
+    const payload = { id: decodedToken.id };
+
+    const newRefreshToken = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
+
+    res.json({
+      token: newRefreshToken,
+    });
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 app.get('/check/id-duplicate', async (req, res) => {
