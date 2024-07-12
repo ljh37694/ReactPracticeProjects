@@ -81,10 +81,7 @@ app.post("/login", async (req, res) => {
     refreshToken,
   });
 
-  res.cookie('tokens', {
-    accessToken,
-    refreshToken,
-  }).redirect('/');
+  res.cookie('tokens', 'hi');
 
   console.log(id, pw);
 });
