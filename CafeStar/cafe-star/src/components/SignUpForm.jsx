@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SignUpForm(props) {
   const [isDuplicate, setIsDupblicate] = useState(true);
+  const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -39,6 +41,12 @@ function SignUpForm(props) {
         },
         body: JSON.stringify(userInfo),
       })
+        .then((response) => response.json())
+        .then(data => {
+          console.log(data);
+
+          navigate('/user/login');
+        })
         .catch(e => console.log(e));
     }
   }
