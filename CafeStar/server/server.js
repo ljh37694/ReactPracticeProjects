@@ -1,16 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
-const { refreshAccessToken, generateToken } = require('./jwt');
 
 // database
 const { connectMongoDB } = require('./database/config');
 
 // FavoriteCafes collection functions
 const { deleteFavoriteCafe, getFavoriteCafes, addFavoriteCafe } = require('./database/favoriteCafes');
+const { signUp, checkIdDuplication } = require('./user/signUp');
+const { login, logout, loginSuccess } = require('./user/login');
 require("dotenv").config();
 
 const PORT = process.env.PORT;
@@ -19,14 +18,20 @@ const app = express();
 
 connectMongoDB();
 
-app.use(cors());
+// middleware
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
 app.use(express.json({ extended: true }));
 app.use(cookieParser());
 
+// server connect
 app.listen(PORT, () => {
   console.log('http://localhost:5000 에서 실행 중입니다.');
 });
 
+// api
 app.get('/', (req, res) => {
   res.send('hi');
 });
@@ -49,79 +54,15 @@ app.post('/favorite-cafes/push', addFavoriteCafe);
 
 app.delete("/favorite-cafes/delete", deleteFavoriteCafe);
 
-app.post("/login", async (req, res) => {
-  const { id, pw } = req.body;
+app.post("/login", login);
 
-  const payload = { id };
+app.post('/logout', logout);
 
-  const accessToken = generateToken(payload, '1h');
-  const refreshToken = generateToken(payload, '7d');
+app.get('/login/success', loginSuccess);
 
-  await db.collection('RefreshTokens').insertOne({
-    refreshToken,
-  });
+app.get('/check/id-duplicate', checkIdDuplication);
 
-  res.cookie('tokens', {
-    accessToken,
-    refreshToken,
-  }).redirect('/');
-
-  console.log(id, pw);
-});
-
-app.post('/token/refresh', async (req, res) => {
-  const ReceivedRefreshToken = req.body.refreshToken;
-
-  try {
-    const decodedToken = jwt.verify(ReceivedRefreshToken, process.env.JWT_SECRET_KEY);
-    console.log(decodedToken);
-
-    const payload = { id: decodedToken.id };
-
-    const newRefreshToken = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
-
-    res.json({
-      token: newRefreshToken,
-    });
-  } catch (e) {
-    console.log(e);
-  }
-});
-
-app.get('/check/id-duplicate', async (req, res) => {
-  const result = await db.collection('Users').findOne({id: req.query.id});
-
-  console.log(result);
-
-  res.send({
-    isDuplicate: result !== null,
-  });
-});
-
-/*
-  user = {
-    _id: DB자체 id,
-    id: user가 입력한 아이디, 중복 X,
-    email: 형식에 맞는 이메일,
-    password: 영어, 숫자, 특수문자 포함 8자 이상
-  }
-*/
-app.post("/sign-up", async (req, res) => {
-  const { id, email, password } = req.body;
-
-  const salt = bcrypt.genSaltSync(10);
-  const hashedPassword = bcrypt.hashSync(password, salt);
-
-  console.log(hashedPassword);
-
-  const result = await db.collection('Users').insertOne({
-    id,
-    email,
-    password: hashedPassword,
-  });
-  
-  console.log(req.body, result);
-});
+app.post("/sign-up", signUp);
 
 app.get("/oauth/kakao/callback", async (req, res) => {
   let tokens = null;

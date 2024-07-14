@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginForm(props) {
+  const navigate = useNavigate();
   const url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_REST_API_KEY}&scope=account_email,profile_nickname,profile_image,openid&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}`;
 
   const onSubmitLogin = (e) => {
@@ -12,8 +13,6 @@ function LoginForm(props) {
     if (id === '' || pw === '') {
       alert("아이디 또는 비밀번호가 빈 칸입니다.");
     } else {
-      console.log(id, pw);
-
       fetch(process.env.REACT_APP_SERVER_URL + "/login", {
         method: "POST",
         headers: {
@@ -22,11 +21,14 @@ function LoginForm(props) {
         body: JSON.stringify({
           id,
           pw,
-        })
+        }),
+        credentials: 'include',
       })
         .then((response) => response.json())
         .then(data => {
           console.log(data);
+
+          navigate('/');
         })
         .catch(e => console.log(e));
     }
