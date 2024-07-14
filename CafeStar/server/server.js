@@ -4,24 +4,20 @@ const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
-const { MongoClient } = require('mongodb');
 const { refreshAccessToken, generateToken } = require('./jwt');
+
+// database
+const { connectMongoDB } = require('./database/config');
+
+// FavoriteCafes collection functions
+const { deleteFavoriteCafe, getFavoriteCafes, addFavoriteCafe } = require('./database/favoriteCafes');
 require("dotenv").config();
 
-let db;
-
-const PORT = 5000;
-const uri = `mongodb+srv://ljh37694:${process.env.DB_PASSWORD}@forum.6p5dx3j.mongodb.net/?retryWrites=true&w=majority&appName=Forum`;
-new MongoClient(uri)
-  .connect()
-  .then((client) => {
-    console.log("DB 연결 성공");
-
-    db = client.db("CafeStar");
-  })
-  .catch(err => console.log(err));
+const PORT = process.env.PORT;
 
 const app = express();
+
+connectMongoDB();
 
 app.use(cors());
 app.use(express.json({ extended: true }));
@@ -47,27 +43,11 @@ app.get('/search', async (req, res) => {
   .catch((e) => console.log(e));
 });
 
-app.get('/favorite-cafes/get', async (req, res) => {
-  const data = await db.collection('FavoriteCafes').find().toArray();
+app.get('/favorite-cafes/get', getFavoriteCafes);
 
-  res.send(data);
-});
+app.post('/favorite-cafes/push', addFavoriteCafe);
 
-app.post('/favorite-cafes/push', async (req, res) => {
-  const result = await db.collection('FavoriteCafes').insertOne({
-    ...req.body,
-  });
-  
-  console.log(result);
-});
-
-app.delete("/favorite-cafes/delete", async (req, res) => {
-  const result = await db.collection('FavoriteCafes').deleteOne({
-    id: req.query.id,
-  });
-
-  console.log(result);
-});
+app.delete("/favorite-cafes/delete", deleteFavoriteCafe);
 
 app.post("/login", async (req, res) => {
   const { id, pw } = req.body;
