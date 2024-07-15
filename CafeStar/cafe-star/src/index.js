@@ -17,7 +17,9 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<MainPage />} />
+          </Route>
           <Route path="/user" element={<LoginPage />} >
             <Route path="login" element={<LoginForm />} />
             <Route path="sign-up" element={<SignUpForm />} />

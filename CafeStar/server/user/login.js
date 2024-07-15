@@ -21,9 +21,10 @@ const getRefreshToken = (payload) => {
   return refreshToken;
 };
 
-const refreshAccessToken = async (res, req) => {
+const refreshAccessToken = async (req, res) => {
   try {
     const refreshToken = req.cookies.refreshToken;
+
     const tokenData = jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY);
 
     const userData = await getCollection('Users').findOne({
@@ -32,7 +33,7 @@ const refreshAccessToken = async (res, req) => {
 
     const { password, ...others } = userData;
 
-    const newAccessToken = getAccessToken({others});
+    const newAccessToken = getAccessToken(others);
 
     res.cookie('accessToken', newAccessToken, {
       httpOnly: true,
@@ -40,13 +41,10 @@ const refreshAccessToken = async (res, req) => {
     });
 
     res.status(200).json('Access token recreated');
-
-    console.log(payload);
   } catch (e) {
-    res.status(500).json(e);
     console.log(e);
   }
-}
+};
 
 const login = async (req, res, next) => {
   const { id, pw } = req.body;
