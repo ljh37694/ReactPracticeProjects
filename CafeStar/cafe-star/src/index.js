@@ -7,9 +7,9 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import LoginCheckPage from "./pages/LoginCheckPage";
 import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/SignUpForm";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -23,7 +23,7 @@ root.render(
             <Route path="sign-up" element={<SignUpForm />} />
           </Route>
 
-          <Route path="/login/check" element={<LoginCheckPage />} />
+          <Route path="/login/check" element={<ProtectedRoute />} />
         </Routes>
       </BrowserRouter>
     </Provider>

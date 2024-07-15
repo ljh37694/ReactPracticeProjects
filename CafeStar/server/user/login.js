@@ -21,6 +21,33 @@ const getRefreshToken = (payload) => {
   return refreshToken;
 };
 
+const refreshAccessToken = async (res, req) => {
+  try {
+    const refreshToken = req.cookies.refreshToken;
+    const tokenData = jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY);
+
+    const userData = await getCollection('Users').findOne({
+      id: tokenData.id,
+    });
+
+    const { password, ...others } = userData;
+
+    const newAccessToken = getAccessToken({others});
+
+    res.cookie('accessToken', newAccessToken, {
+      httpOnly: true,
+      secure: false,
+    });
+
+    res.status(200).json('Access token recreated');
+
+    console.log(payload);
+  } catch (e) {
+    res.status(500).json(e);
+    console.log(e);
+  }
+}
+
 const login = async (req, res, next) => {
   const { id, pw } = req.body;
 
@@ -79,7 +106,7 @@ const logout = (req, res) => {
 
 const loginSuccess = async(req, res) => {
   try {
-    const accessToken = res.cookies.accessToken;
+    const accessToken = req.cookies.accessToken;
     const tokenData = jwt.verify(accessToken, process.env.ACCESS_SECRET_KEY);
 
     const userData = await getCollection('Users').findOne({
@@ -93,6 +120,7 @@ const loginSuccess = async(req, res) => {
     }
   } catch (e) {
     res.status(500).json(e);
+    console.log(e, 'asdfasdf');
   }
 };
 
@@ -100,4 +128,5 @@ module.exports = {
   login,
   logout,
   loginSuccess,
+  refreshAccessToken,
 };
