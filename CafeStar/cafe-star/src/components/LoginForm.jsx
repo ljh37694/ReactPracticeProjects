@@ -1,8 +1,36 @@
+import axios from "axios";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { setIsLoggedIn } from "../redux/states/isLoggedIn";
 
 function LoginForm(props) {
+  const dispatch = useDispatch();
+
+  const isLoggedIn = useSelector(state => state.isLoggedIn.value);
   const navigate = useNavigate();
   const url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_REST_API_KEY}&scope=account_email,profile_nickname,profile_image,openid&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}`;
+
+  useEffect(() => {
+    axios('http://localhost:5000/login/success', {withCredentials: true})
+      .then((res) => {
+        dispatch(setIsLoggedIn(true));
+        console.log(res.data);
+        navigate('/home');
+      })
+      .catch(e => {
+        axios.get('http://localhost:5000/refresh-token', {withCredentials: true})
+          .then(res => {
+            console.log(res.data);
+            navigate('/home');
+          })
+          .catch(e => {
+            console.log(e);
+            dispatch(setIsLoggedIn(false));
+          })
+        console.log(e);
+      })
+  }, []);
 
   const onSubmitLogin = (e) => {
     e.preventDefault();
@@ -28,7 +56,7 @@ function LoginForm(props) {
         .then(data => {
           console.log(data);
 
-          navigate('/');
+          navigate('/home');
         })
         .catch(e => console.log(e));
     }
