@@ -6,14 +6,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setcurrentMenu } from "../redux/states/currentMenu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SideNav(props) {
+  // hooks
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   let [activeMenu, setActiveMenu] = useState(0);
   const icons = [faMagnifyingGlass, faLocationDot, faStar];
-  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(state => state.isLoggedIn.value);
 
   return (
     <nav className="side-nav">
@@ -42,11 +46,24 @@ function SideNav(props) {
 
       <div className="nav-footer">
         <div>
-          <Link to="/user/login">
-            <FontAwesomeIcon icon={faUser} size="2x" />
-          </Link>
+          <FontAwesomeIcon icon={faUser} size="2x" onClick={() => {
+            if (isLoggedIn) {
+              
+            } else {
+              navigate('/user/login');
+            }
+          }} />
         </div>
       </div>
+
+      <section className="">
+        <div>
+          <div></div>
+          <div>
+            <button>로그아웃</button>
+          </div>
+        </div>
+      </section>
     </nav>
   );
 }
