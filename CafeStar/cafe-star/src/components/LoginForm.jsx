@@ -16,13 +16,13 @@ function LoginForm(props) {
       .then((res) => {
         dispatch(setIsLoggedIn(true));
         console.log(res.data);
-        navigate('/home');
+        navigate('/');
       })
       .catch(e => {
         axios.get('http://localhost:5000/refresh-token', {withCredentials: true})
           .then(res => {
             console.log(res.data);
-            navigate('/home');
+            navigate('/');
           })
           .catch(e => {
             console.log(e);
@@ -56,7 +56,7 @@ function LoginForm(props) {
         .then(data => {
           console.log(data);
 
-          navigate('/home');
+          navigate('/');
         })
         .catch(e => console.log(e));
     }

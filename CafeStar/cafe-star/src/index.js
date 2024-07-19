@@ -19,7 +19,7 @@ root.render(
         <Routes>
           {/* protected route */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/home" element={<MainPage />} />
+            <Route path="/" element={<MainPage />} />
           </Route>
 
           <Route path="/user" element={<LoginPage />}>
