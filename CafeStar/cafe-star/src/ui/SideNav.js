@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setcurrentMenu } from "../redux/states/currentMenu";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SideNav(props) {
   // hooks
@@ -56,11 +57,17 @@ function SideNav(props) {
         </div>
       </div>
 
-      <section className="">
+      <section className="user-info">
         <div>
           <div></div>
           <div>
-            <button>로그아웃</button>
+            <button onClick={() => {
+              axios.get('http://localhost:5000/logout', { withCredentials: true })
+                .then(res => {
+                  navigate('/user/login');
+                })
+                .catch(e => console.log(e));
+            }}>로그아웃</button>
           </div>
         </div>
       </section>

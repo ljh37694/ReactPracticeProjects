@@ -56,7 +56,7 @@ app.delete("/favorite-cafes/delete", deleteFavoriteCafe);
 
 app.post("/login", login);
 
-app.post('/logout', logout);
+app.get('/logout', logout);
 
 app.get('/login/success', loginSuccess);
 

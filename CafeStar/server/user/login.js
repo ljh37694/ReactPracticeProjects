@@ -95,7 +95,15 @@ const login = async (req, res, next) => {
 
 const logout = (req, res) => {
   try {
-    res.cookie('accessToken', '');
+    res.clearCookie('accessToken', {
+      httpOnly: true,
+      secure: false,
+    });
+    res.clearCookie('refreshToken', {
+      httpOnly: true,
+      secure: false,
+    });
+    
     res.status(200).json('Logout success');
   } catch (e) {
     res.status(500).json(e);
