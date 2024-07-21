@@ -108,6 +108,23 @@ input, input[type=password] {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.user-info-container {
+  background-color: var(--cream-color);
+  position: absolute;
+  left: 100px;
+  top: -80px;
+  width: 350px;
+  height: 200px;
+  box-shadow: rgba(0, 0, 0, 0.1) 5px 0px 15px 0px;
+}
+
+.user-info {
+  background-color: inherit;
+  width: 100%;
+  height: 70%;
 }
 
 /* Main Panel Style */

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setIsLoggedIn } from "../redux/states/isLoggedIn";
@@ -9,15 +9,13 @@ function ProtectedRoute(props) {
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector(state => state.isLoggedIn.value);
-  const userData = useSelector(state => state.userData.value);
-  const navigate = useNavigate();
   
   useEffect(() => {
     axios.get('http://localhost:5000/login/success', { withCredentials: true })
       .then(response => {
         console.log(response.data);
 
-        dispatch(setUserData(response.data));
+        dispatch(setUserData(response.data.data));
         dispatch(setIsLoggedIn(true));
       })
       .catch(e => {
@@ -28,7 +26,8 @@ function ProtectedRoute(props) {
           console.log(e);
           dispatch(setIsLoggedIn(false));
         })
-      dispatch(setIsLoggedIn(false));
+
+        dispatch(setIsLoggedIn(false));
       });
   }, []);
 

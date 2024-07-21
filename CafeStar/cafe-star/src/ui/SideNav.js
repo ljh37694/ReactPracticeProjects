@@ -5,11 +5,11 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setcurrentMenu } from "../redux/states/currentMenu";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import UserPanel from "./UserPanel";
 
 function SideNav(props) {
   // hooks
@@ -17,8 +17,13 @@ function SideNav(props) {
   const navigate = useNavigate();
 
   let [activeMenu, setActiveMenu] = useState(0);
+  const [showUserPanel, setShowUserPanel] = useState(false);
   const icons = [faMagnifyingGlass, faLocationDot, faStar];
-  const isLoggedIn = useSelector(state => state.isLoggedIn.value);
+  const isLoggedIn = useSelector((state) => state.isLoggedIn.value);
+
+  useEffect(() => {
+    setShowUserPanel(false);
+  }, [isLoggedIn]);
 
   return (
     <nav className="side-nav">
@@ -47,30 +52,21 @@ function SideNav(props) {
 
       <div className="nav-footer">
         <div>
-          <FontAwesomeIcon icon={faUser} size="2x" onClick={() => {
-            if (isLoggedIn) {
-              
-            } else {
-              navigate('/user/login');
-            }
-          }} />
+          <FontAwesomeIcon
+            icon={faUser}
+            size="2x"
+            onClick={() => {
+              if (isLoggedIn) {
+                setShowUserPanel(!showUserPanel);
+              } else {
+                navigate("/user/login");
+              }
+            }}
+          />
         </div>
-      </div>
 
-      <section className="user-info">
-        <div>
-          <div></div>
-          <div>
-            <button onClick={() => {
-              axios.get('http://localhost:5000/logout', { withCredentials: true })
-                .then(res => {
-                  navigate('/user/login');
-                })
-                .catch(e => console.log(e));
-            }}>로그아웃</button>
-          </div>
-        </div>
-      </section>
+        {showUserPanel ? <UserPanel /> : null}
+      </div>
     </nav>
   );
 }

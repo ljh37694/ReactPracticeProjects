@@ -40,7 +40,10 @@ const refreshAccessToken = async (req, res) => {
       secure: false,
     });
 
-    res.status(200).json('Access token recreated');
+    res.status(200).json({
+      data: others,
+      status: 'Access token recreated',
+    });
   } catch (e) {
     console.log(e);
   }
@@ -80,13 +83,19 @@ const login = async (req, res, next) => {
           httpOnly: true,
         });
 
-        res.status(200).json("Login success");
+        res.status(200).json({
+          status: "Login success",
+        });
       } else {
-        res.status(304).json("Not match password");
+        res.status(304).json({
+          status: "Not match password",
+        });
       }
       console.log(isCorrectPassword);
     } else {
-      res.status(304).json("No user data");
+      res.status(304).json({
+        status: "No user data",
+      });
     }
   } catch (e) {
     console.log(e);
@@ -104,7 +113,9 @@ const logout = (req, res) => {
       secure: false,
     });
     
-    res.status(200).json('Logout success');
+    res.status(200).json({
+      status: 'Logout success',
+    });
   } catch (e) {
     res.status(500).json(e);
   }
@@ -115,14 +126,21 @@ const loginSuccess = async(req, res) => {
     const accessToken = req.cookies.accessToken;
     const tokenData = jwt.verify(accessToken, process.env.ACCESS_SECRET_KEY);
 
+    console.log(tokenData);
+
     const userData = await getCollection('Users').findOne({
       id: tokenData.id,
     });
 
     if (userData) {
-      res.status(200).json(userData);
+      res.status(200).json({
+        data: userData,
+        status: 'Success',
+      });
     } else {
-      res.status(500).json('No user data');
+      res.status(500).json({
+        status: 'No user data',
+      });
     }
   } catch (e) {
     res.status(500).json(e);
