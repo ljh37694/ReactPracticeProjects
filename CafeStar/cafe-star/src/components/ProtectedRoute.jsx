@@ -22,6 +22,12 @@ function ProtectedRoute(props) {
         console.log(e);
 
         axios.get('http://localhost:5000/refresh-token', {withCredentials: true})
+        .then(response => {
+          console.log(response.data);
+
+          dispatch(setIsLoggedIn(true));
+          dispatch(setUserData(response.data.data));
+        })
         .catch(e => {
           console.log(e);
           dispatch(setIsLoggedIn(false));
