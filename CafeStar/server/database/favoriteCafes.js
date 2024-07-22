@@ -2,7 +2,9 @@ const { getCollection } = require("./config");
 
 const getFavoriteCafes = async (req, res) => {
   try {
-    const data = await getCollection('FavoriteCafes').find().toArray();
+    const data = await getCollection('FavoriteCafes').find({
+      user_id: req.query.userId,
+    }).toArray();
     
     res.send(data);
   } catch(e) {

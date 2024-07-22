@@ -8,9 +8,13 @@ import StarScore from "../ui/StarScore";
 function CafeCard(props) {
   const dispatch = useDispatch();
 
+  // props
   const { data, idx } = props;
+
+  // states
   const kakaoMap = useSelector((state) => state.kakaoMap.value);
   const favoriteCafeList = useSelector(state => state.favoriteCafeList.value);
+  const userData = useSelector(state => state.userData.value);
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [score, setScore] = useState(0.0);
@@ -81,7 +85,7 @@ function CafeCard(props) {
                   headers: {
                     "Content-Type": "application/json",
                   },
-                  body: JSON.stringify({...data}),
+                  body: JSON.stringify({...data, user_id: userData.id}),
                 });
               }
             }}
