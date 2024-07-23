@@ -1,4 +1,4 @@
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisVertical, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +18,34 @@ function CafeCard(props) {
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [score, setScore] = useState(0.0);
+  const [showExtraMenuPanel, setShowExtraMenuPanel] = useState(false);
+
+  // onClick
+  const onClickStar = (e) => {
+    setIsFavorite(!isFavorite);
+
+    if (isFavorite === true) {
+      dispatch(removeFavoriteCafe(data));
+
+      fetch("http://localhost:5000/favorite-cafes/delete?id=" + data.id, {
+        method: "DELETE",
+      });
+    } else {
+      dispatch(pushFavoriteCafe(data));
+
+      fetch("http://localhost:5000/favorite-cafes/push", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({...data, user_id: userData.id}),
+      });
+    }
+  };
+
+  const onClickExtraMenu = () => {
+    setShowExtraMenuPanel(!showExtraMenuPanel);
+  };
 
   useEffect(() => {
     setIsFavorite(favoriteCafeList.findIndex(item => item.id === data.id) !== -1);
@@ -68,29 +96,12 @@ function CafeCard(props) {
         <div>
           <label
             className={`favorite-button ${isFavorite ? 'active-favorite-button' : '' }`}
-            onClick={(e) => {
-              setIsFavorite(!isFavorite);
-
-              if (isFavorite === true) {
-                dispatch(removeFavoriteCafe(data));
-
-                fetch("http://localhost:5000/favorite-cafes/delete?id=" + data.id, {
-                  method: "DELETE",
-                });
-              } else {
-                dispatch(pushFavoriteCafe(data));
-
-                fetch("http://localhost:5000/favorite-cafes/push", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({...data, user_id: userData.id}),
-                });
-              }
-            }}
-          >
+            onClick={onClickStar}>
             <FontAwesomeIcon icon={faStar} />
+          </label>
+
+          <label className="extra-menu-icon" onClick={onClickExtraMenu}>
+            <FontAwesomeIcon icon={faEllipsisVertical} />
           </label>
         </div>
       </section>
@@ -106,6 +117,10 @@ function CafeCard(props) {
           <StarScore score={score} setScore={setScore} />
           <p>{score.toFixed(1)}</p>
         </div>
+      </section>
+
+      <section className={`extra-menu-panel ${showExtraMenuPanel ? "show-extra-menu-panel" : ""}`}>
+        <div>hi</div>
       </section>
     </div>
   );

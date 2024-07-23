@@ -240,6 +240,7 @@ input, input[type=password] {
   width: 100%;
   border-bottom: 1px solid var(--border-color);
   padding: 24px 0;
+  position: relative;
 }
 
 .cafe-card-title-container {
@@ -281,6 +282,28 @@ input, input[type=password] {
 
 .active-star {
   color: var(--coffee-color);
+}
+
+.extra-menu-icon {
+  margin-left: 10px;
+}
+
+.extra-menu-panel {
+  position: absolute;
+  top: 55px;
+  right: 0px;
+  box-shadow: rgba(0, 0, 0, 0.1) 5px 0px 15px 0px;
+  border: 1px solid var(--border-color);
+  width: 100px;
+  height: 60px;
+  background-color: var(--cream-color);
+  z-index: 2;
+  padding: 10px;
+  visibility: hidden;
+}
+
+.show-extra-menu-panel {
+  visibility: visible;
 }
 
 /* Location Info Style */
