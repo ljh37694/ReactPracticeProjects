@@ -31,7 +31,7 @@ function ProtectedRoute(props) {
         .catch(e => {
           console.log(e);
           dispatch(setIsLoggedIn(false));
-        })
+        });
 
         dispatch(setIsLoggedIn(false));
       });

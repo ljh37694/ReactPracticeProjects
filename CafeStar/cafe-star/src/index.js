@@ -10,6 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/SignUpForm";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ReviewPage from "./pages/ReviewPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,6 +21,7 @@ root.render(
           {/* protected route */}
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<MainPage />} />
+            <Route path="/cafe/review" element={<ReviewPage />} />
           </Route>
 
           <Route path="/user" element={<LoginPage />}>
