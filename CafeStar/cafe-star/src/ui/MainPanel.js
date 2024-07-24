@@ -8,11 +8,12 @@ import { useSelector } from "react-redux";
 import SearchPanel from "../components/SearchPanel";
 import NearbyCafePanel from "../components/NearbyCafePanel";
 import FavoriteCafePanel from "../components/FavoriteCafePanel";
+import ReviewPanel from "../components/ReviewPanel";
 
 function MainPanel(props) {
   let [isClose, setIsClose] = useState(false);
   const currentMenu = useSelector(state => state.currentMenu.value);
-  const panelContentList = [<SearchPanel />, <NearbyCafePanel />, <FavoriteCafePanel />];
+  const panelContentList = [<SearchPanel />, <NearbyCafePanel />, <FavoriteCafePanel />, <ReviewPanel />];
 
   return (
     <div className={`main-panel ${isClose === true ? "main-panel-close" : ""}`}>

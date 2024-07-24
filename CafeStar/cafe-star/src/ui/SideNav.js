@@ -1,4 +1,5 @@
 import {
+  faComment,
   faLocationDot,
   faMagnifyingGlass,
   faStar,
@@ -18,7 +19,7 @@ function SideNav(props) {
 
   let [activeMenu, setActiveMenu] = useState(0);
   const [showUserPanel, setShowUserPanel] = useState(false);
-  const icons = [faMagnifyingGlass, faLocationDot, faStar];
+  const icons = [faMagnifyingGlass, faLocationDot, faStar, faComment];
   const isLoggedIn = useSelector((state) => state.isLoggedIn.value);
 
   useEffect(() => {
