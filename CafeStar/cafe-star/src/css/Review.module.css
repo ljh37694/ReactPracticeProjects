@@ -22,7 +22,7 @@
   background-color: #fff;
   padding: 5px;
   border-radius: 10px;
-  color: var(--deep-gray-color);
+  color: var(--dark-gray-color);
   display: flex;
 
   & > p {

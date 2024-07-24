@@ -105,8 +105,13 @@ function CafeCard(props) {
         <p className="cafe-card-address">{data.address_name}</p>
 
         <div className="cafe-card-rating-container">
-          <StarScore score={score} setScore={setScore} />
-          <p>{score.toFixed(1)}</p>
+          <div className="rating-container">
+            <StarScore score={score} setScore={setScore} />
+            <p>{score.toFixed(1)}</p>
+          </div>
+          <div>
+            <button className="btn rating-btn">평가하기</button>
+          </div>
         </div>
       </section>
     </div>

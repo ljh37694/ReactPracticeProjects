@@ -52,6 +52,19 @@ input, input[type=password] {
   font-family: 'yg-jalnan', 'Courier New', Courier, monospace;
 }
 
+.btn {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #fff;
+  border: none;
+  color: var(--gray-color);
+  font-family: 'ONE-Mobile-POP', 'Courier New', Courier, monospace;
+}
+
+.btn:hover {
+  color: var(--dark-gray-color);
+}
+
 /* Side Navbar Style */
 .side-nav {
   position: absolute;
@@ -272,6 +285,16 @@ input, input[type=password] {
   height: 100%;
   width: 100%;
   color: var(--gray-color);
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.rating-btn {
+  font-size: 16px;
 }
 
 .active-star {
