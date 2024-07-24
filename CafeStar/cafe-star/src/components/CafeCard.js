@@ -1,4 +1,4 @@
-import { faEllipsisVertical, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +18,6 @@ function CafeCard(props) {
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [score, setScore] = useState(0.0);
-  const [showExtraMenuPanel, setShowExtraMenuPanel] = useState(false);
 
   // onClick
   const onClickStar = (e) => {
@@ -41,10 +40,6 @@ function CafeCard(props) {
         body: JSON.stringify({...data, user_id: userData.id}),
       });
     }
-  };
-
-  const onClickExtraMenu = () => {
-    setShowExtraMenuPanel(!showExtraMenuPanel);
   };
 
   useEffect(() => {
@@ -99,10 +94,6 @@ function CafeCard(props) {
             onClick={onClickStar}>
             <FontAwesomeIcon icon={faStar} />
           </label>
-
-          <label className="extra-menu-icon" onClick={onClickExtraMenu}>
-            <FontAwesomeIcon icon={faEllipsisVertical} />
-          </label>
         </div>
       </section>
 
@@ -117,10 +108,6 @@ function CafeCard(props) {
           <StarScore score={score} setScore={setScore} />
           <p>{score.toFixed(1)}</p>
         </div>
-      </section>
-
-      <section className={`extra-menu-panel ${showExtraMenuPanel ? "show-extra-menu-panel" : ""}`}>
-        <div>hi</div>
       </section>
     </div>
   );
