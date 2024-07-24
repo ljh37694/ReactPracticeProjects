@@ -12,13 +12,7 @@
   font-style: normal;
 }
 
-:root {
-  --border-color: rgba(0, 0, 0, 0.15);
-  --coffee-color: #6f4e37;
-  --cream-color: #FAF0D6;
-  --gray-color: rgb(185, 185, 185);
-  --star-color: #ffce54;
-}
+@import url('./variable.css');
 
 div, main, header, footer, nav {
   box-sizing: border-box;
