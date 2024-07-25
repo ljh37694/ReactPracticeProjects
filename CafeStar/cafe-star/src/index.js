@@ -21,7 +21,7 @@ root.render(
           {/* protected route */}
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<MainPage />} />
-            <Route path="/cafe/review" element={<ReviewPage />} />
+            <Route path="/cafe/review/:placeId" element={<ReviewPage />} />
           </Route>
 
           <Route path="/user" element={<LoginPage />}>

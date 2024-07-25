@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { pushFavoriteCafe, removeFavoriteCafe } from "../redux/states/favoriteCafeList";
 import StarScore from "../ui/StarScore";
+import { useNavigate } from "react-router-dom";
 
 function CafeCard(props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // props
   const { data, idx } = props;
@@ -110,7 +112,7 @@ function CafeCard(props) {
             <p>{score.toFixed(1)}</p>
           </div>
           <div>
-            <button className="btn rating-btn">평가하기</button>
+            <button className="btn rating-btn" onClick={() => navigate('/cafe/review/' + data.id)}>평가하기</button>
           </div>
         </div>
       </section>

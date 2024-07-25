@@ -4,9 +4,15 @@ import { useEffect, useState } from "react";
 
 function StarScore(props) {
   const [starCount, setStarCount] = useState(0);
-  const { score, setScore } = props;
+  const { score, setScore, size, ...rest } = props;
 
-  const width = 135;
+  const starSizes = {
+    small: 135,
+    midium: 200,
+    large: 337.5,
+  }
+
+  const width = size ? starSizes[size] : starSizes.midium;
 
   // mouse events
   const mouseMove = (e) => {
@@ -30,7 +36,7 @@ function StarScore(props) {
   }, [score]);
 
   return (
-    <div className="star-score-container">
+    <div className="star-score-container" {...rest}>
       <div className="star-score" onMouseMove={mouseMove} onClick={mouseClick} onMouseOut={mouseOut}>
         {[...new Array(5)].map((item, idx) => {
           return (

@@ -42,13 +42,13 @@ code {
     monospace;
 }
 
-#main-page, #login-page, input {
+#main-page, #login-page, #review-page, input {
   background-color: var(--cream-color);
   color: var(--coffee-color);
   font-family: 'ONE-Mobile-POP', 'Courier New', Courier, monospace;
 }
 
-input, input[type=password] {
+input, input[type=password], textarea {
   font-family: 'yg-jalnan', 'Courier New', Courier, monospace;
 }
 
@@ -57,12 +57,13 @@ input, input[type=password] {
   border-radius: 5px;
   background-color: #fff;
   border: none;
-  color: var(--gray-color);
+  color: var(--dark-gray-color);
   font-family: 'ONE-Mobile-POP', 'Courier New', Courier, monospace;
 }
 
 .btn:hover {
-  color: var(--dark-gray-color);
+  color: #fff;
+  background-color: var(--dark-gray-color);
 }
 
 /* Side Navbar Style */
