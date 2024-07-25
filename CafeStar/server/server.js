@@ -10,10 +10,11 @@ const { connectMongoDB } = require('./database/config');
 const { deleteFavoriteCafe, getFavoriteCafes, addFavoriteCafe } = require('./database/favoriteCafes');
 const { signUp, checkIdDuplication } = require('./user/signUp');
 const { login, logout, loginSuccess, refreshAccessToken } = require('./user/login');
+const { addCafeReview } = require('./database/cafeReview');
+
 require("dotenv").config();
 
 const PORT = process.env.PORT;
-
 const app = express();
 
 connectMongoDB();
@@ -65,6 +66,8 @@ app.get('/check/id-duplicate', checkIdDuplication);
 app.post("/sign-up", signUp);
 
 app.get('/refresh-token', refreshAccessToken);
+
+app.post('/cafe/review/push', addCafeReview);
 
 app.get("/oauth/kakao/callback", async (req, res) => {
   let tokens = null;

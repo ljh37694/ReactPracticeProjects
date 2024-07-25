@@ -112,7 +112,11 @@ function CafeCard(props) {
             <p>{score.toFixed(1)}</p>
           </div>
           <div>
-            <button className="btn rating-btn" onClick={() => navigate('/cafe/review/' + data.id)}>평가하기</button>
+            <button className="btn rating-btn" onClick={() => navigate('/cafe/review', {
+              state: {
+                data,
+              }
+            })}>평가하기</button>
           </div>
         </div>
       </section>
