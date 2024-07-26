@@ -25,7 +25,7 @@ function ReviewPage(props) {
       comment: text,
       user_id: userData.id,
       score: score,
-    };
+    }; 
 
     if (text && score !== 0) {
       axios.post('http://localhost:5000/cafe/review/push', reviewData)

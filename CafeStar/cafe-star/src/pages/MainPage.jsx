@@ -1,8 +1,13 @@
 import SideNav from "../ui/SideNav";
 import MainPanel from "../ui/MainPanel";
 import Map from "../components/Map";
+import { useEffect } from "react";
 
 function MainPage(props) {
+  useEffect(() => {
+    
+  });
+
   return (
     <main id="main-page">
       <SideNav />

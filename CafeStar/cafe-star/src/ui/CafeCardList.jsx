@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import CafeCard from "../components/CafeCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setFavoriteCafeList } from "../redux/states/favoriteCafeList";
+import axios from "axios";
+import { setMyReviewList } from "../redux/states/myReviewList";
 
 function CafeCardList(props) {
   const dispatch = useDispatch();
@@ -13,6 +15,12 @@ function CafeCardList(props) {
     fetch('http://localhost:5000/favorite-cafes/get?userId=' + userData.id)
       .then((res) => res.json())
       .then((data) => dispatch(setFavoriteCafeList(data)))
+      .catch(e => console.log(e));
+
+    axios.get('http://localhost:5000/user/cafe/review/get?userId=' + userData.id)
+      .then(res => {
+        setMyReviewList(res.data);
+      })
       .catch(e => console.log(e));
   }, []);
 
