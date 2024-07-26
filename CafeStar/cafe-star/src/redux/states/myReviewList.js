@@ -7,11 +7,20 @@ export const myReviewListSlice = createSlice({
   },
   reducers: {
     setMyReviewList: (state, action) => {
-      state.value = action.payload;
+      state.value = [...action.payload];
+    },
+    isEvaluated: (state, action) => {
+      const answer = state.value.find(review => review['user_id'] === action.payload);
+
+      if (answer) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 });
 
-export const { setMyReviewList } = myReviewListSlice.actions;
+export const { setMyReviewList, isEvaluated } = myReviewListSlice.actions;
 
 export default myReviewListSlice.reducer;

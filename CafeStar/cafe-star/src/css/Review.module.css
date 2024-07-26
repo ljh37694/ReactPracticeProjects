@@ -5,6 +5,9 @@
   min-height: 200px;
   border-bottom: 1px solid var(--border-color);
   margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 15px;
 }
 
 .header-container {
@@ -32,4 +35,13 @@
 
 .text-container {
   margin-top: 20px;
+  flex-grow: 1;
+}
+
+.footer {
+
+}
+
+.edit-button {
+  float: right;
 }
