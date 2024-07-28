@@ -1,3 +1,5 @@
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -78,9 +80,13 @@ function SignUpForm(props) {
       </header>
 
       <form className="login-form" name="signUpForm" onSubmit={onSubmit}>
-        <div>
+        <div className="id-input-container">
           <input type="text" className="login-form-input" name="id" placeholder="아이디를 입력하세요" />
-          <button onClick={onClickIdDupblicate}>중복확인</button>
+          <div className="duplicate-check-button-container">
+            {
+              isDuplicate ? <button className="btn duplicate-check-btn" onClick={onClickIdDupblicate}>중복확인</button> : <FontAwesomeIcon icon={faCircleCheck} />
+            }
+          </div>
         </div>
         <input type="text" className="login-form-input" name="email" placeholder="이메일을 입력하세요" />
         <input type="password" className="login-form-input" name="password" placeholder="비밀번호를 입력하세요" />

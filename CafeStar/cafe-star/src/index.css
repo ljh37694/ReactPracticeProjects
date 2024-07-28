@@ -127,12 +127,19 @@ input, input[type=password], textarea {
   width: 350px;
   height: 200px;
   box-shadow: rgba(0, 0, 0, 0.1) 5px 0px 15px 0px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .user-info {
   background-color: inherit;
   width: 100%;
   height: 70%;
+}
+
+.logout-btn {
+  font-size: 16px;
+  margin-top: 10px;
 }
 
 /* Main Panel Style */
@@ -374,6 +381,24 @@ input, input[type=password], textarea {
   margin-bottom: 40px;
 }
 
+.id-input-container {
+  width: 100%;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.duplicate-check-btn {
+  background-color: var(--light-gray-color);
+}
+
+.duplicate-check-button-container {
+  position: absolute;
+  right: 20px;
+}
+
 .login-form-input, .login-form-input:focus-visible {
   background-color: inherit;
   border: none;
@@ -391,7 +416,7 @@ input, input[type=password], textarea {
   height: 45px;
   color: var(--cream-color);
   font-family: 'ONE-Mobile-POP';
-  margin-top: 30px;
+  margin: 20px 0 10px 0;
 }
 
 .kakao-login-button {
