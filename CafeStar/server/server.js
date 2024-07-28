@@ -10,7 +10,7 @@ const { connectMongoDB } = require('./database/config');
 const { deleteFavoriteCafe, getFavoriteCafes, addFavoriteCafe } = require('./database/favoriteCafes');
 const { signUp, checkIdDuplication } = require('./user/signUp');
 const { login, logout, loginSuccess, refreshAccessToken } = require('./user/login');
-const { addCafeReview, getUserReview } = require('./database/cafeReview');
+const { addCafeReview, getUserReview, getReviewRateAverage } = require('./database/cafeReview');
 
 require("dotenv").config();
 
@@ -70,6 +70,8 @@ app.get('/refresh-token', refreshAccessToken);
 app.post('/cafe/review/push', addCafeReview);
 
 app.get('/user/cafe/review/get', getUserReview);
+
+app.get('/cafe/review/rage/average', getReviewRateAverage);
 
 app.get("/oauth/kakao/callback", async (req, res) => {
   let tokens = null;

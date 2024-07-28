@@ -6,6 +6,7 @@ import favoriteCafeList from "./states/favoriteCafeList";
 import isLoggedIn from "./states/isLoggedIn";
 import userData from "./states/userData";
 import myReviewList from "./states/myReviewList";
+import rateAverageList from "./states/rateAverageList";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     isLoggedIn: isLoggedIn,
     userData: userData,
     myReviewList: myReviewList,
+    rateAverageList: rateAverageList,
   },
   middleware: (getDefaultMiddleWare) => getDefaultMiddleWare({
     serializableCheck: false,

@@ -42,3 +42,8 @@
   float: right;
   font-size: 16px;
 }
+
+.star-avg {
+  color: rgb(247, 43, 33);
+  margin-right: 5px;
+}

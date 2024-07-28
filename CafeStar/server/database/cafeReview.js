@@ -24,7 +24,29 @@ const getUserReview = async (req, res) => {
   }
 };
 
+const getReviewRateAverage = async (req, res) => {
+  try {
+    const rateAverageList = await getCollection('CafeReviews').aggregate([
+      {
+        $group:
+        {
+          _id: "$id",
+          avgRate: { $avg: "$score" },
+        }
+      }
+    ]).toArray();
+
+    console.log(rateAverageList);
+
+    res.status(200).json(rateAverageList);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json(e);
+  }
+}
+
 module.exports = {
   addCafeReview,
   getUserReview,
+  getReviewRateAverage,
 };
