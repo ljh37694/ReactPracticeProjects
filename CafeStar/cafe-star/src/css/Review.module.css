@@ -38,10 +38,7 @@
   flex-grow: 1;
 }
 
-.footer {
-
-}
-
 .edit-button {
   float: right;
+  font-size: 16px;
 }

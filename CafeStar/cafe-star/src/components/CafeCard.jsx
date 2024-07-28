@@ -17,9 +17,19 @@ function CafeCard(props) {
   const kakaoMap = useSelector((state) => state.kakaoMap.value);
   const favoriteCafeList = useSelector(state => state.favoriteCafeList.value);
   const userData = useSelector(state => state.userData.value);
+  const myReviewList = useSelector(state => state.myReviewList.value);
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [score, setScore] = useState(0.0);
+  const [showRatingButton, setShowRatingButton] = useState(true);
+
+  useEffect(() => {
+    const isEstimated = myReviewList.findIndex(review => review["user_id"] === userData.id && review.id === data.id);
+
+    console.log(isEstimated);
+
+    setShowRatingButton(isEstimated === -1);
+  }, []);
 
   // onClick
   const onClickStar = (e) => {
@@ -108,11 +118,11 @@ function CafeCard(props) {
 
         <div className="cafe-card-rating-container">
           <div className="rating-container">
-            <StarScore score={score} setScore={setScore} />
+            <StarScore score={score} setScore={setScore} size="small" />
             <p>{score.toFixed(1)}</p>
           </div>
           <div>
-            <button className="btn rating-btn" onClick={() => navigate('/cafe/review', {
+            <button className={`btn rating-btn ${showRatingButton ? "" : "hide-rating-button"}`} onClick={() => navigate('/cafe/review', {
               state: {
                 data,
               }
