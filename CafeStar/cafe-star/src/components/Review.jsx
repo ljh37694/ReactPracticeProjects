@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import Score from '../ui/Score';
 
 function Reveiw(props) {
   const cx = classNames.bind(styles);
@@ -16,7 +17,7 @@ function Reveiw(props) {
   useEffect(() => {
     const avgData = rateAverageList.filter((item => item._id === data.id));
 
-    setRateAvg(avgData[0].avgRate);
+    setRateAvg(avgData[0].rateAvg);
 
     console.log(avgData);
   }, []);
@@ -25,13 +26,11 @@ function Reveiw(props) {
     <div className={cx('container')}>
       <section className={cx('header-container')}>
         <h3 className={cx('title')}>{data['place_name']}</h3>
-        <div className={cx('star-container', 'star-avg')}>
-          <FontAwesomeIcon icon={faStar} />
-          <p>{rateAvg.toFixed(1)}</p>
+        <div>
+          <Score score={rateAvg} status="alert" />
         </div>
-        <div className={cx('star-container')}>
-          <FontAwesomeIcon icon={faStar} />
-          <p>{data.score.toFixed(1)}</p>
+        <div>
+          <Score score={data.score} />
         </div>
       </section>
 

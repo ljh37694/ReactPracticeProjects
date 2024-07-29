@@ -1,0 +1,19 @@
+.score-container {
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 10px;
+  color: var(--dark-gray-color);
+  display: flex;
+
+  & > p {
+    margin-left: 5px;
+  }
+}
+
+.alert {
+  color: var(--red-color);
+}
+
+.normal {
+  color: var(--dark-gray-color);
+}

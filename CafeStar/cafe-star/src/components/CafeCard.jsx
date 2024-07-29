@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { pushFavoriteCafe, removeFavoriteCafe } from "../redux/states/favoriteCafeList";
 import StarScore from "../ui/StarScore";
 import { useNavigate } from "react-router-dom";
+import Score from "../ui/Score";
 
 function CafeCard(props) {
   const dispatch = useDispatch();
@@ -18,18 +19,26 @@ function CafeCard(props) {
   const favoriteCafeList = useSelector(state => state.favoriteCafeList.value);
   const userData = useSelector(state => state.userData.value);
   const myReviewList = useSelector(state => state.myReviewList.value);
+  const rateAverageList = useSelector(state => state.rateAverageList.value);
 
   const [isFavorite, setIsFavorite] = useState(false);
-  const [score, setScore] = useState(0.0);
   const [showRatingButton, setShowRatingButton] = useState(true);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
-    const isEstimated = myReviewList.findIndex(review => review["user_id"] === userData.id && review.id === data.id);
+    const myReviewIdx = myReviewList.findIndex(review => review["user_id"] === userData.id && review.id === data.id);
+    setShowRatingButton(myReviewIdx === -1);
 
-    console.log(isEstimated);
+    const rateAvgIdx = [...rateAverageList].findIndex(item => item._id === data.id);
 
-    setShowRatingButton(isEstimated === -1);
-  }, []);
+    if (myReviewIdx === -1 && rateAvgIdx === -1) {
+      setScore(0);
+    } else if (myReviewIdx === -1) {
+      setScore(rateAverageList[rateAvgIdx].rateAvg);
+    } else {
+      setScore(myReviewList[myReviewIdx].score);
+    }
+  }, [myReviewList, rateAverageList]);
 
   // onClick
   const onClickStar = (e) => {
@@ -110,16 +119,15 @@ function CafeCard(props) {
       </section>
 
       <section className="cafe-card-content-container"
-        onClick={(e) => {
+        onClick={() => {
           kakaoMap.setCenter(new window.kakao.maps.LatLng(data.y, data.x));
         }}
       >
         <p className="cafe-card-address">{data.address_name}</p>
 
-        <div className="cafe-card-rating-container">
+        <footer className="cafe-card-rating-container">
           <div className="rating-container">
-            <StarScore score={score} setScore={setScore} size="small" />
-            <p>{score.toFixed(1)}</p>
+            <Score score={score} status={showRatingButton ? 'alert' : ''} />
           </div>
           <div>
             <button className={`btn rating-btn ${showRatingButton ? "" : "hide-rating-button"}`} onClick={() => navigate('/cafe/review', {
@@ -128,7 +136,7 @@ function CafeCard(props) {
               }
             })}>평가하기</button>
           </div>
-        </div>
+        </footer>
       </section>
     </div>
   );

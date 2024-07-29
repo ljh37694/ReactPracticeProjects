@@ -22,9 +22,10 @@ function MainPage(props) {
   }, []);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/cafe/review/rage/average')
+    axios.get('http://localhost:5000/cafe/review/rate/average')
       .then(res => {
         dispatch(setRateAverageList([...res.data]));
+        console.log(res.data);
       })
       .catch(e => console.log(e));
   }, []);

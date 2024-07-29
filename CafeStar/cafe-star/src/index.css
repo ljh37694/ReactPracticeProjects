@@ -200,6 +200,14 @@ input, input[type=password], textarea {
   height: 100%;
 }
 
+.my-rate {
+  color: yellow;
+}
+
+.rate-avg {
+  color: red;
+}
+
 /* Map Style */
 #map {
   height: 100vh;

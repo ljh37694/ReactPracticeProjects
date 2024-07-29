@@ -4,11 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFavoriteCafeList } from "../redux/states/favoriteCafeList";
 
 function CafeCardList(props) {
+  // func
   const dispatch = useDispatch();
 
-  const userData = useSelector(state => state.userData.value);
+  // props
   const { cafeList } = props;
-  
+
+  // states
+  const userData = useSelector(state => state.userData.value);
+
   useEffect(() => {
     fetch('http://localhost:5000/favorite-cafes/get?userId=' + userData.id)
       .then((res) => res.json())
