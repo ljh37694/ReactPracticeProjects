@@ -87,13 +87,13 @@ const login = async (req, res, next) => {
           status: "Login success",
         });
       } else {
-        res.status(304).json({
+        res.status(400).json({
           status: "Not match password",
         });
       }
       console.log(isCorrectPassword);
     } else {
-      res.status(304).json({
+      res.status(400).json({
         status: "No user data",
       });
     }

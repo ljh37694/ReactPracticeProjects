@@ -41,24 +41,24 @@ function LoginForm(props) {
     if (id === '' || pw === '') {
       alert("아이디 또는 비밀번호가 빈 칸입니다.");
     } else {
-      fetch(process.env.REACT_APP_SERVER_URL + "/login", {
-        method: "POST",
+      axios.post(process.env.REACT_APP_SERVER_URL + "/login", JSON.stringify({ id,pw }), {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          id,
-          pw,
-        }),
-        credentials: 'include',
+        withCredentials: true,
       })
-        .then((response) => response.json())
-        .then(data => {
-          console.log(data);
+      .then(res => {
+        console.log(res.data);
 
-          navigate('/');
-        })
-        .catch(e => console.log(e));
+        navigate('/');
+      })
+      .catch(e => {
+        console.log(e);
+
+        if (e.response.status === 400) {
+          alert('아이디 또는 비밀번호를 확인하세요');
+        }
+      });
     }
   }
 
