@@ -31,7 +31,7 @@ const getReviewRateAverage = async (req, res) => {
         $group:
         {
           _id: "$id",
-          avgRate: { $avg: "$score" },
+          rateAvg: { $avg: "$score" },
         }
       }
     ]).toArray();

@@ -71,7 +71,7 @@ app.post('/cafe/review/push', addCafeReview);
 
 app.get('/user/cafe/review/get', getUserReview);
 
-app.get('/cafe/review/rage/average', getReviewRateAverage);
+app.get('/cafe/review/rate/average', getReviewRateAverage);
 
 app.get("/oauth/kakao/callback", async (req, res) => {
   let tokens = null;
