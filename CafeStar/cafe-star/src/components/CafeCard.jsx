@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { pushFavoriteCafe, removeFavoriteCafe } from "../redux/states/favoriteCafeList";
-import StarScore from "../ui/StarScore";
 import { useNavigate } from "react-router-dom";
 import Score from "../ui/Score";
 
@@ -127,7 +126,7 @@ function CafeCard(props) {
 
         <footer className="cafe-card-rating-container">
           <div className="rating-container">
-            <Score score={score} status={showRatingButton ? 'alert' : ''} />
+            <Score score={score} status={showRatingButton ? '' : 'alert'} />
           </div>
           <div>
             <button className={`btn rating-btn ${showRatingButton ? "" : "hide-rating-button"}`} onClick={() => navigate('/cafe/review', {

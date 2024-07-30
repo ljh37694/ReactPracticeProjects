@@ -22,6 +22,7 @@ root.render(
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<MainPage />} />
             <Route path="/cafe/review" element={<ReviewPage />} />
+            <Route path="/cafe/review/edit" element={<ReviewPage edit={true} />} />
           </Route>
 
           <Route path="/user" element={<LoginPage />}>

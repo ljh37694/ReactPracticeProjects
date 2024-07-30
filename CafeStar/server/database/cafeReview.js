@@ -1,8 +1,9 @@
+const { ObjectId } = require("mongodb");
 const { getCollection } = require("./config");
 
 const addCafeReview = async (req, res) => {
   try {
-    await getCollection('CafeReviews').insertOne({
+    await getCollection("CafeReviews").insertOne({
       ...req.body,
     });
   } catch (e) {
@@ -12,10 +13,12 @@ const addCafeReview = async (req, res) => {
 };
 
 const getUserReview = async (req, res) => {
-  try {  
-    const userReviews = await getCollection('CafeReviews').find({
-      'user_id': req.query.userId,
-    }).toArray();
+  try {
+    const userReviews = await getCollection("CafeReviews")
+      .find({
+        user_id: req.query.userId,
+      })
+      .toArray();
 
     res.status(200).json(userReviews);
   } catch (e) {
@@ -26,15 +29,16 @@ const getUserReview = async (req, res) => {
 
 const getReviewRateAverage = async (req, res) => {
   try {
-    const rateAverageList = await getCollection('CafeReviews').aggregate([
-      {
-        $group:
+    const rateAverageList = await getCollection("CafeReviews")
+      .aggregate([
         {
-          _id: "$id",
-          rateAvg: { $avg: "$score" },
-        }
-      }
-    ]).toArray();
+          $group: {
+            _id: "$id",
+            rateAvg: { $avg: "$score" },
+          },
+        },
+      ])
+      .toArray();
 
     console.log(rateAverageList);
 
@@ -43,10 +47,30 @@ const getReviewRateAverage = async (req, res) => {
     console.log(e);
     res.status(500).json(e);
   }
-}
+};
+
+const editReview = async (req, res) => {
+  try {
+    const filter = { _id: new ObjectId(req.body._id) };
+    const updateData = { $set: {
+      comment: req.body.comment,
+      score: req.body.score,
+    }}
+
+    const result = await getCollection("CafeReviews").updateOne(filter, updateData);
+
+    console.log(req.body);
+
+    console.log('success', result);
+  } catch (e) {
+    res.status(500).json(e);
+    console.log(e);
+  }
+};
 
 module.exports = {
   addCafeReview,
   getUserReview,
   getReviewRateAverage,
+  editReview,
 };

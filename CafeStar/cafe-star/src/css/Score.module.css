@@ -17,3 +17,7 @@
 .normal {
   color: var(--dark-gray-color);
 }
+
+.star {
+  color: var(--star-color);
+}

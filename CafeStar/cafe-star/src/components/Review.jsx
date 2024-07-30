@@ -1,13 +1,13 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../css/Review.module.css';
 import classNames from 'classnames/bind';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Score from '../ui/Score';
+import { useNavigate } from 'react-router-dom';
 
 function Reveiw(props) {
   const cx = classNames.bind(styles);
+  const navigate = useNavigate();
 
   const { data } = props;
 
@@ -26,11 +26,11 @@ function Reveiw(props) {
     <div className={cx('container')}>
       <section className={cx('header-container')}>
         <h3 className={cx('title')}>{data['place_name']}</h3>
-        <div>
-          <Score score={rateAvg} status="alert" />
+        <div className={cx('rate-avg')}>
+          <Score score={rateAvg} status="normal" />
         </div>
         <div>
-          <Score score={data.score} />
+          <Score score={data.score} status="alert" />
         </div>
       </section>
 
@@ -39,7 +39,7 @@ function Reveiw(props) {
       </section>
 
       <footer className={cx('footer')}>
-          <button className={`btn ${cx('edit-button')}`}>수정하기</button>
+          <button className={`btn ${cx('edit-button')}`} onClick={() => navigate('/cafe/review/edit', { state: {data} })}>수정하기</button>
       </footer>
     </div>
   );
