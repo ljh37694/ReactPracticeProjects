@@ -35,3 +35,9 @@
   font-size: 36px;
   margin-bottom: 30px;
 }
+
+.submit-btn {
+  margin-top: 20px;
+  font-size: 28px;
+  width: 60%;
+}

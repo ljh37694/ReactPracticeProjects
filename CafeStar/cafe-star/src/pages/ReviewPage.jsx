@@ -76,7 +76,7 @@ function ReviewPage(props) {
           { data.comment }
         </textarea>
 
-        <button type='submit'>{isEditMode ? '수정 완료' : '작성 완료'}</button>
+        <button type='submit' className={`login-button ${cx('submit-btn')}`}>{isEditMode ? '수정 완료' : '작성 완료'}</button>
       </form>
     </main>
   );
