@@ -4,7 +4,9 @@ const getFavoriteCafes = async (req, res) => {
   try {
     const data = await getCollection('FavoriteCafes').find({
       user_id: req.query.userId,
-    }).toArray();
+    })
+    .sort({ created: -1 })
+    .toArray();
     
     res.send(data);
   } catch(e) {

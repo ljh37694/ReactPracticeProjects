@@ -18,6 +18,7 @@ const getUserReview = async (req, res) => {
       .find({
         user_id: req.query.userId,
       })
+      .sort({ created: -1 })
       .toArray();
 
     res.status(200).json(userReviews);

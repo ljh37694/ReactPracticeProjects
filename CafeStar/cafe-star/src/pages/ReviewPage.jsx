@@ -36,6 +36,7 @@ function ReviewPage(props) {
       comment: text,
       user_id: userData.id,
       score: score,
+      created: new Date(),
     };
 
     console.log(reviewData);

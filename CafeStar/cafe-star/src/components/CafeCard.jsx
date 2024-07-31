@@ -57,7 +57,7 @@ function CafeCard(props) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({...data, user_id: userData.id}),
+        body: JSON.stringify({...data, user_id: userData.id, created: new Date()}),
       });
     }
   };
