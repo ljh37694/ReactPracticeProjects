@@ -98,6 +98,7 @@ function CafeCard(props) {
 
     return () => {
       marker.setVisible(false);
+      infoWindow.close();
       cafeCardContentContainer.removeEventListener('click', openInfoWindow);
     }
   }, []);
